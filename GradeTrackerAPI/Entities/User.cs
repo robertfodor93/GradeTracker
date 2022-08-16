@@ -1,6 +1,6 @@
 ﻿namespace GradeTrackerAPI.Entities
 {
-    public class BaseEntity
+    public class User
     {
     }
 }
