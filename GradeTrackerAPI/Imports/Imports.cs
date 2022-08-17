@@ -7,3 +7,4 @@ global using GradeTrackerAPI.Data;
 global using GradeTrackerAPI.Models;
 global using GradeTrackerAPI.Entities;
 global using GradeTrackerAPI.DataTransferObjects;
+global using GradeTrackerAPI.DataContext;
