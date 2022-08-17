@@ -6,6 +6,6 @@
         public double? Weighting { get; set; }
         public DateTime? Date { get; set; } = DateTime.Now;
         public int? ModuleId { get; set; }
-        public Module? Module { get; set; } = new Module();
+        public Module? Module { get; set; }
     }
 }
