@@ -65,10 +65,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 1,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1300),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6214),
                             EducationTypeId = 2,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1304),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6216),
                             ModifiedBy = "",
                             Name = "Fachkompetenzen"
                         },
@@ -76,10 +76,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 2,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1308),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6219),
                             EducationTypeId = 3,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1311),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6221),
                             ModifiedBy = "",
                             Name = "Erweiterte Kompetenzen"
                         },
@@ -87,10 +87,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 3,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1315),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6223),
                             EducationTypeId = 1,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1317),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6225),
                             ModifiedBy = "",
                             Name = "Allgemeinbildung"
                         });
@@ -140,9 +140,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 1,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1247),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6182),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1251),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6185),
                             ModifiedBy = "",
                             Name = "Eidgenössisches Berufsattest (EBA)"
                         },
@@ -151,9 +151,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 2,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1257),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6188),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1259),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6190),
                             ModifiedBy = "",
                             Name = "Eidgenössisches Fachzertifikat (EFZ)"
                         },
@@ -162,9 +162,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 3,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1263),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6193),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1266),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6195),
                             ModifiedBy = "",
                             Name = "Berufsmatura (BMS)"
                         },
@@ -173,9 +173,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 4,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1269),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6197),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1272),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6199),
                             ModifiedBy = "",
                             Name = "IMS"
                         });
@@ -315,9 +315,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 1,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(9129),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1298),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(9151),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1310),
                             ModifiedBy = "",
                             Name = "INF 226B",
                             ShowOnDashboard = true,
@@ -328,9 +328,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 2,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(9158),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1314),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(9161),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1316),
                             ModifiedBy = "",
                             Name = "Mathematik",
                             ShowOnDashboard = false,
@@ -341,9 +341,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 3,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(9165),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1319),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(9167),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1321),
                             ModifiedBy = "",
                             Name = "Sprache und Kommunikation",
                             ShowOnDashboard = false,
@@ -387,9 +387,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 1,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(3270),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7725),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(3291),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7738),
                             ModifiedBy = "",
                             Name = "Roland Bucher"
                         },
@@ -397,9 +397,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 2,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(3296),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7741),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(3299),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7743),
                             ModifiedBy = "",
                             Name = "Fritz Kempf"
                         },
@@ -407,9 +407,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 3,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(3302),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7745),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(3305),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7747),
                             ModifiedBy = "",
                             Name = "Marcel Schorno"
                         });
@@ -453,9 +453,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 1,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1016),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6004),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1070),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6049),
                             ModifiedBy = "",
                             Password = "1234qweR",
                             Username = "Evan"
@@ -464,9 +464,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 2,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1075),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6053),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1078),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6055),
                             ModifiedBy = "",
                             Password = "1234qweR",
                             Username = "Apisana"
@@ -475,9 +475,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 3,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1082),
+                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6057),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 13, 6, 11, 847, DateTimeKind.Local).AddTicks(1085),
+                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6059),
                             ModifiedBy = "",
                             Password = "1234qweR",
                             Username = "Robert"

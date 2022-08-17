@@ -6,6 +6,6 @@
         public double? Weighting { get; set; }
         public int? EducationTypeId { get; set; }
         public EducationType? EducationType { get; set; }
-        public ICollection<Module>? Modules { get; set; } = new List<Module>();
+        public ICollection<Module>? Modules { get; set; }
     }
 }
