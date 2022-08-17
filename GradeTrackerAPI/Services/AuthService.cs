@@ -1,6 +1,7 @@
 ﻿namespace GradeTrackerAPI.Services
 {
-    public class ServicePlaceholder
+    public class AuthService
     {
+
     }
 }

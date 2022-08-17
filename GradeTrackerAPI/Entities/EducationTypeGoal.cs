@@ -3,8 +3,8 @@
     public class EducationTypeGoal : BaseEntity
     {
         [Column(TypeName="decimal(3,2)")]
-        public double AverageDesiredMark { get; set; }
-        public User User { get; set; } = new User();
-        public IEnumerable<EducationType> EducationTypes { get; set; } = new List<EducationType>();
+        public double? AverageDesiredMark { get; set; }
+        public User? User { get; set; } = new User();
+        public IEnumerable<EducationType>? EducationTypes { get; set; } = new List<EducationType>();
     }
 }
