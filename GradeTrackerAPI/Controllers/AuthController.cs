@@ -33,6 +33,23 @@ namespace GradeTrackerAPI.Controllers
             return BadRequest(response.Message);
         }
 
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult<string>> RefreshToken()
+        {
+            var response = await _authService.RefreshToken();
+            if (response.Success)
+            {
+                return Ok(response);
+            }
 
+            return BadRequest(response.Message);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult<string> Authorization()
+        {
+            return Ok("Authorized");
+        }
     }
 }
