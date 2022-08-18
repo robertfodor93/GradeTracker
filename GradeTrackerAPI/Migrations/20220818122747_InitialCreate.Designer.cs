@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GradeTrackerAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220817123249_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220818122747_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,10 +67,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 1,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6214),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8196),
                             EducationTypeId = 2,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6216),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8199),
                             ModifiedBy = "",
                             Name = "Fachkompetenzen"
                         },
@@ -78,10 +78,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 2,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6219),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8201),
                             EducationTypeId = 3,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6221),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8203),
                             ModifiedBy = "",
                             Name = "Erweiterte Kompetenzen"
                         },
@@ -89,10 +89,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 3,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6223),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8205),
                             EducationTypeId = 1,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6225),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8207),
                             ModifiedBy = "",
                             Name = "Allgemeinbildung"
                         });
@@ -142,9 +142,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 1,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6182),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8036),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6185),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8079),
                             ModifiedBy = "",
                             Name = "Eidgenössisches Berufsattest (EBA)"
                         },
@@ -153,9 +153,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 2,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6188),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8083),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6190),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8085),
                             ModifiedBy = "",
                             Name = "Eidgenössisches Fachzertifikat (EFZ)"
                         },
@@ -164,9 +164,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 3,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6193),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8087),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6195),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8089),
                             ModifiedBy = "",
                             Name = "Berufsmatura (BMS)"
                         },
@@ -175,9 +175,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 4,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6197),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8091),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6199),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 824, DateTimeKind.Local).AddTicks(8092),
                             ModifiedBy = "",
                             Name = "IMS"
                         });
@@ -317,40 +317,37 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 1,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1298),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(2756),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1310),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(2769),
                             ModifiedBy = "",
                             Name = "INF 226B",
                             ShowOnDashboard = true,
-                            TeacherId = 1,
-                            UserId = 3
+                            TeacherId = 1
                         },
                         new
                         {
                             Id = 2,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1314),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(2773),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1316),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(2775),
                             ModifiedBy = "",
                             Name = "Mathematik",
                             ShowOnDashboard = false,
-                            TeacherId = 2,
-                            UserId = 3
+                            TeacherId = 2
                         },
                         new
                         {
                             Id = 3,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1319),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(2777),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 567, DateTimeKind.Local).AddTicks(1321),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(2779),
                             ModifiedBy = "",
                             Name = "Sprache und Kommunikation",
                             ShowOnDashboard = false,
-                            TeacherId = 3,
-                            UserId = 3
+                            TeacherId = 3
                         });
                 });
 
@@ -389,9 +386,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 1,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7725),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(188),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7738),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(203),
                             ModifiedBy = "",
                             Name = "Roland Bucher"
                         },
@@ -399,9 +396,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 2,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7741),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(207),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7743),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(209),
                             ModifiedBy = "",
                             Name = "Fritz Kempf"
                         },
@@ -409,9 +406,9 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 3,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7745),
+                            CreatedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(212),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(7747),
+                            ModifiedAt = new DateTime(2022, 8, 18, 14, 27, 46, 825, DateTimeKind.Local).AddTicks(214),
                             ModifiedBy = "",
                             Name = "Marcel Schorno"
                         });
@@ -440,50 +437,21 @@ namespace GradeTrackerAPI.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6004),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6049),
-                            ModifiedBy = "",
-                            Password = "1234qweR",
-                            Username = "Evan"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6053),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6055),
-                            ModifiedBy = "",
-                            Password = "1234qweR",
-                            Username = "Apisana"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6057),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 8, 17, 14, 32, 49, 566, DateTimeKind.Local).AddTicks(6059),
-                            ModifiedBy = "",
-                            Password = "1234qweR",
-                            Username = "Robert"
-                        });
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceArea", b =>
