@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace GradeTrackerAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -18,7 +16,7 @@ namespace GradeTrackerAPI.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult<User>> Register(CreateUserDto request)
         {
             user.Username = request.Username;
             user.Password = request.Password;
@@ -30,7 +28,7 @@ namespace GradeTrackerAPI.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<string>> Login(CreateUserDto request)
         {
             var dbUser = await _dataContext.Users.Where(u => u.Username == request.Username && u.Password == request.Password).FirstOrDefaultAsync();
 

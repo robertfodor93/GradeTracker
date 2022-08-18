@@ -2,7 +2,15 @@
 {
     public class UserDto
     {
-        public string Username { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public virtual IList<ModuleDto> Modules { get; set; }
     }
+
+    public class CreateUserDto
+    {
+        [Required]
+        public string Username { get; set; }
+        [Required]
+        public string Password { get; set; }
+    }
+
 }
