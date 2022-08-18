@@ -14,28 +14,8 @@
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>(entity => { entity.Property(e => e.Id).IsRequired(); });
 
-            modelBuilder.Entity<User>().HasData(
-                new User
-                {
-                    Id = 1,
-                    Username = "Evan",
-                    Password = "1234qweR"
-                },
-                new User
-                {
-                    Id = 2,
-                    Username = "Apisana",
-                    Password = "1234qweR"
-                },
-                new User
-                {
-                    Id = 3,
-                    Username = "Robert",
-                    Password = "1234qweR"
-                }
-                );
+            modelBuilder.Entity<User>(entity => { entity.Property(e => e.Id).IsRequired(); });
 
             modelBuilder.Entity<EducationType>().HasData(
                 new EducationType
@@ -114,9 +94,6 @@
             modelBuilder.Entity<Module>(
                 entity =>
                 {
-                    entity.HasOne(u => u.User)
-                    .WithMany(m => m.Modules)
-                    .HasForeignKey(m => m.UserId);
                     entity.HasOne(ca => ca.CompetenceArea)
                     .WithMany(m => m.Modules)
                     .HasForeignKey(m => m.CompetenceAreaId);
@@ -132,21 +109,18 @@
                     Name = "INF 226B",
                     ShowOnDashboard = true,
                     TeacherId = 1,
-                    UserId = 3
                 },
                 new Module
                 {
                     Id = 2,
                     Name = "Mathematik",
                     TeacherId = 2,
-                    UserId = 3
                 },
                 new Module
                 {
                     Id = 3,
                     Name = "Sprache und Kommunikation",
                     TeacherId = 3,
-                    UserId = 3
                 }
                 );
         }

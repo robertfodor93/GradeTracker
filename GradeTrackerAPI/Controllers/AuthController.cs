@@ -5,39 +5,51 @@ namespace GradeTrackerAPI.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public static User user = new User();
+        private readonly IAuthService _authService;
 
-        private readonly DataContext _dataContext;
-
-        public AuthController(DataContext dataContext)
+        public AuthController(IAuthService authService)
         {
-            _dataContext = dataContext;
+            _authService = authService;
         }
 
         [HttpPost]
         [Route("register")]
-        public async Task<ActionResult<User>> Register(CreateUserDto request)
+        public async Task<ActionResult<User>> Register([FromBody] UserDto request)
         {
-            user.Username = request.Username;
-            user.Password = request.Password;
-            _dataContext.Add(user);
-            await _dataContext.SaveChangesAsync();
-
-            return Ok(user);
+            var response = await _authService.Register(request);
+            return Ok(response);
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult<string>> Login(CreateUserDto request)
+        public async Task<ActionResult<User>> Login([FromBody] UserDto request)
         {
-            var dbUser = await _dataContext.Users.Where(u => u.Username == request.Username && u.Password == request.Password).FirstOrDefaultAsync();
-
-            if(dbUser == null)
+            var response = await _authService.Login(request);
+            if(response.Success)
             {
-                return BadRequest("Login error");
+                return Ok(response);
             }
 
-            return Ok(dbUser);
+            return BadRequest(response.Message);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult<string>> RefreshToken()
+        {
+            var response = await _authService.RefreshToken();
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response.Message);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult<string> Authorization()
+        {
+            return Ok("Authorized");
         }
     }
 }
