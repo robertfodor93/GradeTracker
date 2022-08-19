@@ -2,7 +2,9 @@
 {
     public class EducationTypeDto
     {
+        [Required]
         public string Name { get; set; } = string.Empty;
-        public IList<CompetenceAreaDto> CompetenceAreas { get; set; }
+        [Required]
+        public double Calculation { get; set; }
     }
 }
