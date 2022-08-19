@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.hero{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: lightgrey;
+}
+
+.form-box{
+    width: 380px;
+    height: 480px;
+    position: relative;
+    margin: 6% auto;
+    background: white;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.title{
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+.input-group{
+    top: 180px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+
+.input-field{
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom:1px solid #999;
+    outline: none;
+    background:transparent;
+}
+
+.submit-button{
+    width: 85%;
+    padding: 10px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to right, grey, lightgrey);
+    border-radius: 30px;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    margin-top: 30px;
+}
+
+#login{
+    left: 50px;
+}
+
+#register{
+    left: 450px;
+}
