@@ -11,6 +11,12 @@ import { GradeOverviewComponent } from './grade-overview/grade-overview.componen
 import { SubjectModuleOverviewComponent } from './subject-module-overview/subject-module-overview.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatCardModule} from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +30,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+    MatFormFieldModule,
+    MatCardModule,
+    MatIconModule,
+    
+    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

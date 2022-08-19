@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: grid;
+   justify-content: center;
+   
+}
+
+
+mat-card{
+    width: 380px;
+    height: 480px;
+    position: relative;
+  padding: 16px;
+    background: white;
+    
+    border-radius: 15px;
+}
+
+mat-card-title{
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+
+mat-card-subtitle{
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+.input-field{
+    width: 200%;
+    padding: 10px 0;
+    margin: 5px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom:1px solid #999;
+    outline: none;
+    background:transparent;
+}
+
+.submit-button{
+    width: 85%;
+    padding: 10px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to right, grey, lightgrey);
+    border-radius: 30px;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    margin-top: 30px;
+}
+
+.linkToLogin{
+    text-decoration: underline;
+    color: black;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.linkToLogin:hover{
+    cursor: pointer;
+}
+
+
