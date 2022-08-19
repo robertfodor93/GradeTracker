@@ -3,38 +3,35 @@
     padding: 0;
 }
 
-.hero{
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    background-color: lightgrey;
+.container{
+    display: grid;
+   justify-content: center;
+   
 }
 
-.form-box{
+mat-card{
     width: 380px;
     height: 480px;
     position: relative;
-    margin: 6% auto;
+  padding: 16px;
     background: white;
-    padding: 5px;
+    
     border-radius: 15px;
 }
 
-.title{
+mat-card-title{
     text-align: center;
     margin-top: 50px;
 }
 
-
-.input-group{
-    top: 180px;
-    position: absolute;
-    width: 280px;
-    transition: .5s;
+mat-card-subtitle{
+    text-align: center;
+    margin-top: 20px;
 }
 
+
 .input-field{
-    width: 100%;
+    width: 200%;
     padding: 10px 0;
     margin: 5px;
     border-left: 0;
@@ -59,10 +56,15 @@
     margin-top: 30px;
 }
 
-#login{
-    left: 50px;
+.linkToRegister{
+    text-decoration: underline;
+    color: black;
+    text-align: center;
+    margin-top: 5%;
 }
 
-#register{
-    left: 450px;
+.linkToRegister:hover{
+    cursor: pointer;
 }
+
+

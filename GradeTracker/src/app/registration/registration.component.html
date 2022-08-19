@@ -1,2 +1,26 @@
-<p>registration works!</p>
-<a routerLink="/login">Login</a>
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <h1>Registrieren</h1>
+            </mat-card-title>
+            <mat-card-subtitle>Erstellen sie einen Account für den Grade-Tracker!</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <mat-form-field>
+                <input matInput class="input-field" type="text" placeholder="Username">
+                <input matInput class="input-field" type="email" placeholder="Email"> <br> <br>
+                <input matInput class="input-field" type="password" placeholder="Password">
+                <input matInput class="input-field" type="password" placeholder="Repeat Password">
+            </mat-form-field>
+        </mat-card-content>
+        <button type="submit" class="submit-button">Registrieren</button>
+
+        <div class="linkToLogin">
+            <a routerLink="/login">Bereits registriert?</a>
+        </div>
+
+
+    </mat-card>
+</div>

@@ -12,6 +12,12 @@ import { SubjectModuleOverviewComponent } from './subject-module-overview/subjec
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
+import {MatCardModule} from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +32,14 @@ import { SidenavComponent } from './sidenav/sidenav.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+    MatFormFieldModule,
+    MatCardModule,
+    MatIconModule,
+    
+    
+
   ],
   providers: [],
   bootstrap: [AppComponent]
