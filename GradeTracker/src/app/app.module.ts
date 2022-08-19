@@ -10,6 +10,7 @@ import { GoalOverviewComponent } from './goal-overview/goal-overview.component';
 import { GradeOverviewComponent } from './grade-overview/grade-overview.component';
 import { SubjectModuleOverviewComponent } from './subject-module-overview/subject-module-overview.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardComponent,
     GoalOverviewComponent,
     GradeOverviewComponent,
-    SubjectModuleOverviewComponent
+    SubjectModuleOverviewComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
