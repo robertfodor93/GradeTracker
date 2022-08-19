@@ -2,7 +2,7 @@
 {
     public class CompetenceAreaDto
     {
+        [Required]
         public string Name { get; set; } = string.Empty;
-        public IList<ModuleDto> Modules { get; set; }
     }
 }

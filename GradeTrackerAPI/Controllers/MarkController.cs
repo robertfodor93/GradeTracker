@@ -1,15 +1,17 @@
-﻿
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 namespace GradeTrackerAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ModuleController : ControllerBase
+    public class MarkController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<ModuleController> _logger;
+        private readonly ILogger<MarkController> _logger;
         private readonly IMapper _mapper;
 
-        public ModuleController(IUnitOfWork unitOfWork, ILogger<ModuleController> logger, IMapper mapper)
+        public MarkController(IUnitOfWork unitOfWork, ILogger<MarkController> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
@@ -21,8 +23,8 @@ namespace GradeTrackerAPI.Controllers
         {
             try
             {
-                var modules = await _unitOfWork.Modules.GetAll();
-                var results = _mapper.Map<IList<ModuleDto>>(modules);
+                var marks = await _unitOfWork.Marks.GetAll();
+                var results = _mapper.Map<IList<MarkDto>>(marks);
                 return Ok(results);
             }
             catch (Exception ex)
@@ -37,8 +39,8 @@ namespace GradeTrackerAPI.Controllers
         {
             try
             {
-                var module = await _unitOfWork.Modules.Get(e => e.Id == id);
-                var result = _mapper.Map<ModuleDto>(module);
+                var mark = await _unitOfWork.Marks.Get(e => e.Id == id);
+                var result = _mapper.Map<MarkDto>(mark);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -48,46 +50,45 @@ namespace GradeTrackerAPI.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("create")]
-        public async Task<IActionResult> Create([FromBody] ModuleDto request)
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] MarkDto request)
         {
-            var module = _mapper.Map<Module>(request);
-            await _unitOfWork.Modules.Insert(module);
+            var mark = _mapper.Map<Mark>(request);
+            await _unitOfWork.Marks.Insert(mark);
             await _unitOfWork.Save();
 
-            return Ok(module);
+            return Ok(mark);
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> Update(int id, [FromBody] ModuleDto request)
+        public async Task<IActionResult> Update(int id, [FromBody] MarkDto request)
         {
-            var module = await _unitOfWork.Modules.Get(e => e.Id == id);
-            if (module == null)
+            var mark = await _unitOfWork.Marks.Get(e => e.Id == id);
+            if (mark == null)
             {
                 return BadRequest("Error");
             }
 
-            _mapper.Map(request, module);
-            _unitOfWork.Modules.Update(module);
+            _mapper.Map(request, mark);
+            _unitOfWork.Marks.Update(mark);
             await _unitOfWork.Save();
 
-            return Ok(module);
+            return Ok(mark);
         }
 
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            var module = await _unitOfWork.Modules.Get(e => e.Id == id);
-            if (module == null)
+            var mark = await _unitOfWork.Marks.Get(e => e.Id == id);
+            if (mark == null)
             {
                 return BadRequest("Error");
             }
 
-            await _unitOfWork.Modules.Delete(id);
+            await _unitOfWork.Marks.Delete(id);
             await _unitOfWork.Save();
 
-            return Ok("Module deleted");
+            return Ok("Mark deleted");
         }
     }
 }

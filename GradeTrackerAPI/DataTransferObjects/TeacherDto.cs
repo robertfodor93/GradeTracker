@@ -2,12 +2,7 @@
 {
     public class TeacherDto
     {
-        public virtual IList<ModuleDto> Modules { get; set; }
-
-    }
-
-    public class CreateTeacherDto
-    {
-        public string Name { get; set; } = string.Empty;
+        [Required]
+        public string Name { get; set; }
     }
 }

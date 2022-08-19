@@ -12,16 +12,14 @@ namespace GradeTrackerAPI.Controllers
             _authService = authService;
         }
 
-        [HttpPost]
-        [Route("register")]
+        [HttpPost("register")]
         public async Task<ActionResult<User>> Register([FromBody] UserDto request)
         {
             var response = await _authService.Register(request);
             return Ok(response);
         }
 
-        [HttpPost]
-        [Route("login")]
+        [HttpPost("login")]
         public async Task<ActionResult<User>> Login([FromBody] UserDto request)
         {
             var response = await _authService.Login(request);
@@ -33,7 +31,7 @@ namespace GradeTrackerAPI.Controllers
             return BadRequest(response.Message);
         }
 
-        [HttpPost("refresh-token")]
+        [HttpPost("refreshToken")]
         public async Task<ActionResult<string>> RefreshToken()
         {
             var response = await _authService.RefreshToken();
