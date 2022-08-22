@@ -1,1 +1,104 @@
-<p>subject-module-overview works!</p>
+<mat-tab-group>
+    <mat-tab label="EFZ">
+        <mat-table #table [dataSource]="dataSourceEFZ">
+
+            <!-- Subject Column -->
+            <ng-container matColumnDef="subject">
+                <mat-header-cell *matHeaderCellDef> Subject </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.subject}} </mat-cell>
+            </ng-container>
+
+            <!-- Fachtyp Column -->
+            <ng-container matColumnDef="fachtyp">
+                <mat-header-cell *matHeaderCellDef> Fachtyp </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.fachtyp}} </mat-cell>
+            </ng-container>
+
+            <!-- Kompetenzbereich -->
+            <ng-container matColumnDef="kompetenzbereich">
+                <mat-header-cell *matHeaderCellDef> Kompetenzbereich </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.kompetenzbereich}} </mat-cell>
+            </ng-container>
+
+            <!-- Teacher Column -->
+            <ng-container matColumnDef="teacher">
+                <mat-header-cell *matHeaderCellDef>Teacher</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.teacher}} </mat-cell>
+            </ng-container>
+
+            <!-- Durchschnitt Column -->
+            <ng-container matColumnDef="durchschnitt">
+                <mat-header-cell *matHeaderCellDef>Durchschnitt</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.durchschnitt}} </mat-cell>
+            </ng-container>
+
+            <!-- Anzahl Noten Column -->
+            <ng-container matColumnDef="anzahlNoten">
+                <mat-header-cell *matHeaderCellDef>Anzahl Noten</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.anzahlNoten}} </mat-cell>
+            </ng-container>
+
+            <!-- Favorit Column -->
+            <ng-container matColumnDef="favorit">
+                <mat-header-cell *matHeaderCellDef>Favorit</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.favorit}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+        </mat-table>
+    </mat-tab>
+    <mat-tab label="BM">
+        <mat-table #table [dataSource]="dataSourceBM">
+
+            <!-- Subject Column -->
+            <ng-container matColumnDef="subject">
+                <mat-header-cell *matHeaderCellDef> Subject </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.subject}} </mat-cell>
+            </ng-container>
+
+            <!-- Fachtyp Column -->
+            <ng-container matColumnDef="fachtyp">
+                <mat-header-cell *matHeaderCellDef> Fachtyp </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.fachtyp}} </mat-cell>
+            </ng-container>
+
+            <!-- Kompetenzbereich -->
+            <ng-container matColumnDef="kompetenzbereich">
+                <mat-header-cell *matHeaderCellDef> Kompetenzbereich </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.kompetenzbereich}} </mat-cell>
+            </ng-container>
+
+            <!-- Teacher Column -->
+            <ng-container matColumnDef="teacher">
+                <mat-header-cell *matHeaderCellDef>Teacher</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.teacher}} </mat-cell>
+            </ng-container>
+
+            <!-- Durchschnitt Column -->
+            <ng-container matColumnDef="durchschnitt">
+                <mat-header-cell *matHeaderCellDef>Durchschnitt</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.durchschnitt}} </mat-cell>
+            </ng-container>
+
+            <!-- Anzahl Noten Column -->
+            <ng-container matColumnDef="anzahlNoten">
+                <mat-header-cell *matHeaderCellDef>Anzahl Noten</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.anzahlNoten}} </mat-cell>
+            </ng-container>
+
+            <!-- Favorit Column -->
+            <ng-container matColumnDef="favorit">
+                <mat-header-cell *matHeaderCellDef>Favorit</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.favorit}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+        </mat-table>
+    </mat-tab>
+</mat-tab-group>

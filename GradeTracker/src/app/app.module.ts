@@ -12,9 +12,14 @@ import { SubjectModuleOverviewComponent } from './subject-module-overview/subjec
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table'
+import { MatTabsModule } from '@angular/material/tabs'
+
+
 
 
 
@@ -37,8 +42,11 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatCardModule,
     MatIconModule,
-    
-    
+    MatInputModule,
+    MatTableModule,
+    MatTabsModule
+
+
 
   ],
   providers: [],
