@@ -50,7 +50,7 @@ namespace GradeTrackerAPI.Controllers
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create([FromBody] ModuleDto request)
+        public async Task<IActionResult> Create([FromBody] CreateModuleDto request)
         {
             var module = _mapper.Map<Module>(request);
             await _unitOfWork.Modules.Insert(module);
@@ -60,7 +60,7 @@ namespace GradeTrackerAPI.Controllers
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> Update(int id, [FromBody] ModuleDto request)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateModuleDto request)
         {
             var module = await _unitOfWork.Modules.Get(e => e.Id == id);
             if (module == null)

@@ -15,6 +15,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import {MatCardModule} from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+import { CreateModuleComponent } from './create-module/create-module.component';
 
 
 
@@ -27,7 +28,8 @@ import {MatIconModule} from '@angular/material/icon';
     GoalOverviewComponent,
     GradeOverviewComponent,
     SubjectModuleOverviewComponent,
-    SidenavComponent
+    SidenavComponent,
+    CreateModuleComponent
   ],
   imports: [
     BrowserModule,
