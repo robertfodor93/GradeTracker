@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GoalOverviewComponent } from './goal-overview/goal-overview.component';
 import { GradeOverviewComponent } from './grade-overview/grade-overview.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:`dashboard`, component:DashboardComponent},
   {path:`goaloverview`, component:GoalOverviewComponent},
   {path:`gradeoverview`, component:GradeOverviewComponent},
+  {path:`profile`, component:ProfileComponent},
   {path: '',   redirectTo: '/registration', pathMatch: 'full' },
 
 ];

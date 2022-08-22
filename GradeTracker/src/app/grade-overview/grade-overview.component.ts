@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GradeOverviewComponent implements OnInit {
 
+  title="Notenübersicht";
+
   constructor() { }
 
   ngOnInit(): void {
