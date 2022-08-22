@@ -18,8 +18,18 @@ import {MatDividerModule} from '@angular/material/divider';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table'
-import { MatTabsModule } from '@angular/material/tabs'
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatRow } from '@angular/material/table';
+import { MatHeaderRow } from '@angular/material/table';
+import { MatCell } from '@angular/material/table';
+import { MatHeaderCell } from '@angular/material/table';
+import { ProfileComponent } from './profile/profile.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
+import { Title } from '@angular/platform-browser';
+
+
 
 @NgModule({
   declarations: [
@@ -31,7 +41,9 @@ import { MatTabsModule } from '@angular/material/tabs'
     GradeOverviewComponent,
     SubjectModuleOverviewComponent,
     SidenavComponent,
-    CreateModuleComponent
+    ProfileComponent,
+    
+  
   ],
   imports: [
     BrowserModule,
@@ -47,12 +59,14 @@ import { MatTabsModule } from '@angular/material/tabs'
     
     MatInputModule,
     MatTableModule,
-    MatTabsModule
+    MatTabsModule,
+    MatToolbarModule,
+
 
 
 
   ],
-  providers: [],
+  providers: [Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

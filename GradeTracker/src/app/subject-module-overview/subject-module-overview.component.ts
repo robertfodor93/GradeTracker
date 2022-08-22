@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubjectModuleOverviewComponent implements OnInit {
 
+  title ="Fach-/Modulübersicht";
+
   constructor() { }
 
   ngOnInit(): void {
