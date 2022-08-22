@@ -14,18 +14,12 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
-
 import {MatDividerModule} from '@angular/material/divider';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table'
 import { MatTabsModule } from '@angular/material/tabs'
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -36,7 +30,8 @@ import { MatTabsModule } from '@angular/material/tabs'
     GoalOverviewComponent,
     GradeOverviewComponent,
     SubjectModuleOverviewComponent,
-    SidenavComponent
+    SidenavComponent,
+    CreateModuleComponent
   ],
   imports: [
     BrowserModule,
