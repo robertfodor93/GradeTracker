@@ -11,9 +11,14 @@ import { GradeOverviewComponent } from './grade-overview/grade-overview.componen
 import { SubjectModuleOverviewComponent } from './subject-module-overview/subject-module-overview.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table'
+import { MatTabsModule } from '@angular/material/tabs'
+
+
 
 
 
@@ -35,8 +40,11 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatCardModule,
     MatIconModule,
-    
-    
+    MatInputModule,
+    MatTableModule,
+    MatTabsModule
+
+
 
   ],
   providers: [],
