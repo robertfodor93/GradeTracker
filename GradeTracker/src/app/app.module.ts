@@ -12,12 +12,14 @@ import { SubjectModuleOverviewComponent } from './subject-module-overview/subjec
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import { CreateModuleComponent } from './create-module/create-module.component';
+import {MatDividerModule} from '@angular/material/divider';
 
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table'
+import { MatTabsModule } from '@angular/material/tabs'
 
 @NgModule({
   declarations: [
@@ -39,8 +41,15 @@ import { CreateModuleComponent } from './create-module/create-module.component';
     MatFormFieldModule,
     MatCardModule,
     MatIconModule,
+
+    MatDividerModule,
     
     
+    MatInputModule,
+    MatTableModule,
+    MatTabsModule
+
+
 
   ],
   providers: [],
