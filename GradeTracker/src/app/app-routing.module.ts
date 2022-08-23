@@ -11,7 +11,7 @@ import { GradeOverviewComponent } from './grade-overview/grade-overview.componen
 
 const routes: Routes = [
   
-  {path: `subjectoverview`, component: SubjectModuleOverviewComponent},
+  {path:`subjectoverview`, component: SubjectModuleOverviewComponent},
   {path:`registration`, component:RegistrationComponent},
   {path:`login`, component:LoginComponent},
   {path:`dashboard`, component:DashboardComponent},
