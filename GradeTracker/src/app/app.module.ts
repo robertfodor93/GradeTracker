@@ -18,7 +18,7 @@ import {MatDividerModule} from '@angular/material/divider';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRow } from '@angular/material/table';
 import { MatHeaderRow } from '@angular/material/table';
@@ -28,6 +28,10 @@ import { ProfileComponent } from './profile/profile.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { Title } from '@angular/platform-browser';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -62,11 +66,18 @@ import { Title } from '@angular/platform-browser';
     MatTabsModule,
     MatToolbarModule,
 
+    MatOptionModule,
+    MatSelectModule,
+
+    HttpClientModule,
+
+    MatSortModule,
+
 
 
 
   ],
-  providers: [Title],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

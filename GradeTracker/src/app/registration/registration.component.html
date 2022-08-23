@@ -14,17 +14,12 @@
                 <input  class="input-field" type="password" placeholder="Password">
                 <input  class="input-field" type="password" placeholder="Repeat Password">
                 
-                <select class="input-field">
-                    <option name="EFZ" value="EFZ">EFZ</option>
-                    <option name="EFZmitBM" value="EFZmitBM">EFZ mit BM</option>
-                    <option name="IMS" value="IMS">IMS</option>
-                </select>
                 
-                <!--<mat-select matNativeControl>
-                    <mat-option *ngFor="let abschluss of abschluesse" [value]="abschluss.value">
-                        {{abschluss.value}}
+                <mat-select matNativeControl class="input-field">
+                    <mat-option *ngFor="let post of posts" [value]="post.name">
+                        {{post.name}}
                     </mat-option>
-                </mat-select>-->
+                </mat-select>
             </mat-form-field>
         </mat-card-content>
         <button type="submit" class="submit-button">Registrieren</button>

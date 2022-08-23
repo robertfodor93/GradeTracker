@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EducationtypeService } from '../services/educationtype.service';
 
 @Component({
   selector: 'app-registration',
@@ -7,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  title="Registration"
+  title = "Registration"
 
-  constructor() { }
+  posts: any;
 
-  ngOnInit(): void {
+  constructor(private service: EducationtypeService) { }
+
+  ngOnInit() {
+    this.service.getEducationTypes()
+      .subscribe(response => {
+        this.posts = response;
+      });
   }
-
 }
