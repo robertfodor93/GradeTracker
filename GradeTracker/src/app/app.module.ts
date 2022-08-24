@@ -14,7 +14,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -25,7 +25,7 @@ import { MatHeaderRow } from '@angular/material/table';
 import { MatCell } from '@angular/material/table';
 import { MatHeaderCell } from '@angular/material/table';
 import { ProfileComponent } from './profile/profile.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { Title } from '@angular/platform-browser';
 import { MatOptionModule } from '@angular/material/core';
@@ -46,8 +46,8 @@ import { MatSortModule } from '@angular/material/sort';
     SubjectModuleOverviewComponent,
     SidenavComponent,
     ProfileComponent,
-    
-  
+
+
   ],
   imports: [
     BrowserModule,
@@ -59,8 +59,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatIconModule,
 
     MatDividerModule,
-    
-    
+
+
     MatInputModule,
     MatTableModule,
     MatTabsModule,
