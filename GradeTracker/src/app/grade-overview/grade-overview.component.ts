@@ -31,7 +31,7 @@ export class GradeOverviewComponent implements OnInit {
   dataSourceEFZexam = EXAM_DATA_EFZ;
   dataSourceBMexam = EXAM_DATA_BM;
   displayedColumnsExam =['suject','datum','bez','gewichtung','note'];
-  expandedElement: Subject | null | undefined;
+  expandedElements: Subject | null | undefined;
 
   toggleRow(element:{expanded:boolean;subject:string;}){
     SUBJECT_DATA_EFZ.forEach(row=>{
