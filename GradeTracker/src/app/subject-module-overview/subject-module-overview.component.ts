@@ -17,8 +17,6 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
 
   displayedColumns = ['name', 'competenceArea', 'teacher', 'averageDesiredMark', 'marks', 'showOnDashboard'];
 
-  //SUBJECT_DATA_EFZ:Subject[];
-  //SUBJECT_DATA_BM:Subject[];
 
   protected SUBJECT_DATA_EFZ: Subject[] = []
   protected SUBJECT_DATA_BM: Subject[] = []
@@ -40,6 +38,16 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
     resp.subscribe(report => this.dataSourceEFZ.data = report as Subject[])
     resp.subscribe(report => this.dataSourceBM.data = report as Subject[])
   }
+
+  public openForm() {
+    let form = document.getElementById('myForm')
+    if(form) (form as HTMLFormElement).style.display="block"; 
+}
+
+public closeForm() {
+  let form = document.getElementById('myForm')
+  if(form) (form as HTMLFormElement).style.display="none";
+}
 
 
 

@@ -14,4 +14,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+   isReadOnly: boolean = true;
+  update(){
+    return this.isReadOnly = !this.isReadOnly;
+  }
+
 }
