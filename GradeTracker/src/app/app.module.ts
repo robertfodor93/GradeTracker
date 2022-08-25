@@ -33,6 +33,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatSortModule } from '@angular/material/sort';
 
+import { ModuleService } from './services/module.service';
+
 
 
 @NgModule({
