@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { AuthGuard } from './_guards/auth.guard';
 
 import { SubjectModuleOverviewComponent } from './subject-module-overview/subject-module-overview.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -11,14 +11,14 @@ import { GradeOverviewComponent } from './grade-overview/grade-overview.componen
 
 const routes: Routes = [
   
-  {path:`subjectoverview`, component: SubjectModuleOverviewComponent},
-  {path:`registration`, component:RegistrationComponent},
+  {path: '',   redirectTo: '/login', pathMatch: 'full' },
   {path:`login`, component:LoginComponent},
-  {path:`dashboard`, component:DashboardComponent},
-  {path:`goaloverview`, component:GoalOverviewComponent},
-  {path:`gradeoverview`, component:GradeOverviewComponent},
-  {path: '',   redirectTo: '/registration', pathMatch: 'full' },
-
+  {path:`registration`, component:RegistrationComponent},
+  {path:`subjectoverview`, component: SubjectModuleOverviewComponent, canActivate: [AuthGuard]},
+  {path:`dashboard`, component:DashboardComponent, canActivate: [AuthGuard]},
+  {path:`goaloverview`, component:GoalOverviewComponent, canActivate: [AuthGuard]},
+  {path:`gradeoverview`, component:GradeOverviewComponent, canActivate: [AuthGuard]},
+  
 ];
 
 @NgModule({

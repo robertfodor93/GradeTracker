@@ -4,6 +4,7 @@
     {
         public MapperInitializer()
         {
+            CreateMap<User, UserDto>().ReverseMap();
             CreateMap<EducationTypeGoal, EducationTypeGoalDto>().ReverseMap();
             CreateMap<EducationType, EducationTypeDto>().ReverseMap();
             CreateMap<CompetenceArea, CompetenceAreaDto>().ReverseMap();

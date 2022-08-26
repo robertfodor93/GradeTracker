@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, tap, switchMap } from 'rxjs/operators';
 import {User} from '../_models/user'
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 export interface LoginForm {
   username: string;
@@ -16,31 +17,42 @@ export const jwt = 'token';
   providedIn: 'root'
 })
 export class AuthService {
-  
-  constructor(private http : HttpClient, private jwtHelper: JwtHelperService) { }
+
+  private authenticated = new BehaviorSubject<boolean>(false);
+
+  get checkAuthentication() {
+    return this.authenticated.asObservable();
+  }
+
+  constructor(private http : HttpClient, private jwtHelper: JwtHelperService, private router : Router) { }
 
   login(loginForm: LoginForm) {  
 
-    return this.http.post<any>('https://localhost:7290/Auth/login', {email: loginForm.username, password: loginForm.password}).pipe(
+    return this.http.post<any>('https://localhost:7290/api/Auth/login', {username: loginForm.username, password: loginForm.password}).pipe(
       map((token) => {
-        console.log('token' + token.access_token);
-        localStorage.setItem(jwt, token.access_token);
+        console.log('token' + token.token);
+        localStorage.setItem(jwt, token.token);
         return token;
       })
     )
   }
 
   logout() {
-    localStorage.removeItem(jwt)
+    localStorage.removeItem(jwt);
+    this.router.navigate(['/login'])
   }
 
   register(user: User) {
-    return this.http.post<any>('https://localhost:7290/Auth/register', user);
+    return this.http.post<any>('https://localhost:7290/api/Auth/register', user);
   }
 
   isAuthenticated(): boolean {
     const token = JSON.stringify(localStorage.getItem(jwt));
-    return !this.jwtHelper.isTokenExpired(token);
+    if(!this.jwtHelper.isTokenExpired(token)) {
+      this.authenticated.next(true);
+      return true;
+    }
+    return false;
   }
 
   getUserId(): Observable<number>{
