@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NewGradeComponent } from '../new-grade/new-grade.component';
+import { ModuleService, Subject } from '../services/module.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-grade-overview',
@@ -20,9 +21,14 @@ import { NewGradeComponent } from '../new-grade/new-grade.component';
 
 export class GradeOverviewComponent implements OnInit {
 
-  constructor(public dialog: MatDialog,) { }
+  displayedColumnsSubject = ['subject',  'fachtyp','kompetenzbereich','teacher','durchschnitt','anzahlNoten']
+  displayedColumnsExam =['suject','datum','bez','gewichtung','note'];
+  expandedElements: Subject | null | undefined;
 
-  ngOnInit(): void {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private service: ModuleService,public dialog: MatDialog,) { }
+
+  ngOnInit() {
+    this.getModule();
   }
 
   subject: string | undefined;
@@ -44,42 +50,36 @@ export class GradeOverviewComponent implements OnInit {
   }
 
   panelOpenState = false;
- 
-  dataSourceEFZ = SUBJECT_DATA_EFZ;
-  dataSourceBM = SUBJECT_DATA_BM;
-  displayedColumnsSubject = ['subject',  'fachtyp','kompetenzbereich','teacher','durchschnitt','anzahlNoten']
+  protected SUBJECT_DATA_EFZ: Subject[] = []
+  protected SUBJECT_DATA_BM: Subject[] = []
 
-
+  dataSourceEFZ = new MatTableDataSource<Subject>(this.SUBJECT_DATA_EFZ);
+  dataSourceBM = new MatTableDataSource<Subject>(this.SUBJECT_DATA_BM);
+  
   dataSourceEFZexam = EXAM_DATA_EFZ;
   dataSourceBMexam = EXAM_DATA_BM;
-  displayedColumnsExam =['suject','datum','bez','gewichtung','note'];
-  expandedElements: Subject | null | undefined;
 
-  toggleRow(element:{expanded:boolean;subject:string;}){
-    SUBJECT_DATA_EFZ.forEach(row=>{
-      row.expanded= false
-    })
-    element.expanded = !element.expanded
+  public getModule() {
+    let resp = this.service.getModule();
+    resp.subscribe(report => this.dataSourceEFZ.data = report as Subject[])
+    resp.subscribe(report => this.dataSourceBM.data = report as Subject[])
   }
-  manageAllRows(flag: boolean) {
-    SUBJECT_DATA_EFZ.forEach(row => {
-      row.expanded = flag;
-    })
-  }
+  
+
+  // toggleRow(element:{expanded:boolean;subject:string;}){
+  //   SUBJECT_DATA_EFZ.forEach(row=>{
+  //     row.expanded= false
+  //   })
+  //   element.expanded = !element.expanded
+  // }
+  // manageAllRows(flag: boolean) {
+  //   SUBJECT_DATA_EFZ.forEach(row => {
+  //     row.expanded = flag;
+  //   })
+  // }
 
 }
 
-
-export interface Subject {
-  subject: string;
-  fachtyp: string;
-  kompetenzbereich: string;
-  teacher: string;
-  durchschnitt: number;
-  anzahlNoten: number;
-  favorit: boolean;
-  expanded:boolean;
-}
 export interface Exam{
   subject: string;
   datum: Date;
@@ -88,12 +88,7 @@ export interface Exam{
   note:number;
 }
 
-const SUBJECT_DATA_EFZ: Subject[] = [
-  { subject: 'M117', fachtyp: 'EFZ', kompetenzbereich: 'Informatikkompetenzen', teacher: 'Erik Benz', durchschnitt: 4, anzahlNoten: 3, favorit: false, expanded:false },
-  { subject: 'M200', fachtyp: 'EFZ', kompetenzbereich: 'ÜK', teacher: 'Erik Benz', durchschnitt: 3, anzahlNoten: 2, favorit: true, expanded:false },
-  { subject: 'M300', fachtyp: 'EFZ', kompetenzbereich: 'Informatikkompetenzen', teacher: 'Erik Benz', durchschnitt: 6, anzahlNoten: 7, favorit: true, expanded:false },
-  { subject: 'M400', fachtyp: 'EFZ', kompetenzbereich: 'ÜK', teacher: 'Erik Benz', durchschnitt: 5, anzahlNoten: 1, favorit: false,expanded:false }
-];
+
 const EXAM_DATA_EFZ: Exam[]=[
   {subject:'M117', bez:'Theorie', gewichtung: 1, note: 5, datum: new Date(2022, 4, 8) },
   {subject:'M117', bez:'Praktische Arbeit', gewichtung: 1, note: 4, datum: new Date(2022, 6, 18) },
@@ -104,10 +99,3 @@ const EXAM_DATA_BM: Exam[]=[
   {subject:'Englisch', bez:'FCE', gewichtung: 1, note: 5, datum: new Date(2022, 4, 28) },
   {subject:'Deutsch', bez:'Theorie', gewichtung: 1, note: 4.5, datum: new Date(2022, 4, 18) }
 ]
-
-const SUBJECT_DATA_BM: Subject[] = [
-  { subject: 'Mathe', fachtyp: 'BM', kompetenzbereich: 'Berufsmaturität', teacher: 'Heinz Estermann', durchschnitt: 5, anzahlNoten: 2, favorit: true,expanded:false  },
-  { subject: 'Deutsch', fachtyp: 'BM', kompetenzbereich: 'Berufsmaturität', teacher: 'Peter Wicki', durchschnitt: 5, anzahlNoten: 2, favorit: false ,expanded:false},
-  { subject: 'Englisch', fachtyp: 'BM', kompetenzbereich: 'Berufsmaturität', teacher: 'Timothy Black', durchschnitt: 4.5, anzahlNoten: 6, favorit: false, expanded:false },
-  { subject: 'Wirtschaft', fachtyp: 'BM', kompetenzbereich: 'Berufsmaturität', teacher: 'Patrick Stark', durchschnitt: 5.5, anzahlNoten: 4, favorit: true,expanded:false }
-];
