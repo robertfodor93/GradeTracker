@@ -75,11 +75,13 @@ import { ModuleService } from './services/module.service';
 
     MatSortModule,
 
+    
+
 
 
 
   ],
-  providers: [HttpClient],
+  providers: [HttpClient, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
