@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { NewGradeComponent } from '../new-grade/new-grade.component';
+
 @Component({
   selector: 'app-grade-overview',
   templateUrl: './grade-overview.component.html',
@@ -17,10 +20,29 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 
 export class GradeOverviewComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog,) { }
 
   ngOnInit(): void {
   }
+
+  subject: string | undefined;
+  datum: Date | undefined;
+  bez:string | undefined;
+  gewichtung:number | undefined;
+  note:number | undefined;
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(NewGradeComponent, {
+      width: '40%' ,height:'87%',
+      data: {subject: this.subject,datum:this.datum, bez: this.bez, gewictung: this.gewichtung,note:this.note },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.bez = result;
+    });
+  }
+
   panelOpenState = false;
  
   dataSourceEFZ = SUBJECT_DATA_EFZ;

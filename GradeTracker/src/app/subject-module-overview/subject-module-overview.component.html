@@ -114,29 +114,4 @@
     </mat-tab>
 </mat-tab-group>
 
-<button class="open-button" (click)="openForm()">Modul oder Fach erfassen</button>
-
-<div class="form-popup" id="myForm">
-    <form action="/action_page.php" class="form-container">
-        <h1>Modul erfassen</h1>
-
-        <input class="input-field" type="text" placeholder="Name">
-        <select class="input-field">
-            <option>BM</option>
-            <option>EFZ</option>
-        </select>
-        <select class="input-field">
-            <option>ÜK</option>
-            <option>Informatikkompetentz</option>
-        </select>
-        <input class="input-field" type="password" placeholder="Lehrperson">
-
-        <div class="favorit">
-            Favorit
-            <input class="input-field" type="checkbox" name="favorit" value="favorit" >
-        </div>
-
-        <button type="submit" class="btn erfassen">Erfassen</button>
-        <button type="button" class="btn cancel" (click)="closeForm()">Close</button>
-    </form>
-</div>
+<button class="buttonNew" mat-raised-button (click)="openDialog()">Neues Fach/Modul erfassen</button>
