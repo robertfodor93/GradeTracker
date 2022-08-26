@@ -25,13 +25,20 @@
           [@detailExpand]="element == expandedElements ? 'expanded' : 'collapsed'">
           <table multiTemplateDataRows
           class="mat-elevation-z8">
+          <tr>
+            <th  class="row"style="width: 15%" >Datum</th>
+            <th  class="row" style="width: 15%" >Subject</th>
+            <th  class="row" style="width: 50%">Prüfung</th>
+            <th  class="row" style="width: 5%">Gew.</th>
+            <th  class="row" style="width: 5%">Note</th>
+          </tr>
             <ng-container *ngFor="let exam of dataSourceEFZexam">
               <ng-container  *ngIf="exam.subject == element.subject">
                 <tr>
                   <td  class="row"style="width: 15%" >{{exam.datum | date: 'dd/MM/yyyy'}}</td>
                   <td  class="row" style="width: 15%" >{{exam.subject}}</td>
                   <td  class="row" style="width: 50%">{{exam.bez}}</td>
-                  <td  class="row" style="width: 10%">Gew. {{exam.gewichtung}}.0</td>
+                  <td  class="row" style="width: 10%">{{exam.gewichtung}}.0</td>
                   <td  class="row" style="width: 10%">{{exam.note}}</td>
                 </tr>
               </ng-container>
@@ -87,7 +94,7 @@
                 <td  class="row"style="width: 15%" >{{exam.datum | date: 'dd/MM/yyyy'}}</td>
                 <td  class="row" style="width: 15%" >{{exam.subject}}</td>
                 <td  class="row" style="width: 50%">{{exam.bez}}</td>
-                <td  class="row" style="width: 10%">Gew. {{exam.gewichtung}}.0</td>
+                <td  class="row" style="width: 10%">{{exam.gewichtung}}.0</td>
                 <td  class="row" style="width: 10%">{{exam.note}}</td>
               </tr>
             </ng-container>
@@ -108,4 +115,4 @@
      </mat-tab>
 </mat-tab-group>
 
-
+<button class="buttonNew" mat-raised-button (click)="openDialog()">Neue Noten erfassen</button>

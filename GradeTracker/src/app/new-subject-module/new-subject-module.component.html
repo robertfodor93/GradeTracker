@@ -1,0 +1,30 @@
+<h2>Fach/Modulerfassung</h2>
+<mat-divider></mat-divider>
+<div mat-dialog-actions>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" >
+        <br>
+       <label for="fachtyp">Fachtyp</label>
+        <select id="fachtyp" name="fachtyp" class="input-field">
+            <option>BM</option>
+            <option>EFZ</option>
+        </select>
+        <br>
+        <label for="kompetenzenbereich">Kompetenzenbereich</label>
+        <select id="kompetenzenbereich" name="kompetenzenbereich" class="input-field">
+            <option>Informatikkompetentz</option>
+            <option>ÜK</option>   
+        </select>
+        <br>
+        <label for="lehrperson">Lehrperson</label>
+        <input type="text" id="lehrperson" name="lehrperson" >
+        <br>
+       
+        <label for="favorit">Favorit</label>
+        <input type="checkbox" name="favorit" value="favorit" >
+    
+        <br>
+        <button class="buttonSubmit" (click)="onNoClick()">Abbrechen</button>
+        <button class="buttonCancel"  [mat-dialog-close]="" cdkFocusInitial>Speichern</button>
+</div>
+

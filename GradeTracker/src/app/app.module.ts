@@ -34,7 +34,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatSortModule } from '@angular/material/sort';
 
 import { ModuleService } from './services/module.service';
-
+import { NewGradeComponent } from './new-grade/new-grade.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { NewSubjectModuleComponent } from './new-subject-module/new-subject-module.component';
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import { ModuleService } from './services/module.service';
     SubjectModuleOverviewComponent,
     SidenavComponent,
     ProfileComponent,
+    NewGradeComponent,
+    NewSubjectModuleComponent,
 
 
   ],
@@ -75,7 +79,7 @@ import { ModuleService } from './services/module.service';
 
     MatSortModule,
 
-    
+    MatDialogModule,
 
 
 
