@@ -78,12 +78,14 @@ import { NewSubjectModuleComponent } from './new-subject-module/new-subject-modu
     HttpClientModule,
 
     MatSortModule,
+
     MatDialogModule,
 
 
 
+
   ],
-  providers: [HttpClient],
+  providers: [HttpClient, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
