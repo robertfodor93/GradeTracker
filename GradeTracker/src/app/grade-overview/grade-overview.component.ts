@@ -21,7 +21,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 export class GradeOverviewComponent implements OnInit {
 
-  displayedColumnsSubject = ['subject',  'fachtyp','kompetenzbereich','teacher','durchschnitt','anzahlNoten']
+  displayedColumnsSubject = ['name', 'competenceArea', 'teacher', 'averageDesiredMark', 'marks', 'showOnDashboard']
   displayedColumnsExam =['suject','datum','bez','gewichtung','note'];
   expandedElements: Subject | null | undefined;
 
@@ -66,17 +66,6 @@ export class GradeOverviewComponent implements OnInit {
   }
   
 
-  // toggleRow(element:{expanded:boolean;subject:string;}){
-  //   SUBJECT_DATA_EFZ.forEach(row=>{
-  //     row.expanded= false
-  //   })
-  //   element.expanded = !element.expanded
-  // }
-  // manageAllRows(flag: boolean) {
-  //   SUBJECT_DATA_EFZ.forEach(row => {
-  //     row.expanded = flag;
-  //   })
-  // }
 
 }
 
@@ -90,12 +79,12 @@ export interface Exam{
 
 
 const EXAM_DATA_EFZ: Exam[]=[
-  {subject:'M117', bez:'Theorie', gewichtung: 1, note: 5, datum: new Date(2022, 4, 8) },
+  {subject:'INF 226B', bez:'Theorie', gewichtung: 1, note: 5, datum: new Date(2022, 4, 8) },
   {subject:'M117', bez:'Praktische Arbeit', gewichtung: 1, note: 4, datum: new Date(2022, 6, 18) },
   {subject:'M200', bez:'Theorie', gewichtung: 1, note: 4.5, datum: new Date(2022, 5, 8) }
 ]
 const EXAM_DATA_BM: Exam[]=[
-  {subject:'Mathe', bez:'Vektorgeometrie', gewichtung: 1, note: 5.5, datum: new Date(2022, 4, 8) },
+  {subject:'Mathematik', bez:'Vektorgeometrie', gewichtung: 1, note: 5.5, datum: new Date(2022, 4, 8) },
   {subject:'Englisch', bez:'FCE', gewichtung: 1, note: 5, datum: new Date(2022, 4, 28) },
   {subject:'Deutsch', bez:'Theorie', gewichtung: 1, note: 4.5, datum: new Date(2022, 4, 18) }
 ]
