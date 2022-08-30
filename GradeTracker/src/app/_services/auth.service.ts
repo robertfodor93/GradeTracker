@@ -11,7 +11,7 @@ export interface LoginForm {
   password: string;
 }
 
-export const jwt = 'token';
+export const JWT_NAME = 'token';
 
 @Injectable({
   providedIn: 'root'
@@ -31,14 +31,14 @@ export class AuthService {
     return this.http.post<any>('https://localhost:7290/api/Auth/login', {username: loginForm.username, password: loginForm.password}).pipe(
       map((token) => {
         console.log('token' + token.token);
-        localStorage.setItem(jwt, token.token);
+        localStorage.setItem(JWT_NAME, token.token);
         return token;
       })
     )
   }
 
   logout() {
-    localStorage.removeItem(jwt);
+    localStorage.removeItem(JWT_NAME);
     this.router.navigate(['/login'])
   }
 
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    const token = JSON.stringify(localStorage.getItem(jwt));
+    const token = JSON.stringify(localStorage.getItem(JWT_NAME));
     if(!this.jwtHelper.isTokenExpired(token)) {
       this.authenticated.next(true);
       return true;
@@ -56,7 +56,7 @@ export class AuthService {
   }
 
   getUserId(): Observable<number>{
-    return of(JSON.stringify(localStorage.getItem(jwt))).pipe(
+    return of(JSON.stringify(localStorage.getItem(JWT_NAME))).pipe(
       switchMap((jwt) => of(this.jwtHelper.decodeToken(jwt)).pipe(
         map((jwt : any) => jwt.user.id)
       )

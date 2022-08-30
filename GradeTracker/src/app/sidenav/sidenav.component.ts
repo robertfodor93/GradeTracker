@@ -1,5 +1,3 @@
-import { Observable } from 'rxjs';
-import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,18 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
 
-  authenticated$: Observable<boolean> | undefined;
-
-  constructor(private authService: AuthService) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  checkAuthentication() {
-    this.authenticated$ = this.authService.checkAuthentication;
-    return this.authenticated$;
-  }
-  logout() {
-    this.authService.logout();
   }
 }
