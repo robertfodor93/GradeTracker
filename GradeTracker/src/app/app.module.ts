@@ -76,8 +76,8 @@ import { ModuleService } from './services/module.service';
     MatSortModule,
     MatDialogModule
   ],
-  providers: [
-    JwtHelperService, 
+  providers: [ 
+    JwtHelperService,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     {
       provide: HTTP_INTERCEPTORS,

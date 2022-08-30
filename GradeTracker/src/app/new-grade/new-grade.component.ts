@@ -1,7 +1,7 @@
 import { Component, OnInit,Inject } from '@angular/core';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Exam } from '../grade-overview/grade-overview.component';
+import { Exam } from '../services/grade.service';
 
 
 @Component({
