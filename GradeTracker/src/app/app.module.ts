@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { ttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -24,7 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table'
 import { MatTabsModule } from '@angular/material/tabs'
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableDataSource} from '@angular/material/table';
 import { MatRow } from '@angular/material/table';
 import { MatHeaderRow } from '@angular/material/table';
 import { MatCell } from '@angular/material/table';

@@ -24,7 +24,7 @@ export class RegistrationComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.service.getEducationTypes()
+    this.educationTypeService.getEducationTypes()
       .subscribe(response => {
         this.posts = response;
       });
