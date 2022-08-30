@@ -8,7 +8,7 @@
         </mat-card-header>
 
         <mat-card-content>
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="loginForm">
             <mat-form-field>
                 <input matInput  class="input-field" type="username" placeholder="Username" formControlName="username"> <br> <br>
                 <input matInput class="input-field" type="password" placeholder="Password" formControlName="password">
