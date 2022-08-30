@@ -22,9 +22,11 @@ export class NewSubjectModuleComponent implements OnInit {
   }
 
  onSubmit(module: any){
-  this.http.post('')
+  this.http.post('https://localhost:7290/api/Module/create', module).subscribe((result)=>{
+    console.warn("result", result);
+  })
+  
   console.warn(module);
-
   
  }
 

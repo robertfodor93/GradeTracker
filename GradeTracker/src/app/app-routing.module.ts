@@ -12,14 +12,14 @@ import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   
-  {path: `subjectoverview`, component: SubjectModuleOverviewComponent},
+  {path: `subjectoverview`, component: SubjectModuleOverviewComponent, data:{title:'Modulübersicht'}},
   {path:`registration`, component:RegistrationComponent, data:{title:'Registrieren'}},
   {path:`login`, component:LoginComponent, data:{title:'Login'}},
   {path:`dashboard`, component:DashboardComponent, data:{title:'Dashboard'}},
   {path:`goaloverview`, component:GoalOverviewComponent, data:{title:'Zielübersicht'}},
   {path:`gradeoverview`, component:GradeOverviewComponent, data:{title:'Notenüberischt'}},
   {path:`profile`, component:ProfileComponent, data:{title:'Profil'}},
-  {path: '',   redirectTo: '/registration', pathMatch: 'full' },
+  {path: '',   redirectTo: '/registration', pathMatch: 'full'},
 
 ];
 
