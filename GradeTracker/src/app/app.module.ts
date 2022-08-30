@@ -38,6 +38,7 @@ import { NewGradeComponent } from './new-grade/new-grade.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { NewSubjectModuleComponent } from './new-subject-module/new-subject-module.component';
 
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,8 @@ import { NewSubjectModuleComponent } from './new-subject-module/new-subject-modu
     MatSortModule,
 
     MatDialogModule,
+
+    FormsModule
 
 
 
