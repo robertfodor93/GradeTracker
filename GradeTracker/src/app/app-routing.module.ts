@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { AuthGuard } from './_guards/auth.guard';
 
 import { SubjectModuleOverviewComponent } from './subject-module-overview/subject-module-overview.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -12,15 +12,13 @@ import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   
-  {path: `subjectoverview`, component: SubjectModuleOverviewComponent},
-  {path:`registration`, component:RegistrationComponent, data:{title:'Registrieren'}},
-  {path:`login`, component:LoginComponent, data:{title:'Login'}},
-  {path:`dashboard`, component:DashboardComponent, data:{title:'Dashboard'}},
-  {path:`goaloverview`, component:GoalOverviewComponent, data:{title:'Zielübersicht'}},
-  {path:`gradeoverview`, component:GradeOverviewComponent, data:{title:'Notenüberischt'}},
-  {path:`profile`, component:ProfileComponent, data:{title:'Profil'}},
-  {path: '',   redirectTo: '/registration', pathMatch: 'full' },
-
+  {path: '',   redirectTo: '/login', pathMatch: 'full' },
+  {path:`login`, component:LoginComponent},
+  {path:`registration`, component:RegistrationComponent},
+  {path:`subjectoverview`, component: SubjectModuleOverviewComponent, canActivate: [AuthGuard]},
+  {path:`dashboard`, component:DashboardComponent, canActivate: [AuthGuard]},
+  {path:`goaloverview`, component:GoalOverviewComponent, canActivate: [AuthGuard]},
+  {path:`gradeoverview`, component:GradeOverviewComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

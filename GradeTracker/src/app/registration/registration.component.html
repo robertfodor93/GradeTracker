@@ -2,32 +2,23 @@
     <mat-card>
         <mat-card-header>
             <mat-card-title>
-                <h1>Registrieren</h1>
+                <h1>Login</h1>
             </mat-card-title>
-            <mat-card-subtitle>Erstellen sie einen Account für den Grade-Tracker!</mat-card-subtitle>
+            <mat-card-subtitle>Loggen sie sich in ihren Grade-Tracker Account ein!</mat-card-subtitle>
         </mat-card-header>
-
         <mat-card-content>
-            <mat-form-field>
-                <input  class="input-field" type="text" placeholder="Username">
-                <input  class="input-field" type="email" placeholder="Email"> 
-                <input  class="input-field" type="password" placeholder="Password">
-                <input  class="input-field" type="password" placeholder="Repeat Password">
-                
-                
-                <mat-select matNativeControl class="input-field">
-                    <mat-option *ngFor="let post of posts" [value]="post.name">
-                        {{post.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <mat-form-field>
+                    <input matInput placeholder="Username" formControlName="username">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Password" formControlName="password">
+                </mat-form-field>
+                <button type="submit" class="submit-button">Register</button>
+            </form>
         </mat-card-content>
-        <button type="submit" class="submit-button">Registrieren</button>
-
-        <div class="linkToLogin">
-            <a routerLink="/login">Bereits registriert?</a>
+        <div class="linkToRegister">
+            <a routerLink="/registration">Noch kein Konto?</a>
         </div>
-
-
     </mat-card>
-</div> 
+</div>

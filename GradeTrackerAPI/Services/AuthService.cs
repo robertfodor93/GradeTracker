@@ -5,12 +5,14 @@
         private readonly DataContext _dataContext;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AuthService(DataContext dataContext, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public AuthService(DataContext dataContext, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork)
         {
             _dataContext = dataContext;
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<User> Register(UserDto request)
@@ -32,10 +34,10 @@
 
         public async Task<AuthResponseDto> Login(UserDto request)
         {
-            var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
+            var user = await _unitOfWork.Users.Get(u => u.Username == request.Username);
             if(user == null)
             {
-                return new AuthResponseDto { Message = "Error" };
+                return new AuthResponseDto { Message = "User not found" };
             }
 
             if (!VerifyPasswordHash(request.Password, user.PasswordSalt, user.PasswordHash))
