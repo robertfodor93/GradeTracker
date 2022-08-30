@@ -1,4 +1,8 @@
-input[type=text], [type=date],[type=number], select {
+form{
+  width: 100%;
+}
+
+input[type=text], [type=date],[type=number], select{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -15,25 +19,29 @@ input[type=text], [type=date],[type=number], select {
     box-sizing: border-box;
   }
 
-.buttonSubmit{
-  width: 45%;
-  margin-top: 35px;
-  display: inline;
-  height: 30px;
-  background-color: green;
-  border-radius: 8px;
-  border-color: green;
-}
-.buttonCancel{
-  width: 45%;
-  margin-top: 35px;
-  margin-left: auto;
-  display: inline;
-  height: 30px;
-  background-color: red;
-  border-radius: 8px;
-  border-color: red;
-}
+  .buttonSubmit {
+    width: 45%;
+    margin-top: 35px;
+    display: inline;
+    height: 30px;
+    background-color: green;
+    border-radius: 8px;
+    border-color: green;
+    margin-left: auto;
+    cursor: pointer;
+  }
+  
+  .buttonCancel {
+    width: 45%;
+    margin-top: 35px;
+    display: inline;
+    height: 30px;
+    background-color: red;
+    border-radius: 8px;
+    border-color: red;
+    cursor: pointer;
+  }
+
 h2{
   text-align: center;
 }

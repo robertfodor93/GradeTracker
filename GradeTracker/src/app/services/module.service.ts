@@ -18,10 +18,12 @@ export interface Subject {
 export class ModuleService {
 
   private url = 'https://localhost:7290/api/module/getAll';
+  
    
   constructor(private http: HttpClient) { }
   
   getModule(){
     return this.http.get(this.url);
   }
+
 }

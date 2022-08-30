@@ -3,8 +3,10 @@
 </div>
 
 <div class="content">
-    <mat-toolbar>
-        <span>{{title}}</span>
-    </mat-toolbar>
-    <router-outlet></router-outlet>
+
+    <router-outlet>
+        <mat-toolbar>
+            <span>{{this.title}}</span>
+        </mat-toolbar>
+    </router-outlet>
 </div>
