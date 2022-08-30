@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { AuthGuard } from './_guards/auth.guard';
 
 import { SubjectModuleOverviewComponent } from './subject-module-overview/subject-module-overview.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -20,6 +20,8 @@ const routes: Routes = [
   {path:`gradeoverview`, component:GradeOverviewComponent, data:{title:'Notenüberischt'}},
   {path:`profile`, component:ProfileComponent, data:{title:'Profil'}},
   {path: '',   redirectTo: '/registration', pathMatch: 'full'},
+
+
 
 ];
 

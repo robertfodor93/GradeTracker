@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NewGradeComponent } from '../new-grade/new-grade.component';
 import { ModuleService, Subject } from '../services/module.service';
+import { Exam, GradeService } from '../services/grade.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-grade-overview',
@@ -21,14 +23,16 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 export class GradeOverviewComponent implements OnInit {
 
-  displayedColumnsSubject = ['name', 'competenceArea', 'teacher', 'averageDesiredMark', 'marks', 'showOnDashboard']
-  displayedColumnsExam =['suject','datum','bez','gewichtung','note'];
-  expandedElements: Subject | null | undefined;
+  constructor(private _liveAnnouncer: LiveAnnouncer, private Modulservice: ModuleService,private Gradeservice: GradeService,public dialog: MatDialog,) { }
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private service: ModuleService,public dialog: MatDialog,) { }
+ //Daten von der Datenbank holen
+  displayedColumnsSubject = ['name', 'competenceArea', 'teacher', 'averageDesiredMark', 'marks', 'showOnDashboard','Id']
+  displayedColumnsExam =['date',' weighting','grade','moduleId'];
+  expandedElements: Subject | null | undefined;
 
   ngOnInit() {
     this.getModule();
+    this.getGrade();
   }
 
   subject: string | undefined;
@@ -37,6 +41,36 @@ export class GradeOverviewComponent implements OnInit {
   gewichtung:number | undefined;
   note:number | undefined;
 
+
+
+ 
+  panelOpenState = false;
+  protected SUBJECT_DATA_EFZ: Subject[] = [];
+  protected SUBJECT_DATA_BM: Subject[] = [];
+  protected EXAM_DATA_EFZ: Exam[] = [];
+  protected EXAM_DATA_BM: Exam[] = [];
+
+  dataSourceEFZ = new MatTableDataSource<Subject>(this.SUBJECT_DATA_EFZ);
+  dataSourceBM = new MatTableDataSource<Subject>(this.SUBJECT_DATA_BM);
+  // datasourceEFZExam = EXAM_DATA_EFZ;
+  // datasourceBMExam = EXAM_DATA_BM;
+  dataSourceEFZexam = new MatTableDataSource<Exam>(this.EXAM_DATA_EFZ);
+  dataSourceBMexam = new MatTableDataSource<Exam>(this.EXAM_DATA_BM);
+
+
+  public getModule() {
+    let resp = this.Modulservice.getModule();
+    resp.subscribe(report => this.dataSourceEFZ.data = report as Subject[])
+    resp.subscribe(report => this.dataSourceBM.data = report as Subject[])
+  }
+  
+  public getGrade() {
+    let resp = this.Gradeservice.getGrade();
+    resp.subscribe(report => this.dataSourceEFZexam.data = report as Exam[])
+    resp.subscribe(report => this.dataSourceBMexam.data = report as Exam[])
+  }
+  
+  //Neue Noten erfassen
   openDialog(): void {
     const dialogRef = this.dialog.open(NewGradeComponent, {
       width: '40%' ,height:'87%',
@@ -49,42 +83,43 @@ export class GradeOverviewComponent implements OnInit {
     });
   }
 
-  panelOpenState = false;
-  protected SUBJECT_DATA_EFZ: Subject[] = []
-  protected SUBJECT_DATA_BM: Subject[] = []
 
-  dataSourceEFZ = new MatTableDataSource<Subject>(this.SUBJECT_DATA_EFZ);
-  dataSourceBM = new MatTableDataSource<Subject>(this.SUBJECT_DATA_BM);
-  
-  dataSourceEFZexam = EXAM_DATA_EFZ;
-  dataSourceBMexam = EXAM_DATA_BM;
+  //sortieren
+  @ViewChild(MatSort) sort = new MatSort();
 
-  public getModule() {
-    let resp = this.service.getModule();
-    resp.subscribe(report => this.dataSourceEFZ.data = report as Subject[])
-    resp.subscribe(report => this.dataSourceBM.data = report as Subject[])
+  ngAfterViewInit() {
+    this.dataSourceBM.sort = this.sort;
+    this.dataSourceEFZ.sort = this.sort;
   }
-  
 
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
 
 }
 
-export interface Exam{
-  subject: string;
-  datum: Date;
-  bez:string;
-  gewichtung:number;
-  note:number;
-}
+
+// export interface Exam{
+//   subject: string;
+//   datum: Date;
+//   bez:string;
+//   gewichtung:number;
+//   note:number;
+// }
 
 
-const EXAM_DATA_EFZ: Exam[]=[
-  {subject:'INF 226B', bez:'Theorie', gewichtung: 1, note: 5, datum: new Date(2022, 4, 8) },
-  {subject:'M117', bez:'Praktische Arbeit', gewichtung: 1, note: 4, datum: new Date(2022, 6, 18) },
-  {subject:'M200', bez:'Theorie', gewichtung: 1, note: 4.5, datum: new Date(2022, 5, 8) }
-]
-const EXAM_DATA_BM: Exam[]=[
-  {subject:'Mathematik', bez:'Vektorgeometrie', gewichtung: 1, note: 5.5, datum: new Date(2022, 4, 8) },
-  {subject:'Englisch', bez:'FCE', gewichtung: 1, note: 5, datum: new Date(2022, 4, 28) },
-  {subject:'Deutsch', bez:'Theorie', gewichtung: 1, note: 4.5, datum: new Date(2022, 4, 18) }
-]
+// const EXAM_DATA_EFZ: Exam[]=[
+//   {subject:'INF 226B', bez:'Theorie', gewichtung: 1, note: 5, datum: new Date(2022, 4, 8) },
+//   {subject:'M117', bez:'Praktische Arbeit', gewichtung: 1, note: 4, datum: new Date(2022, 6, 18) },
+//   {subject:'M200', bez:'Theorie', gewichtung: 1, note: 4.5, datum: new Date(2022, 5, 8) }
+// ]
+// const EXAM_DATA_BM: Exam[]=[
+//   {subject:'Mathematik', bez:'Vektorgeometrie', gewichtung: 1, note: 5.5, datum: new Date(2022, 4, 8) },
+//   {subject:'Englisch', bez:'FCE', gewichtung: 1, note: 5, datum: new Date(2022, 4, 28) },
+//   {subject:'Deutsch', bez:'Theorie', gewichtung: 1, note: 4.5, datum: new Date(2022, 4, 18) }
+// ]
+

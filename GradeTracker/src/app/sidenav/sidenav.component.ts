@@ -1,3 +1,4 @@
+import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,5 +12,4 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

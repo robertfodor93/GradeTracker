@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 
 export interface Subject {
+  Id: number;
   name: string;
   competenceArea: string;
   teacher: string;

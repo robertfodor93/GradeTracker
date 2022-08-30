@@ -7,7 +7,7 @@ namespace GradeTrackerAPI.Controllers
     {
         private readonly IAuthService _authService;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _authService = authService;
         }
@@ -23,7 +23,7 @@ namespace GradeTrackerAPI.Controllers
         public async Task<ActionResult<User>> Login([FromBody] UserDto request)
         {
             var response = await _authService.Login(request);
-            if(response.Success)
+            if (response.Success)
             {
                 return Ok(response);
             }

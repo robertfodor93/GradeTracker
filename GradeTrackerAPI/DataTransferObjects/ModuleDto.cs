@@ -14,7 +14,7 @@
 
     public class CreateModuleDto : UpdateModuleDto
     {
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
     }
 
     public class UpdateModuleDto
@@ -22,8 +22,8 @@
         public string Name { get; set; }
         public bool ShowOnDashboard { get; set; }
         public double AverageDesiredMark { get; set; }
-        public TeacherDto Teacher { get; set; }
-        public ICollection<MarkDto> Marks { get; set; }
-        public int CompetenceAreaId { get; set; }
+        public TeacherDto? Teacher { get; set; }
+        public ICollection<MarkDto>? Marks { get; set; }
+        public int? CompetenceAreaId { get; set; }
     }
 }

@@ -2,10 +2,10 @@
   <mat-tab label="EFZ">
       <table mat-table
       [dataSource]="dataSourceEFZ" multiTemplateDataRows
-      class="mat-elevation-z8">
+      class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
  <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsSubject">
-   <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-   <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+   <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by column"> {{column}} </th>
+   <td mat-cell *matCellDef="let element"> Hello{{element[column]}} </td>
  </ng-container>
 
  <ng-container matColumnDef="expand">
@@ -23,26 +23,15 @@
    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsSubject.length">
      <div class="example-element-detail"
           [@detailExpand]="element == expandedElements ? 'expanded' : 'collapsed'">
-          <table multiTemplateDataRows
-          class="mat-elevation-z8">
-          <tr>
-            <th  class="row"style="width: 15%" >Datum</th>
-            <th  class="row" style="width: 15%" >Subject</th>
-            <th  class="row" style="width: 50%">Prüfung</th>
-            <th  class="row" style="width: 5%">Gew.</th>
-            <th  class="row" style="width: 5%">Note</th>
-          </tr>
-            <ng-container *ngFor="let exam of dataSourceEFZexam">
-              <ng-container  *ngIf="exam.subject == element.subject">
-                <tr>
-                  <td  class="row"style="width: 15%" >{{exam.datum | date: 'dd/MM/yyyy'}}</td>
-                  <td  class="row" style="width: 15%" >{{exam.subject}}</td>
-                  <td  class="row" style="width: 50%">{{exam.bez}}</td>
-                  <td  class="row" style="width: 10%">{{exam.gewichtung}}.0</td>
-                  <td  class="row" style="width: 10%">{{exam.note}}</td>
-                </tr>
-              </ng-container>
-            </ng-container> 
+          <table mat-table
+      [dataSource]=" dataSourceEFZexam " multiTemplateDataRows
+      class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsExam"></tr>
+ <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsExam">
+   <th mat-header-cell *matHeaderCellDef > {{column}} </th>
+   <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsExam;"></tr>
+ </ng-container>
         </table>
         
       </div>
@@ -65,9 +54,9 @@
   <mat-tab label="BM"> 
     <table mat-table
     [dataSource]="dataSourceBM" multiTemplateDataRows
-    class="mat-elevation-z8">
+    class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
 <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsSubject">
- <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+ <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by column"> {{column}} </th>
  <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
 </ng-container>
 
@@ -87,15 +76,15 @@
    <div class="example-element-detail"
         [@detailExpand]="element == expandedElements ? 'expanded' : 'collapsed'">
         <table multiTemplateDataRows
-        class="mat-elevation-z8">
-          <ng-container *ngFor="let exam of dataSourceBMexam">
-            <ng-container  *ngIf="exam.subject == element.subject">
+        class="mat-elevation-z8" >
+          <ng-container *ngFor="let exam of displayedColumnsExam">
+            <ng-container  *ngIf="1===1">
               <tr>
-                <td  class="row"style="width: 15%" >{{exam.datum | date: 'dd/MM/yyyy'}}</td>
-                <td  class="row" style="width: 15%" >{{exam.subject}}</td>
-                <td  class="row" style="width: 50%">{{exam.bez}}</td>
-                <td  class="row" style="width: 10%">{{exam.gewichtung}}.0</td>
-                <td  class="row" style="width: 10%">{{exam.note}}</td>
+                <td  class="row"style="width: 15%" ></td>
+                <td  class="row" style="width: 15%" ></td>
+                <td  class="row" style="width: 50%"></td>
+                <td  class="row" style="width: 10%">.0</td>
+                <td  class="row" style="width: 10%"></td>
               </tr>
             </ng-container>
           </ng-container> 
@@ -116,3 +105,8 @@
 </mat-tab-group>
 
 <button class="buttonNew" mat-raised-button (click)="openDialog()">Neue Noten erfassen</button>
+
+<div ng for >
+
+</div>
+
