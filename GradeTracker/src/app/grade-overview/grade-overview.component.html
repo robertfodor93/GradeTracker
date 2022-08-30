@@ -1,1 +1,118 @@
-<p>grade-overview works!</p>
+<mat-tab-group>
+  <mat-tab label="EFZ">
+      <table mat-table
+      [dataSource]="dataSourceEFZ" multiTemplateDataRows
+      class="mat-elevation-z8">
+ <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsSubject">
+   <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+   <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+ </ng-container>
+
+ <ng-container matColumnDef="expand">
+   <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+   <td mat-cell *matCellDef="let element">
+     <button mat-icon-button aria-label="expand row" (click)="(expandedElements = expandedElements === element ? null : element); $event.stopPropagation()">
+       <mat-icon *ngIf="expandedElements !== element">keyboard_arrow_down</mat-icon>
+       <mat-icon *ngIf="expandedElements === element" >keyboard_arrow_up</mat-icon>
+     </button>
+   </td>
+ </ng-container>
+
+ <!-- Exams-->
+ <ng-container matColumnDef="expandedDetail">
+   <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsSubject.length">
+     <div class="example-element-detail"
+          [@detailExpand]="element == expandedElements ? 'expanded' : 'collapsed'">
+          <table multiTemplateDataRows
+          class="mat-elevation-z8">
+          <tr>
+            <th  class="row"style="width: 15%" >Datum</th>
+            <th  class="row" style="width: 15%" >Subject</th>
+            <th  class="row" style="width: 50%">Prüfung</th>
+            <th  class="row" style="width: 5%">Gew.</th>
+            <th  class="row" style="width: 5%">Note</th>
+          </tr>
+            <ng-container *ngFor="let exam of dataSourceEFZexam">
+              <ng-container  *ngIf="exam.subject == element.subject">
+                <tr>
+                  <td  class="row"style="width: 15%" >{{exam.datum | date: 'dd/MM/yyyy'}}</td>
+                  <td  class="row" style="width: 15%" >{{exam.subject}}</td>
+                  <td  class="row" style="width: 50%">{{exam.bez}}</td>
+                  <td  class="row" style="width: 10%">{{exam.gewichtung}}.0</td>
+                  <td  class="row" style="width: 10%">{{exam.note}}</td>
+                </tr>
+              </ng-container>
+            </ng-container> 
+        </table>
+        
+      </div>
+   </td>
+ </ng-container>
+
+ <tr mat-header-row *matHeaderRowDef="displayedColumnsSubject"></tr>
+ <tr mat-row *matRowDef="let element; columns: displayedColumnsSubject;"
+     class="example-element-row"
+     [class.example-expanded-row]="expandedElements === element"
+     (click)="expandedElements = expandedElements === element ? null : element">
+ </tr>
+ <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+  </mat-tab>
+
+
+
+  <!--BM Noten-->
+  <mat-tab label="BM"> 
+    <table mat-table
+    [dataSource]="dataSourceBM" multiTemplateDataRows
+    class="mat-elevation-z8">
+<ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsSubject">
+ <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+ <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+</ng-container>
+
+<ng-container matColumnDef="expand">
+ <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+ <td mat-cell *matCellDef="let element">
+  <button mat-icon-button aria-label="expand row" (click)="(expandedElements = expandedElements === element ? null : element); $event.stopPropagation()">
+    <mat-icon *ngIf="expandedElements !== element">keyboard_arrow_down</mat-icon>
+    <mat-icon *ngIf="expandedElements === element">keyboard_arrow_up</mat-icon>
+  </button>
+ </td>
+</ng-container>
+
+<!-- Exams -->
+<ng-container matColumnDef="expandedDetail">
+ <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsSubject.length">
+   <div class="example-element-detail"
+        [@detailExpand]="element == expandedElements ? 'expanded' : 'collapsed'">
+        <table multiTemplateDataRows
+        class="mat-elevation-z8">
+          <ng-container *ngFor="let exam of dataSourceBMexam">
+            <ng-container  *ngIf="exam.subject == element.subject">
+              <tr>
+                <td  class="row"style="width: 15%" >{{exam.datum | date: 'dd/MM/yyyy'}}</td>
+                <td  class="row" style="width: 15%" >{{exam.subject}}</td>
+                <td  class="row" style="width: 50%">{{exam.bez}}</td>
+                <td  class="row" style="width: 10%">{{exam.gewichtung}}.0</td>
+                <td  class="row" style="width: 10%">{{exam.note}}</td>
+              </tr>
+            </ng-container>
+          </ng-container> 
+      </table>
+   </div>
+ </td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="displayedColumnsSubject"></tr>
+<tr mat-row *matRowDef="let element; columns: displayedColumnsSubject;"
+   class="example-element-row"
+   [class.example-expanded-row]="expandedElements === element"
+   (click)="expandedElements = expandedElements === element ? null : element">
+</tr>
+<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+     </mat-tab>
+</mat-tab-group>
+
+<button class="buttonNew" mat-raised-button (click)="openDialog()">Neue Noten erfassen</button>

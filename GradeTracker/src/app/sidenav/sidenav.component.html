@@ -4,28 +4,38 @@
 <li routerLinkActive ="active">
     <a routerLink="/dashboard">
        <h3>Dashoard</h3> 
+<a routerLink="/dashboard">
+    <h1>GradeTracker</h1>
+</a>
+<br>
+<li>
+    <a routerLink="/dashboard" routerLinkActive="active">
+        <p>Dashoard</p>
     </a>
 </li>
 <mat-divider></mat-divider>
-<li routerLinkActive ="active">
-    <a routerLink="/goaloverview">
-       <h3>Zielübersicht</h3> 
+<li>
+    <a routerLink="/goaloverview" routerLinkActive="active">
+        <p>Zielübersicht</p>
     </a>
 </li>
 <mat-divider></mat-divider>
-<li routerLinkActive ="active">
-    <a routerLink="/gradeoverview">
-       <h3>Notenübersicht</h3> 
+<li>
+    <a routerLink="/gradeoverview" routerLinkActive="active">
+        <p>Notenübersicht</p>
     </a>
 </li>
 <mat-divider></mat-divider>
-<li routerLinkActive ="active">
-    <a routerLink="/subjectoverview">
-       <h3>Fach/Modulübersicht</h3> 
+<li>
+    <a routerLink="/subjectoverview" routerLinkActive="active">
+        <p>Fach/Modulübersicht</p>
     </a>
 </li>
-
 <button (click)="logout()">Logout</button>
 
 <img src="./assets/pic/profil.jpg"class="profil">
 </div>
+
+<a routerLink="/profile" routerLinkActive="activeProfile">
+    <img src="./assets/pic/profil.jpg" class="profil">
+</a>

@@ -3,6 +3,7 @@ import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import { map } from 'rxjs/operators';
+import { EducationtypeService } from '../services/educationtype.service';
 
 @Component({
   selector: 'app-registration',
@@ -11,17 +12,22 @@ import { map } from 'rxjs/operators';
 })
 export class RegistrationComponent implements OnInit {
 
+  title = "Registration"
+  posts: any;
   registerForm : FormGroup;
 
-  constructor(private authService: AuthService, private router : Router, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthService, private router : Router, private formBuilder: FormBuilder, private educationTypeService: EducationtypeService) {
     this.registerForm = this.formBuilder.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
     })
    }
 
-  ngOnInit(): void {
-
+  ngOnInit() {
+    this.service.getEducationTypes()
+      .subscribe(response => {
+        this.posts = response;
+      });
   }
 
   onSubmit(){
@@ -33,5 +39,4 @@ export class RegistrationComponent implements OnInit {
       map(user => this.router.navigate(['registration']))
     ).subscribe()
   }
-
 }

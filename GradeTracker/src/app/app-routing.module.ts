@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GoalOverviewComponent } from './goal-overview/goal-overview.component';
 import { GradeOverviewComponent } from './grade-overview/grade-overview.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   
@@ -18,7 +19,6 @@ const routes: Routes = [
   {path:`dashboard`, component:DashboardComponent, canActivate: [AuthGuard]},
   {path:`goaloverview`, component:GoalOverviewComponent, canActivate: [AuthGuard]},
   {path:`gradeoverview`, component:GradeOverviewComponent, canActivate: [AuthGuard]},
-  
 ];
 
 @NgModule({

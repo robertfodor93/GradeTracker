@@ -11,7 +11,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  
+
+  title="Login";
   loginForm: FormGroup;
 
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {

@@ -1,0 +1,43 @@
+input[type=text], [type=date],[type=number], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input[type=checkbox] {
+    width: 50%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+.buttonSubmit{
+  width: 45%;
+  margin-top: 35px;
+  display: inline;
+  height: 30px;
+  background-color: green;
+  border-radius: 8px;
+  border-color: green;
+}
+.buttonCancel{
+  width: 45%;
+  margin-top: 35px;
+  margin-left: auto;
+  display: inline;
+  height: 30px;
+  background-color: red;
+  border-radius: 8px;
+  border-color: red;
+}
+h2{
+  text-align: center;
+}
+  
+.favorit{
+  margin-top: 20px;
+}
