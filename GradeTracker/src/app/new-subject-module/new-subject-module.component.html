@@ -1,22 +1,24 @@
 <h2>Fach/Modulerfassung</h2>
 <mat-divider></mat-divider>
 <div mat-dialog-actions>
-    <form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)">
+    <form [formGroup] = "createModuleForm" (ngSubmit)="onSubmit()">
         <label for="name">Name</label>
-        <input type="text" ngModel id="name" name="name" required>
+        <input type="text" formControlName="name" required>
         <br>
         <label for="fachtyp">Fachtyp</label>
-        <select id="competenceArea" ngModel name="competenceArea" class="input-field" required>
+        <select id="competenceArea" formControlName="competenceArea" required>
             <option value="1">BM</option>
             <option value="2">EFZ</option>
         </select>
         <br>
+        <div formGroupName="teacher">
         <label for="lehrperson">Lehrperson</label>
-        <input type="text" ngModel id="teacher" name="teacher" required>
+        <input type="text" formControlName="teacher" form required>
+        </div>
         <br>
 
         <label for="favorit">Favorit</label>
-        <input type="checkbox" ngModel name="showOnDashboard" value="favorit" required>
+        <input type="checkbox" formControlName="showOnDashboard" value="favorit" required>
 
         <br>
         <button class="buttonCancel" [mat-dialog-close]="">Abbrechen</button>
