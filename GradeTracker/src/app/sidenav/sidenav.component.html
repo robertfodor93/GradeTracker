@@ -1,29 +1,38 @@
- <h1>GradeTracker</h1>
-<br>
-<li>
-    <a routerLink="/dashboard" routerLinkActive="active">
-        <p>Dashoard</p>
+<div class="container">
+
+    <div class="wildspitz">
+        <a routerLink="/dashboard">
+            <img src="./assets/pic/wildspitz.png">
+            <h1>GradeTracker</h1>
+        </a>
+    </div>
+
+
+    <br>
+    <li>
+        <a routerLink="/dashboard" routerLinkActive="active">
+            <p>Dashoard</p>
+        </a>
+    </li>
+    <mat-divider></mat-divider>
+    <li>
+        <a routerLink="/goaloverview" routerLinkActive="active">
+            <p>Zielübersicht</p>
+        </a>
+    </li>
+    <mat-divider></mat-divider>
+    <li>
+        <a routerLink="/gradeoverview" routerLinkActive="active">
+            <p>Notenübersicht</p>
+        </a>
+    </li>
+    <mat-divider></mat-divider>
+    <li>
+        <a routerLink="/subjectoverview" routerLinkActive="active">
+            <p>Fach/Modulübersicht</p>
+        </a>
+    </li>
+    <a routerLink="/profile" routerLinkActive="activeProfile">
+        <img src="./assets/pic/profil.jpg" class="profil">
     </a>
-</li>
-<mat-divider></mat-divider>
-<li>
-    <a routerLink="/goaloverview" routerLinkActive="active">
-        <p>Zielübersicht</p>
-    </a>
-</li>
-<mat-divider></mat-divider>
-<li>
-    <a routerLink="/gradeoverview" routerLinkActive="active">
-        <p>Notenübersicht</p>
-    </a>
-</li>
-<mat-divider></mat-divider>
-<li>
-    <a routerLink="/subjectoverview" routerLinkActive="active">
-        <p>Fach/Modulübersicht</p>
-    </a>
-</li>
-<img src="./assets/pic/profil.jpg"class="profil">
-<a routerLink="/profile" routerLinkActive="activeProfile">
-    <img src="./assets/pic/profil.jpg" class="profil">
-</a>
+</div>
