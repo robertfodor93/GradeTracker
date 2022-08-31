@@ -73,7 +73,7 @@ export class GradeOverviewComponent implements OnInit {
   //Neue Noten erfassen
   openDialog(): void {
     const dialogRef = this.dialog.open(NewGradeComponent, {
-      width: '40%' ,height:'87%',
+      width: '40%' ,height:'87%', 
       data: {subject: this.subject,datum:this.datum, bez: this.bez, gewictung: this.gewichtung,note:this.note },
     });
 
