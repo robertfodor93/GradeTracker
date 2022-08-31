@@ -2,28 +2,26 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
-export interface Subject {
+export interface Goal {
   Id: number;
   name: string;
-  competenceArea: string;
   teacher: string;
-  averageDesiredMark: number;
-  marks: number;
-  showOnDashboard: boolean;
+  goal: number;
+  needed: number;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class ModuleService {
+
+export class GoalService {
 
   private url = 'https://localhost:7290/api/module/getAll';
   
    
   constructor(private http: HttpClient) { }
   
-  getModule(){
+  getGoals(){
     return this.http.get(this.url);
   }
-
 }

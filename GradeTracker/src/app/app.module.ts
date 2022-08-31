@@ -35,12 +35,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
 
+
 import { Title } from '@angular/platform-browser';
 
 import { JwtHelperService, JWT_OPTIONS } from "@auth0/angular-jwt";
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 import { ModuleService } from './services/module.service';
+
 
 @NgModule({
   declarations: [
@@ -74,6 +76,13 @@ import { ModuleService } from './services/module.service';
     MatOptionModule,
     MatSelectModule,
     MatSortModule,
+
+    MatDialogModule,
+
+    FormsModule,
+
+
+
     MatDialogModule
   ],
   providers: [ 

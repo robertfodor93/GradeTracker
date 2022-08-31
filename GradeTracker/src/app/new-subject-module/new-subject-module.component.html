@@ -1,30 +1,30 @@
 <h2>Fach/Modulerfassung</h2>
 <mat-divider></mat-divider>
 <div mat-dialog-actions>
+    <form [formGroup] = "createModuleForm" (ngSubmit)="onSubmit()">
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" >
+        <input type="text" formControlName="name" required>
         <br>
-       <label for="fachtyp">Fachtyp</label>
-        <select id="fachtyp" name="fachtyp" class="input-field">
-            <option>BM</option>
-            <option>EFZ</option>
+        <label for="fachtyp">Fachtyp</label>
+        <select id="competenceArea" formControlName="competenceArea" required>
+            <option value="1">BM</option>
+            <option value="2">EFZ</option>
         </select>
         <br>
-        <label for="kompetenzenbereich">Kompetenzenbereich</label>
-        <select id="kompetenzenbereich" name="kompetenzenbereich" class="input-field">
-            <option>Informatikkompetentz</option>
-            <option>ÜK</option>   
-        </select>
-        <br>
+        <div formGroupName="teacher">
         <label for="lehrperson">Lehrperson</label>
-        <input type="text" id="lehrperson" name="lehrperson" >
+        <input type="text" formControlName="teacher" form required>
+        </div>
         <br>
-       
-        <label for="favorit">Favorit</label>
-        <input type="checkbox" name="favorit" value="favorit" >
-    
-        <br>
-        <button class="buttonSubmit" (click)="onNoClick()">Abbrechen</button>
-        <button class="buttonCancel"  [mat-dialog-close]="" cdkFocusInitial>Speichern</button>
-</div>
 
+        <label for="favorit">Favorit</label>
+        <input type="checkbox" formControlName="showOnDashboard" value="favorit" required>
+
+        <br>
+        <button class="buttonCancel" [mat-dialog-close]="">Abbrechen</button>
+        <button type="submit" class="buttonSubmit"  cdkFocusInitial>Speichern</button>
+        
+        
+    </form>
+
+</div>

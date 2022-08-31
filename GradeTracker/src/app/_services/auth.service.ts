@@ -24,7 +24,7 @@ export class AuthService {
     return this.authenticated.asObservable();
   }
 
-  constructor(private http : HttpClient, private jwtHelper: JwtHelperService,private router : Router) { }
+  constructor(private http : HttpClient, private jwtHelper : JwtHelperService, private router : Router) { }
 
   login(loginForm: LoginForm) {  
 

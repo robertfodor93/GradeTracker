@@ -41,7 +41,7 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
   dataSourceEFZ = new MatTableDataSource<Subject>(this.SUBJECT_DATA_EFZ);
   dataSourceBM = new MatTableDataSource<Subject>(this.SUBJECT_DATA_BM);
 
-  title = "Fach-/Modulübersicht";
+  title:string = "Fach-/Modulübersicht";
 
 
   constructor(private _liveAnnouncer: LiveAnnouncer, private service: ModuleService,public dialog: MatDialog,) { }

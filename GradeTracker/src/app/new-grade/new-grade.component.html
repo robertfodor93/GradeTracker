@@ -1,3 +1,4 @@
+<div class="background">
 <h2>Notenerfassung</h2>
 <mat-divider></mat-divider>
 <div mat-dialog-actions>
@@ -27,6 +28,7 @@
         <label for="note">Note</label>
         <input type="number" id="note" name="note" min="1" max="6">
         <br>
-        <button class="buttonSubmit" (click)="onNoClick()">Abbrechen</button>
-        <button class="buttonCancel"  [mat-dialog-close]="" cdkFocusInitial>Speichern</button>
+        <button class="buttonCancel" (click)="onNoClick()">Abbrechen</button>
+        <button class="buttonSubmit"  [mat-dialog-close]="" cdkFocusInitial>Speichern</button>
+</div>
 </div>

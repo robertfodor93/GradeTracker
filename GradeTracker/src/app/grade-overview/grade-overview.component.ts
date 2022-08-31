@@ -21,7 +21,11 @@ import { MatSort, Sort } from '@angular/material/sort';
   ],
 })
 
+
+
 export class GradeOverviewComponent implements OnInit {
+
+title: string='Notenübersicht';
 
   constructor(private _liveAnnouncer: LiveAnnouncer, private Modulservice: ModuleService,private Gradeservice: GradeService,public dialog: MatDialog,) { }
 
@@ -33,6 +37,7 @@ export class GradeOverviewComponent implements OnInit {
   ngOnInit() {
     this.getModule();
     this.getGrade();
+    console.log(this.title);
   }
 
   subject: string | undefined;
@@ -73,7 +78,7 @@ export class GradeOverviewComponent implements OnInit {
   //Neue Noten erfassen
   openDialog(): void {
     const dialogRef = this.dialog.open(NewGradeComponent, {
-      width: '40%' ,height:'87%',
+      width: '40%' ,height:'87%', 
       data: {subject: this.subject,datum:this.datum, bez: this.bez, gewictung: this.gewichtung,note:this.note },
     });
 
