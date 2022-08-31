@@ -1,1 +1,44 @@
-<p>goal-overview works!</p>
+<mat-toolbar>
+    <span>{{this.title}}</span>
+  </mat-toolbar>
+
+  <table mat-table [dataSource]="dataSourceGoal" matSort (matSortChange)="announceSortChange($event)"
+  class="mat-elevation-z8">
+
+  <!-- subject Column -->
+  <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by subject">
+          Fach
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- teacher Column -->
+  <ng-container matColumnDef="teacher">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by teacher">
+          Lehperson
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.teacher}} </td>
+  </ng-container>
+
+  <!-- ziel Column -->
+  <ng-container matColumnDef="averageDesiredMark">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by goal">
+          Ziel
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.goal}} </td>
+  </ng-container>
+
+  <!-- benötigte Note Column -->
+  <ng-container matColumnDef="marks">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by needed grade">
+          Benötigte Note
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.needed}} </td>
+  </ng-container>
+
+  
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

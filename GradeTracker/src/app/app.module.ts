@@ -36,8 +36,6 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
 
 
-import { FormsModule } from '@angular/forms';
-
 import { Title } from '@angular/platform-browser';
 
 import { JwtHelperService, JWT_OPTIONS } from "@auth0/angular-jwt";
@@ -81,7 +79,7 @@ import { ModuleService } from './services/module.service';
 
     MatDialogModule,
 
-    FormsModule
+    FormsModule,
 
 
 

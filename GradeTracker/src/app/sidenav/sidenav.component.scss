@@ -1,12 +1,30 @@
 a{
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
+.container{
+    position: relative;
+}
+
+.wildspitz img{
+    opacity: 0.3;
+    width: 150px;
+}
+
+
+/* Container holding the image and the text */
+.wildspitz {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  
+
 .profil{   
-    position:fixed;
-    bottom:7%;
-    left: 5%;
+    position:sticky;
+    margin-top: 400px;
+    margin-left: 108.5px;
     width:90px;
     height:90px;
     border-radius: 50%;
@@ -26,7 +44,7 @@ p{
 }
 
 .active{
-    color:red;
+    color:rgb(0, 0, 0);
     font-size: 25px;
     font-weight: bold;
     text-decoration: underline;
@@ -34,7 +52,7 @@ p{
 
 .activeProfile{
     img{
-        border: solid 5px red;
+        border: solid 5px rgb(0, 0, 0);
     }
 }
 
