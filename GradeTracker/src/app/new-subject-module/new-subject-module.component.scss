@@ -7,45 +7,50 @@ input[type=text], [type=date],[type=number], select{
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: #ACCEF9;
   }
   input[type=checkbox] {
     width: 50%;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: #ACCEF9;
+    accent-color:#4678b4;
   }
 
-  .buttonSubmit {
-    width: 45%;
-    margin-top: 35px;
-    display: inline;
-    height: 30px;
-    background-color: green;
-    border-radius: 8px;
-    border-color: green;
-    margin-left: auto;
-    cursor: pointer;
-  }
-  
-  .buttonCancel {
-    width: 45%;
-    margin-top: 35px;
-    display: inline;
-    height: 30px;
-    background-color: red;
-    border-radius: 8px;
-    border-color: red;
-    cursor: pointer;
-  }
 
+.buttonSubmit{
+  width: 45%;
+  margin-top: 35px;
+  display: inline;
+  height: 30px;
+  background-color: rgb(0, 0, 0);
+  border-radius: 8px;
+  border-color: rgb(0, 0, 0);
+  color: #ffffff;
+}
+.buttonCancel{
+  width: 45%;
+  margin-top: 35px;
+  margin-left: auto;
+  display: inline;
+  height: 30px;
+  background-color: rgb(0, 0, 0);
+  border-radius: 8px;
+  border-color: rgb(0, 0, 0);
+  color: #ffffff;
+}
 h2{
   text-align: center;
 }
   
 .favorit{
   margin-top: 20px;
+}
+.mat-divider{
+  border-color: black;
 }
