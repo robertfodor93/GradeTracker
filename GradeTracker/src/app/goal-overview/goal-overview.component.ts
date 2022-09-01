@@ -19,15 +19,13 @@ export class GoalOverviewComponent implements AfterViewInit,OnInit {
   displayedColumns = ['name', 'teacher', 'goal', 'needed'];
 
   subject: string | undefined;
-  datum: Date | undefined;
   bez:string | undefined;
-  gewichtung:number | undefined;
-  note:number | undefined;
+  goal:number | undefined;
 
   openDialog(): void {
     const dialogRef = this.dialog.open(NewgoalComponent, {
       width: '40%' ,height:'70%',
-      data: {subject: this.subject,datum:this.datum, bez: this.bez, gewictung: this.gewichtung,note:this.note },
+      data: {subject: this.subject, bez: this.bez, goal:this.goal },
     });
 
     dialogRef.afterClosed().subscribe(result => {
