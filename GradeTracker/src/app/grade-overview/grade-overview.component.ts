@@ -95,6 +95,8 @@ title: string='Notenübersicht';
   ngAfterViewInit() {
     this.dataSourceBM.sort = this.sort;
     this.dataSourceEFZ.sort = this.sort;
+    this.dataSourceBMexam.sort = this.sort;
+    this.dataSourceEFZexam.sort = this.sort;
   }
 
   announceSortChange(sortState: Sort) {
