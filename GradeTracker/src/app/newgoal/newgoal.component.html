@@ -1,0 +1,25 @@
+<h2>Fach/Modulerfassung</h2>
+<mat-divider></mat-divider>
+<div mat-dialog-actions>
+    <form [formGroup] = "newGoal" (ngSubmit)="onSubmit()">
+        
+        <label for="name">Fach</label>
+        <select id="name" formControlName="name" required>
+            <option value="1">Mathe</option>
+            <option value="2">Englisch</option>
+        </select>
+     <br>
+        <div formGroupName="goal">
+            <label for="goal">Ziel</label>
+            <input type="text" formControlName="goal" form required>
+            </div>
+            <br>
+
+        <br>
+        <button class="buttonCancel" [mat-dialog-close]="">Abbrechen</button>
+        <button type="submit" class="buttonSubmit"  cdkFocusInitial>Speichern</button>
+        
+        
+    </form>
+
+</div>

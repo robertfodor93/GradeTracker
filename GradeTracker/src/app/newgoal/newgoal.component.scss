@@ -1,0 +1,53 @@
+form{
+    width: 100%;
+  }
+  
+  input[type=text], [type=date],[type=number], select{
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid rgb(0, 0, 0);
+      border-radius: 4px;
+      box-sizing: border-box;
+      background-color: #ACCEF9;
+    }
+    input[type=checkbox] {
+      width: 50%;
+      display: inline-block;
+      border: 1px solid rgb(0, 0, 0);
+      border-radius: 4px;
+      box-sizing: border-box;
+      background-color: #ACCEF9;
+      accent-color:#4678b4;
+    }
+  
+  
+  .buttonSubmit{
+    width: 45%;
+    margin-top: 35px;
+    display: inline;
+    height: 30px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 8px;
+    border-color: rgb(0, 0, 0);
+    color: #ffffff;
+  }
+  .buttonCancel{
+    width: 45%;
+    margin-top: 35px;
+    margin-left: auto;
+    display: inline;
+    height: 30px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 8px;
+    border-color: rgb(0, 0, 0);
+    color: #ffffff;
+  }
+  h2{
+    text-align: center;
+  }
+    
+  .mat-divider{
+    border-color: black;
+  }

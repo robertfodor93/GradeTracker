@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="mat-toolbar-single-row">
     <span>{{this.title}}</span>
   </mat-toolbar>
 
@@ -10,7 +10,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by subject">
           Fach
       </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td mat-cell *matCellDef="let element"> element.name </td>
   </ng-container>
 
   <!-- teacher Column -->
@@ -18,23 +18,23 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by teacher">
           Lehperson
       </th>
-      <td mat-cell *matCellDef="let element"> {{element.teacher}} </td>
+      <td mat-cell *matCellDef="let element"> element.teacher</td>
   </ng-container>
 
   <!-- ziel Column -->
-  <ng-container matColumnDef="averageDesiredMark">
+  <ng-container matColumnDef="goal">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by goal">
           Ziel
       </th>
-      <td mat-cell *matCellDef="let element"> {{element.goal}} </td>
+      <td mat-cell *matCellDef="let element"> element.goal </td>
   </ng-container>
 
   <!-- benötigte Note Column -->
-  <ng-container matColumnDef="marks">
+  <ng-container matColumnDef="needed">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by needed grade">
           Benötigte Note
       </th>
-      <td mat-cell *matCellDef="let element"> {{element.needed}} </td>
+      <td mat-cell *matCellDef="let element"> element.needed </td>
   </ng-container>
 
   
@@ -42,3 +42,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<button class="buttonNew" mat-raised-button (click)="openDialog()">Neues Ziel erfassen</button>
