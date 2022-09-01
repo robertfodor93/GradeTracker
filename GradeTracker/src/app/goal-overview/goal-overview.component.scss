@@ -1,0 +1,51 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 70%;
+    
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+    width: 100%;
+  }
+  
+  mat-header-cell{
+    font-weight: bold;
+    font-size: 17px;
+    color: black;
+  }
+  
+  mat-cell{
+    font-size: 15px;
+    color: grey;
+  }
+  
+  .title{
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 30px;
+  }
+  
+  .buttonNew{
+  width: 15%;
+  bottom: 10px;
+  right: 10px;
+  position: absolute;
+  margin-right: 0px;
+  display: inline;
+  height: 30px;
+  border-radius: 8px;
+  background-color: rgb(0, 0, 0);
+  color:white; 
+  }
+  .buttonNew:hover{
+  
+  background-color: rgb(154, 154, 154);
+  
+  }
+  .headerrow{
+  background-color: #ACCEF9;
+  }
