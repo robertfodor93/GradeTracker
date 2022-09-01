@@ -16,12 +16,13 @@ import { ModuleService } from '../services/module.service';
 export class NewgoalComponent implements OnInit {
 
   newGoal : FormGroup
+  posts: any;
 
   constructor(
     public dialogRef: MatDialogRef<NewgoalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Subject,
     private http:HttpClient,
-    private formBuilder : FormBuilder) {
+    private formBuilder : FormBuilder, private service:ModuleService) {
       this.newGoal = this.formBuilder.group({
         name : [null],
         goal : [null],
@@ -38,7 +39,10 @@ export class NewgoalComponent implements OnInit {
   })
  }
 
-  ngOnInit(): void {
+ ngOnInit(){
+  this.service.getModule()
+    .subscribe(response => {
+      this.posts = response;
+    });
   }
-
 }
