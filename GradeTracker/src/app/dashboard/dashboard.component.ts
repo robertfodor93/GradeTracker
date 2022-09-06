@@ -17,4 +17,6 @@ title: string ="Dashboard"
     this.titleEvent.emit(this.title)
   }
 
+  url: string = 'https://www.miljobs.ch/funktionen-von-a-bis-z'
+
 }
