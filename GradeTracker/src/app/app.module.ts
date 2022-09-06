@@ -42,6 +42,7 @@ import { JwtHelperService, JWT_OPTIONS } from "@auth0/angular-jwt";
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 import { ModuleService } from './services/module.service';
+import { NewgoalComponent } from './newgoal/newgoal.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { ModuleService } from './services/module.service';
     ProfileComponent,
     NewGradeComponent,
     NewSubjectModuleComponent,
+    NewgoalComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,7 @@ import { ModuleService } from './services/module.service';
 
 
 
-    MatDialogModule
+   
   ],
   providers: [ 
     JwtHelperService,

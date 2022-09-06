@@ -16,10 +16,8 @@
         <br>
         <label for="fach">Modul/Fach</label>
         <select id="fach" name="fach" class="input-field">
-            <option>M117</option>
-            <option>M200</option>
-            <option>M300</option>
-            <option>M400</option>
+            <option  *ngFor="let a of modul"> {{a.name}}</option>
+          
         </select>
         <br>
         <label for="gewichtung">Gewichtung</label>
@@ -30,5 +28,7 @@
         <br>
         <button class="buttonCancel" (click)="onNoClick()">Abbrechen</button>
         <button class="buttonSubmit"  [mat-dialog-close]="" cdkFocusInitial>Speichern</button>
-</div>
+       
+            
+    </div>
 </div>

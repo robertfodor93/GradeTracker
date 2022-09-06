@@ -73,6 +73,7 @@ title: string='Notenübersicht';
     let resp = this.Gradeservice.getGrade();
     resp.subscribe(report => this.dataSourceEFZexam.data = report as Exam[])
     resp.subscribe(report => this.dataSourceBMexam.data = report as Exam[])
+    console.log(this.dataSourceEFZexam)
   }
   
   //Neue Noten erfassen
@@ -95,6 +96,8 @@ title: string='Notenübersicht';
   ngAfterViewInit() {
     this.dataSourceBM.sort = this.sort;
     this.dataSourceEFZ.sort = this.sort;
+    this.dataSourceBMexam.sort = this.sort;
+    this.dataSourceEFZexam.sort = this.sort;
   }
 
   announceSortChange(sortState: Sort) {
