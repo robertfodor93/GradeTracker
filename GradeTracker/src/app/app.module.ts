@@ -83,7 +83,7 @@ import { ModuleService } from './services/module.service';
 
 
 
-    MatDialogModule
+   
   ],
   providers: [ 
     JwtHelperService,

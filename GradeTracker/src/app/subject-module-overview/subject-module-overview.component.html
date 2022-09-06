@@ -1,120 +1,120 @@
-<mat-toolbar>
-    <span>{{this.title}}</span>
-  </mat-toolbar>
+<div class="toolbar">
+    <h2>{{this.title}}</h2>
+</div>
 
 <mat-tab-group>
     <mat-tab label="EFZ">
-        <table mat-table [dataSource]="dataSourceEFZ" matSort (matSortChange)="announceSortChange($event)"
+        <mat-table [dataSource]="dataSourceEFZ" matSort (matSortChange)="announceSortChange($event)"
             class="mat-elevation-z8">
 
             <!-- subject Column -->
             <ng-container matColumnDef="name">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by subject">
+                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by subject">
                     Subject
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element" > {{element.name}} </mat-cell>
             </ng-container>
 
             <!-- kompetenzbereich Column -->
             <ng-container matColumnDef="competenceArea">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by kompetenzbereich">
+                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by kompetenzbereich">
                     Kompetenzbereich
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.competenceArea}} </td>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.competenceArea}} </mat-cell>
             </ng-container>
 
             <!-- teacher Column -->
             <ng-container matColumnDef="teacher">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by teacher">
+                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by teacher">
                     Teacher
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.teacher}} </td>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.teacher}} </mat-cell>
             </ng-container>
 
             <!-- durchschnitt Column -->
             <ng-container matColumnDef="averageDesiredMark">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by durchschnitt">
+                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by durchschnitt">
                     Durchschnitt
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.averageDesiredMark}} </td>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.averageDesiredMark}} </mat-cell>
             </ng-container>
 
             <!-- anzahlNoten Column -->
             <ng-container matColumnDef="marks">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by anzahlNoten">
+                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by anzahlNoten">
                     Anzahl Noten
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.marks}} </td>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.marks}} </mat-cell>
             </ng-container>
 
             <!-- Favorit Column -->
             <ng-container matColumnDef="showOnDashboard">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by favorit">
+                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by favorit">
                     Favorit
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.showOnDashboard}} </td>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.showOnDashboard}} </mat-cell>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
     </mat-tab>
 
     <mat-tab label="BM">
-        <table mat-table [dataSource]="dataSourceBM" matSort (matSortChange)="announceSortChange($event)"
-            class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSourceBM" matSort (matSortChange)="announceSortChange($event)"
+        class="mat-elevation-z8">
 
-            <!-- subject Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by subject">
-                    Subject
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
+        <!-- subject Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by subject">
+                Subject
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
 
-            <!-- kompetenzbereich Column -->
-            <ng-container matColumnDef="competenceArea">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by kompetenzbereich">
-                    Kompetenzbereich
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.competenceArea}} </td>
-            </ng-container>
+        <!-- kompetenzbereich Column -->
+        <ng-container matColumnDef="competenceArea">
+            <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by kompetenzbereich">
+                Kompetenzbereich
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.competenceArea}} </mat-cell>
+        </ng-container>
 
-            <!-- teacher Column -->
-            <ng-container matColumnDef="teacher">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by teacher">
-                    Teacher
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.teacher}} </td>
-            </ng-container>
+        <!-- teacher Column -->
+        <ng-container matColumnDef="teacher">
+            <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by teacher">
+                Teacher
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.teacher}} </mat-cell>
+        </ng-container>
 
-            <!-- durchschnitt Column -->
-            <ng-container matColumnDef="averageDesiredMark">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by durchschnitt">
-                    Durchschnitt
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.averageDesiredMark}} </td>
-            </ng-container>
+        <!-- durchschnitt Column -->
+        <ng-container matColumnDef="averageDesiredMark">
+            <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by durchschnitt">
+                Durchschnitt
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.averageDesiredMark}} </mat-cell>
+        </ng-container>
 
-            <!-- anzahlNoten Column -->
-            <ng-container matColumnDef="marks">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by anzahlNoten">
-                    Anzahl Noten
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.marks}} </td>
-            </ng-container>
+        <!-- anzahlNoten Column -->
+        <ng-container matColumnDef="marks">
+            <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by anzahlNoten">
+                Anzahl Noten
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.marks}} </mat-cell>
+        </ng-container>
 
-            <!-- Favorit Column -->
-            <ng-container matColumnDef="showOnDashboard">
-                <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by favorit">
-                    Favorit
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.showOnDashboard}} </td>
-            </ng-container>
+        <!-- Favorit Column -->
+        <ng-container matColumnDef="showOnDashboard">
+            <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by favorit">
+                Favorit
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.showOnDashboard}} </mat-cell>
+        </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
     </mat-tab>
 </mat-tab-group>
 

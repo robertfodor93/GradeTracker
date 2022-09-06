@@ -73,6 +73,7 @@ title: string='Notenübersicht';
     let resp = this.Gradeservice.getGrade();
     resp.subscribe(report => this.dataSourceEFZexam.data = report as Exam[])
     resp.subscribe(report => this.dataSourceBMexam.data = report as Exam[])
+    console.log(this.dataSourceEFZexam)
   }
   
   //Neue Noten erfassen

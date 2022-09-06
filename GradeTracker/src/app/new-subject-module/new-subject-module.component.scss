@@ -24,28 +24,32 @@ input[type=text], [type=date],[type=number], select{
 
 
 .buttonSubmit{
-  width: 45%;
-  margin-top: 35px;
+  width: 40%;
+  margin-top: 15px;
+  margin-left: 19.5%;
   display: inline;
   height: 30px;
   background-color: rgb(0, 0, 0);
   border-radius: 8px;
   border-color: rgb(0, 0, 0);
   color: #ffffff;
+  font-size: 0.9vw;
 }
 .buttonCancel{
-  width: 45%;
-  margin-top: 35px;
-  margin-left: auto;
+  width: 40%;
+  margin-top: 15px;
+  margin-left: 0.4%;
   display: inline;
   height: 30px;
   background-color: rgb(0, 0, 0);
   border-radius: 8px;
   border-color: rgb(0, 0, 0);
   color: #ffffff;
+  font-size: 0.9vw;
 }
 h2{
   text-align: center;
+  font-size: 2vw;
 }
   
 .favorit{
