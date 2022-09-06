@@ -85,7 +85,7 @@ import { NewgoalComponent } from './newgoal/newgoal.component';
 
 
 
-    MatDialogModule
+   
   ],
   providers: [ 
     JwtHelperService,

@@ -1,15 +1,24 @@
 .sidenav{
-    padding: 16px;
-    width: 20%;
-    height: 96.3%;
-    display: inline-block;
-    vertical-align: middle;
-    background-color: #4678b4;
+    margin: 0;
+  padding: 0;
+  width: 20%;
+  position: fixed;
+  height: 99.9%;
+  overflow: auto;
+ background-color: #4678b4;
+
 }
 .content{
-    height: 100%;
-    width: 77%;
-    margin-left: 5px;
-    display: inline-block;
-    vertical-align:top;
+  margin-left: 20%;
+  padding: 1px 16px;
+  height: 100%;
+  width: 100%;
+  
 }
+.grid-container{
+    display: flex;
+   
+    
+}
+
+
