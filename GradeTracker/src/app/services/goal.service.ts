@@ -16,12 +16,17 @@ export interface Goal {
 
 export class GoalService {
 
-  private url = 'https://localhost:7290/api/module/getAll';
+  private urlGoals = 'https://localhost:7290/api/module/getAll';
+  private urlAddGoal = 'https://localhost:7290/api/module/update?id=';
   
    
   constructor(private http: HttpClient) { }
   
   getGoals(){
-    return this.http.get(this.url);
+    return this.http.get(this.urlGoals);
+  }
+
+  setGoals(id:number){
+    return this.http.get(this.urlAddGoal + id);
   }
 }
