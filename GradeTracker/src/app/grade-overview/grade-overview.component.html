@@ -5,106 +5,104 @@
 <mat-tab-group>
   <mat-tab label="EFZ">
 
-      <table mat-table
-      [dataSource]="dataSourceEFZ" multiTemplateDataRows
-      class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
- <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsSubject">
-   <th mat-header-cell class="headerrow"*matHeaderCellDef mat-sort-header sortActionDescription="Sort by column"> {{column}} </th>
-   <td mat-cell *matCellDef="let element">{{element[column]}} </td>
- </ng-container>
-
- <ng-container matColumnDef="expand">
-   <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
-   <td mat-cell *matCellDef="let element">
-     <button mat-icon-button aria-label="expand row" (click)="(expandedElements = expandedElements === element ? null : element); $event.stopPropagation()">
-       <mat-icon *ngIf="expandedElements !== element">keyboard_arrow_down</mat-icon>
-       <mat-icon *ngIf="expandedElements === element" >keyboard_arrow_up</mat-icon>
-     </button>
-   </td>
- </ng-container>
-
- <!-- Exams-->
- <ng-container matColumnDef="expandedDetail">
-   <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsSubject.length">
-     <div class="example-element-detail" [@detailExpand]="element == expandedElements ? 'expanded' : 'collapsed'">
-      
-          <table mat-table [dataSource]=" dataSourceEFZexam " multiTemplateDataRows class="innertable" matSort (matSortChange)="announceSortChange($event)">
-      <tr mat-header-row *matHeaderRowDef="displayedColumnsExam"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumnsExam;"></tr>
-      <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsExam">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="Sort by column" class="row" > {{column}}</th>
-        <td mat-cell *matCellDef="let element"class="row" > {{element[column]}} </td>
+    <table mat-table [dataSource]="dataSourceEFZ" multiTemplateDataRows class="mat-elevation-z8" matSort
+      (matSortChange)="announceSortChange($event)">
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsSubject">
+        <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by column">
+          {{column}} </th>
+        <td mat-cell *matCellDef="let element">{{element[column]}} </td>
       </ng-container>
-        </table>
-        
-      </div>
-   </td>
- </ng-container>
 
- <tr mat-header-row *matHeaderRowDef="displayedColumnsSubject"></tr>
- <tr mat-row *matRowDef="let element; columns: displayedColumnsSubject;"
-     class="example-element-row"
-     [class.example-expanded-row]="expandedElements === element"
-     (click)="expandedElements = expandedElements === element ? null : element">
- </tr>
- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
+      <ng-container matColumnDef="expand">
+        <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button aria-label="expand row"
+            (click)="(expandedElements = expandedElements === element ? null : element); $event.stopPropagation()">
+            <mat-icon *ngIf="expandedElements !== element">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="expandedElements === element">keyboard_arrow_up</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Exams-->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsSubject.length">
+          <div class="example-element-detail" [@detailExpand]="element == expandedElements ? 'expanded' : 'collapsed'">
+
+            <table mat-table [dataSource]=" dataSourceEFZexam " multiTemplateDataRows class="innertable" matSort
+              (matSortChange)="announceSortChange($event)">
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsExam"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsExam;"></tr>
+              <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsExam">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by column"
+                  class="row"> {{column}}</th>
+                <td mat-cell *matCellDef="let element" class="row"> {{element[column]}} </td>
+              </ng-container>
+            </table>
+
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsSubject"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayedColumnsSubject;" class="example-element-row"
+        [class.example-expanded-row]="expandedElements === element"
+        (click)="expandedElements = expandedElements === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
   </mat-tab>
 
 
 
   <!--BM Noten-->
-  <mat-tab label="BM"> 
-    <table mat-table
-      [dataSource]="dataSourceBM" multiTemplateDataRows
-      class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
- <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsSubject">
-   <th mat-header-cell class="headerrow"*matHeaderCellDef mat-sort-header sortActionDescription="Sort by column"> {{column}} </th>
-   <td mat-cell *matCellDef="let element">{{element[column]}} </td>
- </ng-container>
-
- <ng-container matColumnDef="expand">
-   <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
-   <td mat-cell *matCellDef="let element">
-     <button mat-icon-button aria-label="expand row" (click)="(expandedElements = expandedElements === element ? null : element); $event.stopPropagation()">
-       <mat-icon *ngIf="expandedElements !== element">keyboard_arrow_down</mat-icon>
-       <mat-icon *ngIf="expandedElements === element" >keyboard_arrow_up</mat-icon>
-     </button>
-   </td>
- </ng-container>
-
- <!-- Exams-->
- <ng-container matColumnDef="expandedDetail">
-   <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsSubject.length">
-     <div class="example-element-detail" [@detailExpand]="element == expandedElements ? 'expanded' : 'collapsed'">
-      
-          <table mat-table [dataSource]=" dataSourceBMexam " multiTemplateDataRows class="innertable" matSort (matSortChange)="announceSortChange($event)">
-      <tr mat-header-row *matHeaderRowDef="displayedColumnsExam"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumnsExam;"></tr>
-      <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsExam">
-        <th mat-header-cell *matHeaderCellDef class="row" > {{column}}</th>
-        <td mat-cell *matCellDef="let element"class="row" > {{element[column]}} </td>
+  <mat-tab label="BM">
+    <table mat-table [dataSource]="dataSourceBM" multiTemplateDataRows class="mat-elevation-z8" matSort
+      (matSortChange)="announceSortChange($event)">
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsSubject">
+        <th mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header sortActionDescription="Sort by column">
+          {{column}} </th>
+        <td mat-cell *matCellDef="let element">{{element[column]}} </td>
       </ng-container>
-        </table>
-        
-      </div>
-   </td>
- </ng-container>
 
- <tr mat-header-row *matHeaderRowDef="displayedColumnsSubject"></tr>
- <tr mat-row *matRowDef="let element; columns: displayedColumnsSubject;"
-     class="example-element-row"
-     [class.example-expanded-row]="expandedElements === element"
-     (click)="expandedElements = expandedElements === element ? null : element">
- </tr>
- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
-     </mat-tab>
+      <ng-container matColumnDef="expand">
+        <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button aria-label="expand row"
+            (click)="(expandedElements = expandedElements === element ? null : element); $event.stopPropagation()">
+            <mat-icon *ngIf="expandedElements !== element">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="expandedElements === element">keyboard_arrow_up</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Exams-->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsSubject.length">
+          <div class="example-element-detail" [@detailExpand]="element == expandedElements ? 'expanded' : 'collapsed'">
+
+            <table mat-table [dataSource]=" dataSourceBMexam " multiTemplateDataRows class="innertable" matSort
+              (matSortChange)="announceSortChange($event)">
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsExam"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsExam;"></tr>
+              <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsExam">
+                <th mat-header-cell *matHeaderCellDef class="row"> {{column}}</th>
+                <td mat-cell *matCellDef="let element" class="row"> {{element[column]}} </td>
+              </ng-container>
+            </table>
+
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsSubject"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayedColumnsSubject;" class="example-element-row"
+        [class.example-expanded-row]="expandedElements === element"
+        (click)="expandedElements = expandedElements === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+  </mat-tab>
 </mat-tab-group>
 
 <button class="buttonNew" mat-raised-button (click)="openDialog()">Neue Noten erfassen</button>
-
-<div ng for >
-
-</div>
-
