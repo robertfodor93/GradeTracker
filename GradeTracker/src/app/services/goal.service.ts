@@ -3,7 +3,10 @@ import { Injectable } from '@angular/core';
 
 
 export interface Goal {
+  id: number;
+  educationTypes: number;
   averageDesiredMark: number;
+
 }
 
 @Injectable({
@@ -12,9 +15,8 @@ export interface Goal {
 
 export class GoalService {
 
-  private urlGoals = 'https://localhost:7290/api/module/getAll';
-  private urlAddGoal = 'https://localhost:7290/api/module/update?id=';
-
+  private urlGoals ='https://localhost:7290/api/EducationTypeGoal/getAll';
+ 
 
   constructor(private http: HttpClient) { }
 
