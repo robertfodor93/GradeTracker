@@ -19,14 +19,27 @@ export class NewgoalComponent implements OnInit {
   posts: any;
 
 
-
-
   constructor(
     public dialogRef: MatDialogRef<NewgoalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Subject,
+    @Inject(MAT_DIALOG_DATA) public data: Goal,
     private http: HttpClient,
-    private service: ModuleService, private serviceGoal: GoalService, private dataGoal: Goal) {
+    private service: ModuleService, private serviceGoal: GoalService) {
   }
+
+  onClick() {
+    this.postGrade(this.data);
+    this.dialogRef.close();
+  }
+
+postGrade(data : Goal){
+    const headers = { 'content-type': 'application/json'} 
+    const goal = JSON.stringify(data);
+    console.log(goal)
+    this.http.post('https://localhost:7290/api/EducationTypeGoal/create', goal, {'headers':headers}).subscribe((result)=>{
+      console.warn("result", result);
+    });
+  }
+
 
   ngOnInit() {
     this.service.getModule()
@@ -41,20 +54,4 @@ export class NewgoalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-
-  onSubmit() {
-    this.postGoal(this.dataGoal)
-    // console.log(this.selectedSubject, this.selectedGoal);
-    //this.serviceGoal.setGoals(this.selectedSubject, this.selectedGoal)
-  }
-
-  postGoal(dataGoal: Goal) {
-    const headers = { 'content-type': 'application/json' }
-    const goal = JSON.stringify(dataGoal);
-    console.log(goal)
-    this.http.post('https://localhost:7290/api/EducationTypeGoal/create', goal, { 'headers': headers }).subscribe((result) => {
-      console.warn("result", result);
-    });
-
-  }
 }
