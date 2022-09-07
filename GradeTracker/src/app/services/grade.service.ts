@@ -13,10 +13,12 @@ export interface Exam {
   providedIn: 'root'
 })
 export class GradeService {
-  private url = 'https://localhost:7290/api/Mark/getAll';
+  private urlget = 'https://localhost:7290/api/Mark/getAll';
+
   
   constructor(private http: HttpClient) { }
   getGrade(){
-    return this.http.get(this.url);
+    return this.http.get(this.urlget);
   }
+
 }
