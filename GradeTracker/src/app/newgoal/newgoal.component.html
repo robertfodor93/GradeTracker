@@ -1,28 +1,26 @@
 <h2>Zielerfassung</h2>
 <mat-divider></mat-divider>
 <div mat-dialog-actions>
-    <form  (ngSubmit)="onSubmit()">
-
+    <form>
         <label for="name">Fach</label>
-    
-        <mat-select matNativeControl #post class="input-field" formControlName="fach" [(ngModel)]="data.fach" >
-            <mat-option *ngFor="let post of posts" [value]="post.id" name="fach" >
+
+        <mat-select matNativeControl #post class="input-field">
+            <mat-option *ngFor="let post of posts" [value]="post.id" name="fach">
                 {{post.name}}
             </mat-option>
         </mat-select>
 
         <br>
-        <div formGroupName="goal">
+        <div>
             <label for="goal">Ziel</label>
-            <input type="number" max="6" min="1"  formControlName="goal" [(ngModel)]="data.goal" name="goal" required>
+            <input type="number" max="6" min="1" [(ngModel)]="data.averageDesiredMark" name="goal" required>
         </div>
         <br>
 
         <br>
-        <button class="buttonCancel" [mat-dialog-close]="">Abbrechen</button>
-        <button type="submit" class="buttonSubmit" cdkFocusInitial>Speichern</button>
-
-
+        <button class="buttonCancel" [mat-dialog-close]="" cdkFocusInitial>Abbrechen</button>
+        <button class="buttonSubmit" (click)="onClick()">Speichern</button>
     </form>
+
 
 </div>
