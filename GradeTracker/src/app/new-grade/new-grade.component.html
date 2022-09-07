@@ -3,7 +3,7 @@
 <mat-divider></mat-divider>
 <div mat-dialog-actions>
         <label for="date">Datum</label>
-        <input type="date" id="date" name="date" value="2022-08-25" min="2018-01-01" max="2024-12-31">
+        <input type="date" id="date" name="date" value="2022-08-25" min="2018-01-01" max="2024-12-31" [(ngModel)]="data.date">
         <br>
        <label for="bez">Bezeichnung</label>
        <input  id="bez" name="bez" class="input-field" type="text" >
@@ -14,21 +14,20 @@
             <option>EFZ</option>
         </select>
         <br>
-        <label for="fach">Modul/Fach</label>
-        <select id="fach" name="fach" class="input-field">
-            <option  *ngFor="let a of modul"> {{a.name}}</option>
-          
-        </select>
+        <label for="note">Note</label>
+        <input type="number" id="note" name="note" min="1" max="6" [(ngModel)]="data.grade">
         <br>
         <label for="gewichtung">Gewichtung</label>
-        <input type="number" id="gewichtung" name="gewictung" min="0" max="2" step="0.5">
+        <input type="number" id="gewichtung" name="gewictung" min="0" max="2" step="0.5" [(ngModel)]="data.weighting">
         <br>
-        <label for="note">Note</label>
-        <input type="number" id="note" name="note" min="1" max="6">
+        <label for="fach" >Modul/Fach</label>
+        <select id="fach" name="fach" class="input-field" [(ngModel)]="data.moduleId">
+            <option  *ngFor="let a of modul"> {{a.id}}</option>
+        </select>
         <br>
-        <button class="buttonCancel" (click)="onNoClick()">Abbrechen</button>
-        <button class="buttonSubmit"  [mat-dialog-close]="" cdkFocusInitial>Speichern</button>
-       
-            
+  
+  
+        <button class="buttonCancel" [mat-dialog-close]="" cdkFocusInitial>Abbrechen</button>
+        <button class="buttonSubmit" (click)="onClick()" >Speichern</button> 
     </div>
 </div>

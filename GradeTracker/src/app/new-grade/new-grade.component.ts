@@ -1,7 +1,9 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import { ModuleService, Subject } from '../services/module.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Exam } from '../services/grade.service';
+import { Exam ,GradeService } from '../services/grade.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -15,14 +17,21 @@ modul:any;
   
   constructor(
     public dialogRef: MatDialogRef<NewGradeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Exam, private Modulservice: ModuleService
+    @Inject(MAT_DIALOG_DATA ) public data: Exam, private Modulservice: ModuleService, private GradeService: GradeService, private http:HttpClient
   ) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  onClick() {
+    this.postGrade(this.data)
   }
 
-  
+  postGrade(data : Exam){
+    const headers = { 'content-type': 'application/json'} 
+    const grade = JSON.stringify(data);
+    console.log(grade)
+    this.http.post('https://localhost:7290/api/Mark/create', grade, {'headers':headers}).subscribe((result)=>{
+      console.warn("result", result);
+    });
+  }
 
   public getModule() {
     let resp = this.Modulservice.getModule();
