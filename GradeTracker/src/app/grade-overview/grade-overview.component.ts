@@ -30,8 +30,8 @@ title: string='Notenübersicht';
   constructor(private _liveAnnouncer: LiveAnnouncer, private Modulservice: ModuleService,private Gradeservice: GradeService,public dialog: MatDialog,) { }
 
  //Daten von der Datenbank holen
-  displayedColumnsSubject = ['name', 'competenceArea', 'teacher', 'averageDesiredMark', 'marks', 'showOnDashboard','Id']
-  displayedColumnsExam =['date',' weighting','grade','moduleId'];
+  displayedColumnsSubject = ['name', 'competenceArea', 'teacher', 'averageDesiredMark', 'marks', 'showOnDashboard','id']
+  displayedColumnsExam =['date','weighting','grade','moduleId'];
   expandedElements: Subject | null | undefined;
 
   ngOnInit() {
@@ -106,6 +106,13 @@ title: string='Notenübersicht';
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  applyFilter(event: Event) {
+    console.log((event.target as HTMLInputElement).value);
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
+    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
   }
 
 }

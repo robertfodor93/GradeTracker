@@ -4,7 +4,10 @@
 
 <mat-tab-group>
   <mat-tab label="EFZ">
-
+    <mat-form-field appearance="standard">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
     <table mat-table [dataSource]="dataSourceEFZ" multiTemplateDataRows class="mat-elevation-z8" matSort
       (matSortChange)="announceSortChange($event)">
       <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsSubject">
@@ -57,6 +60,10 @@
 
   <!--BM Noten-->
   <mat-tab label="BM">
+    <mat-form-field appearance="standard">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" >
+    </mat-form-field>
     <table mat-table [dataSource]="dataSourceBM" multiTemplateDataRows class="mat-elevation-z8" matSort
       (matSortChange)="announceSortChange($event)">
       <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsSubject">
@@ -80,17 +87,15 @@
       <ng-container matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsSubject.length">
           <div class="example-element-detail" [@detailExpand]="element == expandedElements ? 'expanded' : 'collapsed'">
-
-            <table mat-table [dataSource]=" dataSourceBMexam " multiTemplateDataRows class="innertable" matSort
-              (matSortChange)="announceSortChange($event)">
-              <tr mat-header-row *matHeaderRowDef="displayedColumnsExam"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumnsExam;"></tr>
-              <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsExam">
-                <th mat-header-cell *matHeaderCellDef class="row"> {{column}}</th>
-                <td mat-cell *matCellDef="let element" class="row"> {{element[column]}} </td>
-              </ng-container>
-            </table>
-
+            <div *ngFor="let a of dataSourceEFZ.data ">
+              ({{a.id}}){{a.name}} 
+              <div *ngFor="let b of dataSourceEFZexam.data">
+                <div *ngIf="b.moduleId === a.id">
+                  {{b.grade}}({{b.moduleId}})
+                </div>
+              </div>
+            </div>
+         
           </div>
         </td>
       </ng-container>
@@ -106,3 +111,14 @@
 </mat-tab-group>
 
 <button class="buttonNew" mat-raised-button (click)="openDialog()">Neue Noten erfassen</button>
+
+
+
+<div *ngFor="let a of dataSourceEFZ.data ">
+  ({{a.id}}){{a.name}} 
+  <div *ngFor="let b of dataSourceEFZexam.data">
+    <div *ngIf="b.moduleId === a.id">
+      {{b.grade}}({{b.moduleId}})
+    </div>
+  </div>
+</div>
