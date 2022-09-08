@@ -16,21 +16,20 @@ export class GoalOverviewComponent implements AfterViewInit,OnInit {
 
   title:string='Zielübersicht';
 
-  displayedColumns = ['name', 'teacher', 'goal', 'needed'];
+  displayedColumns = ['fach', 'averageDesiredMark', 'needed'];
 
-  subject: string | undefined;
-  bez:string | undefined;
-  goal:number | undefined;
+  fach: string;
+  averageDesiredMark:number;
+  needed:number;
 
   openDialog(): void {
     const dialogRef = this.dialog.open(NewgoalComponent, {
       width: '40%' ,height:'70%',
-      data: {subject: this.subject, bez: this.bez, goal:this.goal },
+      data: {subject: this.fach, goal: this.averageDesiredMark},
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.bez = result;
+      console.log('The dialog was closed');;
     });
   }
   protected GOAL_DATA: Goal[] = []
@@ -44,6 +43,19 @@ export class GoalOverviewComponent implements AfterViewInit,OnInit {
 
   ngOnInit() {
     this.service.getGoals();
+    console.log(this.service.getGoals())
+  }
+
+  onChange($event:any){
+    const filterValue = $event.value;
+    this.dataSourceGoal.filter = filterValue.trim().toLowerCase();
+   
+  }
+
+  applyFilter(event:Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceGoal.filter = filterValue.trim().toLowerCase();
+
   }
 
   public getModule() {
