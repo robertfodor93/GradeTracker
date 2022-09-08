@@ -46,6 +46,18 @@ export class GoalOverviewComponent implements AfterViewInit,OnInit {
     console.log(this.service.getGoals())
   }
 
+  onChange($event:any){
+    const filterValue = $event.value;
+    this.dataSourceGoal.filter = filterValue.trim().toLowerCase();
+   
+  }
+
+  applyFilter(event:Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceGoal.filter = filterValue.trim().toLowerCase();
+
+  }
+
   public getModule() {
     let resp = this.service.getGoals();
     resp.subscribe(report => this.dataSourceGoal.data = report as Goal[])

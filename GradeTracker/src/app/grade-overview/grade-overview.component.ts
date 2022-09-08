@@ -26,6 +26,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 export class GradeOverviewComponent implements OnInit {
 
 title: string='Notenübersicht';
+  posts: any;
 
   constructor(private _liveAnnouncer: LiveAnnouncer, private Modulservice: ModuleService,private Gradeservice: GradeService,public dialog: MatDialog,) { }
 
@@ -38,6 +39,10 @@ title: string='Notenübersicht';
     this.getModule();
     this.getGrade();
     console.log(this.title);
+    this.Modulservice.getModule()
+    .subscribe(response => {
+      this.posts = response;
+    });
   }
 
   subject: string | undefined;
@@ -62,6 +67,12 @@ title: string='Notenübersicht';
   dataSourceEFZexam = new MatTableDataSource<Exam>(this.EXAM_DATA_EFZ);
   dataSourceBMexam = new MatTableDataSource<Exam>(this.EXAM_DATA_BM);
 
+  onChange($event:any){
+    const filterValue = $event.value;
+    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
+    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
+  }
+  
 
   public getModule() {
     let resp = this.Modulservice.getModule();
