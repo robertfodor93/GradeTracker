@@ -5,6 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ModuleService, Subject } from '../services/module.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NewSubjectModuleComponent } from '../new-subject-module/new-subject-module.component';
+import { HttpClient } from '@angular/common/http';
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-subject-module-overview',
   templateUrl: './subject-module-overview.component.html',
@@ -23,6 +26,8 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
   bez:string | undefined;
   gewichtung:number | undefined;
   note:number | undefined;
+  posts: any;
+
 
   openDialog(): void {
     const dialogRef = this.dialog.open(NewSubjectModuleComponent, {
@@ -44,14 +49,32 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
   title:string = "Fach-/Modulübersicht";
 
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private service: ModuleService,public dialog: MatDialog,) { }
+  constructor(private _liveAnnouncer: LiveAnnouncer, private service: ModuleService,public dialog: MatDialog, private http: HttpClient) { }
 
   ngOnInit() {
     this.getModule();
+    this.service.getModule()
+    .subscribe(response => {
+      this.posts = response;
+    });
   }
+
+  onChange($event:any){
+    const filterValue = $event.value;
+    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
+    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilter(event:Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
+    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
+  }
+  
 
   public getModule() {
     let resp = this.service.getModule();
+    
     resp.subscribe(report => this.dataSourceEFZ.data = report as Subject[])
     resp.subscribe(report => this.dataSourceBM.data = report as Subject[])
   }
@@ -85,8 +108,3 @@ public closeForm() {
   }
 
 }
-
-
-
-
-
