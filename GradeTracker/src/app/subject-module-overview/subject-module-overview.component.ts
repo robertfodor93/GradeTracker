@@ -6,7 +6,6 @@ import { ModuleService, Subject } from '../services/module.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NewSubjectModuleComponent } from '../new-subject-module/new-subject-module.component';
 import { HttpClient } from '@angular/common/http';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-subject-module-overview',
