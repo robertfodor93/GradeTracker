@@ -72,7 +72,25 @@ title: string='Notenübersicht';
     this.dataSourceBM.filter = filterValue.trim().toLowerCase();
     this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
   }
+  applyFilter(event: Event) {
   
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
+    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataSourceEFZ.filter = filterValue.trim().toLowerCase());
+  }
+  // filterExam($event:Event){
+  //   const subject = document.getElementById("subject")?.innerHTML;
+  //   console.log(subject);
+  //   this.dataSourceEFZ.filter = subject.trim().toLowerCase();
+  // }
+
+    filterExam(){
+   const filter = 2;
+   this.dataSourceEFZexam.filter = filter.toString();
+    console.log(this.dataSourceEFZexam.filter = filter.toString().trim());
+  //funktioniert noch nicht 
+  }
 
   public getModule() {
     let resp = this.Modulservice.getModule();
@@ -119,12 +137,7 @@ title: string='Notenübersicht';
     }
   }
 
-  applyFilter(event: Event) {
-    console.log((event.target as HTMLInputElement).value);
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
-    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
-  }
+
 
 }
 
