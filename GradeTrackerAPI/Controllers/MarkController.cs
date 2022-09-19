@@ -50,6 +50,22 @@ namespace GradeTrackerAPI.Controllers
             }
         }
 
+        [HttpGet("getByModuleId{id:int}")]
+        public async Task<IActionResult> GetByModuleId(int id)
+        {
+            try
+            {
+                var mark = await _unitOfWork.Marks.Get(e => e.ModuleId == id);
+                var result = _mapper.Map<MarkDto>(mark);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error {nameof(GetById)}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] MarkDto request)
         {

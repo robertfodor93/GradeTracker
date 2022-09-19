@@ -28,15 +28,20 @@ export class NewgoalComponent implements OnInit {
 
   onClick() {
     this.postGrade(this.data);
+    console.log(this.data);
     this.dialogRef.close();
   }
 
 postGrade(data : Goal){
     const headers = { 'content-type': 'application/json'} 
-    const goal = JSON.stringify(data);
-    console.log(goal)
-    this.http.post('https://localhost:7290/api/EducationTypeGoal/create', goal, {'headers':headers}).subscribe((result)=>{
+    const averageDesiredMark = data.averageDesiredMark;
+    const fach = JSON.stringify(data.fach);
+    console.log(averageDesiredMark);
+    console.log(fach);
+    console.log('https://localhost:7290/api/Module/update?id=' + fach)
+    this.http.put('https://localhost:7290/api/Module/update?id=' + fach, averageDesiredMark, {'headers':headers}).subscribe((result)=>{
       console.warn("result", result);
+      
     });
   }
 

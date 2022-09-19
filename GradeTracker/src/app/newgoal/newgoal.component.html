@@ -4,8 +4,8 @@
     <form>
         <label for="name">Fach</label>
 
-        <mat-select matNativeControl #post class="input-field">
-            <mat-option *ngFor="let post of posts" [value]="post.id" name="fach">
+        <mat-select matNativeControl #post class="input-field" [(ngModel)]="data.fach" name="fach">
+            <mat-option *ngFor="let post of posts" [value]="post.id" name="fach" >
                 {{post.name}}
             </mat-option>
         </mat-select>

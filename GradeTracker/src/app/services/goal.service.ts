@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 
 export interface Goal {
   id: number;
+  fach: number;
   educationTypes: number;
   averageDesiredMark: number;
 

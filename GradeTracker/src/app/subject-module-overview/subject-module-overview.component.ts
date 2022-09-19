@@ -7,7 +7,6 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { NewSubjectModuleComponent } from '../new-subject-module/new-subject-module.component';
 import { HttpClient } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-subject-module-overview',
   templateUrl: './subject-module-overview.component.html',
