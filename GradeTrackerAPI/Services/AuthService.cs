@@ -57,6 +57,24 @@
             };
         }
 
+        public async Task<User> ChangePassword(int id, ChangePasswordDto request)
+        {
+            var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+            if(user.Id != id)
+            {
+                return user;
+            }
+
+            CreatePasswordHash(request.Password, out byte[] passwordSalt, out byte[] passwordHash);
+            
+            user.PasswordSalt = passwordSalt;
+            user.PasswordHash = passwordHash;
+
+            await _dataContext.SaveChangesAsync();
+
+            return user;
+        }
+
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using(var hmac = new HMACSHA512())

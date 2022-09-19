@@ -24,4 +24,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  onSubmit() {
+    if(this.loginForm.invalid) {
+      return;
+    }
+    this.authService.login(this.loginForm.value).pipe(
+      map(token => this.router.navigate(['dashboard']))
+    ).subscribe()
+  }
 }

@@ -6,10 +6,14 @@ namespace GradeTrackerAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
         public AuthController(IAuthService authService, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _authService = authService;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -29,6 +33,14 @@ namespace GradeTrackerAPI.Controllers
             }
 
             return BadRequest(response.Message);
+        }
+
+        [HttpPost("changePassword")]
+        public async Task<ActionResult<User>> ChangePassword(int id, [FromBody]ChangePasswordDto request)
+        {
+            var response = await _authService.ChangePassword(id, request);
+
+            return response;
         }
 
         [HttpPost("refreshToken")]
