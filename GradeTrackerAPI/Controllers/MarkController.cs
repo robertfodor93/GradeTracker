@@ -55,8 +55,8 @@ namespace GradeTrackerAPI.Controllers
         {
             try
             {
-                var mark = await _unitOfWork.Marks.Get(e => e.ModuleId == id);
-                var result = _mapper.Map<MarkDto>(mark);
+                var mark = await _unitOfWork.Marks.GetAll(e => e.ModuleId == id);
+                var result = _mapper.Map<ICollection<MarkDto>>(mark);
                 return Ok(result);
             }
             catch (Exception ex)
