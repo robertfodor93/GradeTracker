@@ -11,6 +11,8 @@
             CreateMap<CompetenceArea, CompetenceAreaDto>().ReverseMap();
             CreateMap<Module, ModuleDto>().ReverseMap();
             CreateMap<Module, CreateModuleDto>().ReverseMap();
+            CreateMap<Module, UpdateModuleDto>().ReverseMap();
+            CreateMap<Module, SetGoalDto>().ReverseMap();
             CreateMap<Teacher, TeacherDto>().ReverseMap();
             CreateMap<Mark, MarkDto>().ReverseMap();
         }

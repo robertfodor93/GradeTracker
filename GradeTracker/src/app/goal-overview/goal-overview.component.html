@@ -11,37 +11,26 @@
 
 
   
-<table mat-table [dataSource]="dataSourceGoal" matSort (matSortChange)="announceSortChange($event)"
-  class="mat-elevation-z8">
-
+<table mat-table [dataSource]="dataSourceGoal" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
   <!-- subject Column -->
-  <ng-container matColumnDef="fach">
-      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by fach">
-          Fach
-      </mat-header-cell>
-      
+  <ng-container matColumnDef="module">
+      <th mat-header-cell *matHeaderCellDef> Modul </th>  
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
-
   <!-- ziel Column -->
   <ng-container matColumnDef="averageDesiredMark">
-      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by averageDesiredMark">
-          Ziel
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.averageDesiredMark}} </mat-cell>
+      <th mat-header-cell *matHeaderCellDef>Ziel </th>
+      <td mat-cell *matCellDef="let element"> {{element.averageDesiredMark}} </td>
   </ng-container>
-
+  <ng-container matColumnDef="reached">
+    <th mat-header-cell *matHeaderCellDef>Erreicht</th>
+    <td mat-cell *matCellDef="let element">{{element.marks}}</td>
+  </ng-container>
   <!-- benötigte Note Column -->
   <ng-container matColumnDef="needed">
-      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by needed">
-          Benötigte Note
-      </mat-header-cell>
-      
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by needed">Benötigte Note</th>
   </ng-container>
-
-  
-
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
 <button class="buttonNew" mat-raised-button (click)="openDialog()">Neues Ziel erfassen</button>

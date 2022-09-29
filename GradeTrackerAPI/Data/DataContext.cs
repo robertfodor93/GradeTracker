@@ -12,6 +12,8 @@
         public DbSet<Teacher>? Teachers { get; set; }
         public DbSet<Mark>? Marks { get; set; }
         
+
+        /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -123,6 +125,6 @@
                     TeacherId = 3,
                 }
                 );
-        }
+        }*/
     }
 }

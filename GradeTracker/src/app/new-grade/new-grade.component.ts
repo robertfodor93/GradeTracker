@@ -1,7 +1,9 @@
 import { Component, OnInit,Inject } from '@angular/core';
-import { ModuleService, Subject } from '../services/module.service';
+import { ModuleService} from '../_services/module.service';
+import { Module } from '../_models/module';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Exam ,GradeService } from '../services/grade.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { MarkService } from '../_services/mark.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -13,34 +15,33 @@ import { Observable } from 'rxjs';
 })
 export class NewGradeComponent implements OnInit {
 
-modul:any;
+  newMarkForm : FormGroup
+  modules : any
   
   constructor(
     public dialogRef: MatDialogRef<NewGradeComponent>,
-    @Inject(MAT_DIALOG_DATA ) public data: Exam, private Modulservice: ModuleService, private GradeService: GradeService, private http:HttpClient
-  ) {}
-
-  onClick() {
-    this.postGrade(this.data)
+    private moduleService: ModuleService, private markService: MarkService, private http:HttpClient, private formBuilder : FormBuilder
+  ) {
+    
   }
 
-  postGrade(data : Exam){
-    const headers = { 'content-type': 'application/json'} 
-    const grade = JSON.stringify(data);
-    console.log(grade)
-    this.http.post('https://localhost:7290/api/Mark/create', grade, {'headers':headers}).subscribe((result)=>{
-      console.warn("result", result);
-    });
+  onSubmit() {
+    this.markService.createMark(this.newMarkForm.value).subscribe()
   }
 
-  public getModule() {
-    let resp = this.Modulservice.getModule();
-    resp.subscribe(report => this.modul = report as Subject[]);
-    console.log('modul',this.modul);
-  }
+  ngOnInit() {
+    this.moduleService.getAll()
+      .subscribe(response => {
+        this.modules = response;
+      });
+    console.log(this.modules)
 
-  ngOnInit(): void {
-    this.getModule();
+    this.newMarkForm = this.formBuilder.group({
+      mark: [null],
+      description : [null],
+      weighting : [null],
+      date : [null],
+      moduleId : [null]
+    })
   }
-
 }

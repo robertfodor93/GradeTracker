@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NewGradeComponent } from '../new-grade/new-grade.component';
-import { ModuleService, Subject } from '../services/module.service';
-import { Exam, GradeService } from '../services/grade.service';
+import { ModuleService } from '../_services/module.service';
+import { MarkService } from '../_services/mark.service';
+import { Module} from '../_models/module';
+import { Mark } from '../_models/mark';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -28,18 +30,17 @@ export class GradeOverviewComponent implements OnInit {
 title: string='Notenübersicht';
   posts: any;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private Modulservice: ModuleService,private Gradeservice: GradeService,public dialog: MatDialog,) { }
+  constructor(private _liveAnnouncer: LiveAnnouncer, private modulservice: ModuleService,private gradeservice: MarkService,public dialog: MatDialog,) { }
 
  //Daten von der Datenbank holen
-  displayedColumnsSubject = ['name', 'competenceArea', 'teacher', 'averageDesiredMark', 'marks', 'showOnDashboard','id']
+  displayedColumnsSubject = ['name', 'competenceArea', 'teacher', 'averageDesiredMark', 'showOnDashboard','id']
   displayedColumnsExam =['date','weighting','grade','moduleId'];
-  expandedElements: Subject | null | undefined;
+  expandedElements: Module | null | undefined;
 
   ngOnInit() {
     this.getModule();
-    this.getGrade();
-    console.log(this.title);
-    this.Modulservice.getModule()
+    this.getMark();
+    this.modulservice.getAll()
     .subscribe(response => {
       this.posts = response;
     });
@@ -55,17 +56,17 @@ title: string='Notenübersicht';
 
  
   panelOpenState = false;
-  protected SUBJECT_DATA_EFZ: Subject[] = [];
-  protected SUBJECT_DATA_BM: Subject[] = [];
-  protected EXAM_DATA_EFZ: Exam[] = [];
-  protected EXAM_DATA_BM: Exam[] = [];
+  protected SUBJECT_DATA_EFZ: Module[] = [];
+  protected SUBJECT_DATA_BM: Module[] = [];
+  protected EXAM_DATA_EFZ: Mark[] = [];
+  protected EXAM_DATA_BM: Mark[] = [];
 
-  dataSourceEFZ = new MatTableDataSource<Subject>(this.SUBJECT_DATA_EFZ);
-  dataSourceBM = new MatTableDataSource<Subject>(this.SUBJECT_DATA_BM);
+  dataSourceEFZ = new MatTableDataSource<Module>(this.SUBJECT_DATA_EFZ);
+  dataSourceBM = new MatTableDataSource<Module>(this.SUBJECT_DATA_BM);
   // datasourceEFZExam = EXAM_DATA_EFZ;
   // datasourceBMExam = EXAM_DATA_BM;
-  dataSourceEFZexam = new MatTableDataSource<Exam>(this.EXAM_DATA_EFZ);
-  dataSourceBMexam = new MatTableDataSource<Exam>(this.EXAM_DATA_BM);
+  dataSourceEFZexam = new MatTableDataSource<Mark>(this.EXAM_DATA_EFZ);
+  dataSourceBMexam = new MatTableDataSource<Mark>(this.EXAM_DATA_BM);
 
   onChange($event:any){
     const filterValue = $event.value;
@@ -75,15 +76,15 @@ title: string='Notenübersicht';
   
 
   public getModule() {
-    let resp = this.Modulservice.getModule();
-    resp.subscribe(report => this.dataSourceEFZ.data = report as Subject[])
-    resp.subscribe(report => this.dataSourceBM.data = report as Subject[])
+    let resp = this.modulservice.getAll();
+    resp.subscribe(report => this.dataSourceEFZ.data = report as Module[])
+    resp.subscribe(report => this.dataSourceBM.data = report as Module[])
   }
   
-  public getGrade() {
-    let resp = this.Gradeservice.getGrade();
-    resp.subscribe(report => this.dataSourceEFZexam.data = report as Exam[])
-    resp.subscribe(report => this.dataSourceBMexam.data = report as Exam[])
+  public getMark() {
+    let resp = this.gradeservice.getAll();
+    resp.subscribe(report => this.dataSourceEFZexam.data = report as Mark[])
+    resp.subscribe(report => this.dataSourceBMexam.data = report as Mark[])
     console.log(this.dataSourceEFZexam)
   }
   

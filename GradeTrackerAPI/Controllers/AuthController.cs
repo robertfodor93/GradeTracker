@@ -35,14 +35,6 @@ namespace GradeTrackerAPI.Controllers
             return BadRequest(response.Message);
         }
 
-        [HttpPost("changePassword")]
-        public async Task<ActionResult<User>> ChangePassword(int id, [FromBody]ChangePasswordDto request)
-        {
-            var response = await _authService.ChangePassword(id, request);
-
-            return response;
-        }
-
         [HttpPost("refreshToken")]
         public async Task<ActionResult<string>> RefreshToken()
         {

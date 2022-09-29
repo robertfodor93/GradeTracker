@@ -59,41 +59,6 @@ namespace GradeTrackerAPI.Migrations
                     b.HasIndex("EducationTypeId");
 
                     b.ToTable("CompetenceAreas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(950),
-                            EducationTypeId = 2,
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(953),
-                            ModifiedBy = "",
-                            Name = "Fachkompetenzen"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(955),
-                            EducationTypeId = 3,
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(956),
-                            ModifiedBy = "",
-                            Name = "Erweiterte Kompetenzen"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(958),
-                            EducationTypeId = 1,
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(959),
-                            ModifiedBy = "",
-                            Name = "Allgemeinbildung"
-                        });
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.EducationType", b =>
@@ -133,52 +98,6 @@ namespace GradeTrackerAPI.Migrations
                     b.HasIndex("EducationTypeGoalId");
 
                     b.ToTable("EducationTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Calculation = 1.0,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(835),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(865),
-                            ModifiedBy = "",
-                            Name = "Eidgenössisches Berufsattest (EBA)"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Calculation = 1.0,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(868),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(870),
-                            ModifiedBy = "",
-                            Name = "Eidgenössisches Fachzertifikat (EFZ)"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Calculation = 1.0,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(872),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(873),
-                            ModifiedBy = "",
-                            Name = "Berufsmatura (BMS)"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Calculation = 1.0,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(874),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(876),
-                            ModifiedBy = "",
-                            Name = "IMS"
-                        });
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.EducationTypeGoal", b =>
@@ -249,7 +168,7 @@ namespace GradeTrackerAPI.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ModuleId")
+                    b.Property<int>("ModuleId")
                         .HasColumnType("int");
 
                     b.Property<double?>("Weighting")
@@ -297,7 +216,7 @@ namespace GradeTrackerAPI.Migrations
                     b.Property<bool?>("ShowOnDashboard")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("TeacherId")
+                    b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
                     b.Property<int?>("UserId")
@@ -312,44 +231,6 @@ namespace GradeTrackerAPI.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Modules");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(3683),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(3692),
-                            ModifiedBy = "",
-                            Name = "INF 226B",
-                            ShowOnDashboard = true,
-                            TeacherId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(3694),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(3696),
-                            ModifiedBy = "",
-                            Name = "Mathematik",
-                            ShowOnDashboard = false,
-                            TeacherId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(3697),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(3699),
-                            ModifiedBy = "",
-                            Name = "Sprache und Kommunikation",
-                            ShowOnDashboard = false,
-                            TeacherId = 3
-                        });
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.Teacher", b =>
@@ -381,38 +262,6 @@ namespace GradeTrackerAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teachers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(1899),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(1908),
-                            ModifiedBy = "",
-                            Name = "Roland Bucher"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(1911),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(1912),
-                            ModifiedBy = "",
-                            Name = "Fritz Kempf"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreateBy = "",
-                            CreatedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(1913),
-                            IsActive = true,
-                            ModifiedAt = new DateTime(2022, 9, 16, 8, 42, 57, 0, DateTimeKind.Local).AddTicks(1915),
-                            ModifiedBy = "",
-                            Name = "Marcel Schorno"
-                        });
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.User", b =>
@@ -500,7 +349,9 @@ namespace GradeTrackerAPI.Migrations
                 {
                     b.HasOne("GradeTrackerAPI.Entities.Module", "Module")
                         .WithMany("Marks")
-                        .HasForeignKey("ModuleId");
+                        .HasForeignKey("ModuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Module");
                 });
@@ -513,7 +364,9 @@ namespace GradeTrackerAPI.Migrations
 
                     b.HasOne("GradeTrackerAPI.Entities.Teacher", "Teacher")
                         .WithMany("Modules")
-                        .HasForeignKey("TeacherId");
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("GradeTrackerAPI.Entities.User", "User")
                         .WithMany("Modules")

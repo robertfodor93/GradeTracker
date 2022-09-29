@@ -37,7 +37,7 @@ namespace GradeTrackerAPI.Controllers
         {
             try
             {
-                var module = await _unitOfWork.Modules.Get(e => e.Id == id);
+                var module = await _unitOfWork.Modules.Get(e => e.Id == id, new List<string> { "Marks"});
                 var result = _mapper.Map<ModuleDto>(module);
                 return Ok(result);
             }
@@ -61,6 +61,22 @@ namespace GradeTrackerAPI.Controllers
 
         [HttpPut("update")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateModuleDto request)
+        {
+            var module = await _unitOfWork.Modules.Get(e => e.Id == id);
+            if (module == null)
+            {
+                return BadRequest("Error");
+            }
+
+            _mapper.Map(request, module);
+            _unitOfWork.Modules.Update(module);
+            await _unitOfWork.Save();
+
+            return Ok(module);
+        }
+
+        [HttpPut("setGoal")]
+        public async Task<IActionResult> SetGoal(int id, [FromBody] SetGoalDto request)
         {
             var module = await _unitOfWork.Modules.Get(e => e.Id == id);
             if (module == null)

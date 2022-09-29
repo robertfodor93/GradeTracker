@@ -10,7 +10,7 @@
         public DateTime TokenCreated { get; set; }
         public DateTime TokenExpires { get; set; }
         public string Role { get; set; } = string.Empty;
-        public ICollection<EducationTypeGoal>? EducationTypeGoals { get; set; }
-        public ICollection<Module>? Modules { get; set; }
+        public virtual IList <EducationTypeGoal>? EducationTypeGoals { get; set; }
+        public virtual IList<Module>? Modules { get; set; }
     }
 }

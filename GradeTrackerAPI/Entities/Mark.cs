@@ -6,7 +6,8 @@
         public string? Description { get; set; } = string.Empty;
         public double? Weighting { get; set; }
         public DateTime? Date { get; set; } = DateTime.Now;
-        public int? ModuleId { get; set; }
-        public Module? Module { get; set; }
+        [ForeignKey(nameof(ModuleId))]
+        public Module Module { get; set; }
+        public int ModuleId { get; set; }
     }
 }

@@ -2,8 +2,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Subject } from '../services/module.service';
-import { ModuleService } from '../services/module.service';
+import { Module } from '../_models/module';
+import { ModuleService } from '../_services/module.service';
 
 @Component({
   selector: 'app-new-subject-module',
@@ -16,7 +16,7 @@ export class NewSubjectModuleComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<NewSubjectModuleComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Subject,
+    @Inject(MAT_DIALOG_DATA) public data: Module,
     private http:HttpClient,
     private formBuilder : FormBuilder) {
       this.createModuleForm = this.formBuilder.group({

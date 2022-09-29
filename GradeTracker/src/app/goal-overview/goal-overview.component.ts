@@ -1,8 +1,10 @@
+import { IGoal } from './../_models/goal';
 import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { GoalService, Goal } from '../services/goal.service';
+import { ModuleService } from '../_services/module.service';
+import { Module } from '../_models/module';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NewgoalComponent } from '../newgoal/newgoal.component';
 
@@ -15,35 +17,33 @@ import { NewgoalComponent } from '../newgoal/newgoal.component';
 export class GoalOverviewComponent implements AfterViewInit,OnInit {
 
   title:string='Zielübersicht';
-
-  displayedColumns = ['fach', 'averageDesiredMark', 'needed'];
-
-  fach: string;
+  GOAL_DATA : Module[] = [];
+  displayedColumns: string[] = ['module', 'averageDesiredMark', 'reached'];
+  dataSourceGoal = new MatTableDataSource<Module>(this.GOAL_DATA)
+  module: string;
   averageDesiredMark:number;
   needed:number;
 
   openDialog(): void {
     const dialogRef = this.dialog.open(NewgoalComponent, {
       width: '40%' ,height:'70%',
-      data: {subject: this.fach, goal: this.averageDesiredMark},
+      data: {module: this.module, goal: this.averageDesiredMark},
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');;
     });
   }
-  protected GOAL_DATA: Goal[] = []
-  
 
-  dataSourceGoal = new MatTableDataSource<Goal>(this.GOAL_DATA);
- 
-
-
-  constructor(private _liveAnnouncer: LiveAnnouncer, private service: GoalService,public dialog: MatDialog,) { }
+  constructor(private _liveAnnouncer: LiveAnnouncer, private moduleService: ModuleService,public dialog: MatDialog,) { }
 
   ngOnInit() {
-    this.service.getGoals();
-    console.log(this.service.getGoals())
+    this.getAllGoals();
+  }
+
+  public getAllGoals() {
+    var response = this.moduleService.getAll();
+    response.subscribe(goals => this.dataSourceGoal.data = goals as Module[])
   }
 
   onChange($event:any){
@@ -58,10 +58,6 @@ export class GoalOverviewComponent implements AfterViewInit,OnInit {
 
   }
 
-  public getModule() {
-    let resp = this.service.getGoals();
-    resp.subscribe(report => this.dataSourceGoal.data = report as Goal[])
-  }
 
   public openForm() {
     let form = document.getElementById('myForm')

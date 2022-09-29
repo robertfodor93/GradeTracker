@@ -12,13 +12,23 @@
                     <input matInput placeholder="Username" formControlName="username">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Password" formControlName="password">
+                    <input matInput type="password" placeholder="Password" formControlName="password">
+                    <mat-hint *ngIf="registerForm.get('password')">Password is required</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="password" placeholder="Passwort Wiederholen" formControlName="confirmPassword">
+                    <mat-hint *ngIf="registerForm.hasError('passwordsNotMatching')">Passwords not matching</mat-hint>
                 </mat-form-field>
                 <button type="submit" class="submit-button">Register</button>
             </form>
+
+            <h3 *ngIf="registerForm.invalid">Form contains following errors</h3>
+            <small *ngIf="registerForm.get('password').hasError('passwordInvalid')">Passwort hat keine Zahl</small> <br>
+            <small *ngIf="registerForm.hasError('passwordsNotMatching')">Passwörter stimmen nicht überein</small>
         </mat-card-content>
         <div class="linkToRegister">
-            <a routerLink="/registration">Noch kein Konto?</a>
+            <a routerLink="/login">Schon ein Konto?</a>
         </div>
     </mat-card>
 </div>
