@@ -8,6 +8,7 @@ global using System.ComponentModel.DataAnnotations;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using Microsoft.OpenApi.Models;
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Query;
 global using Microsoft.IdentityModel.Tokens;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;

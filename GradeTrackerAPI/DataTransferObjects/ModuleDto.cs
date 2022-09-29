@@ -9,7 +9,7 @@
         public CompetenceAreaDto? CompetenceArea { get; set; }
         public int? CompetenceAreaId { get; set; }
         public IList<MarkDto> Marks { get; set; }
-        public TeacherDto? Teacher { get; set; }
+        public TeacherDto Teacher { get; set; }
     }
 
     public class CreateModuleDto : UpdateModuleDto

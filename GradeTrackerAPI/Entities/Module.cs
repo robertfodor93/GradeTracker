@@ -7,13 +7,13 @@
         public double? AverageDesiredMark { get; set; }
         public virtual IList<Mark>? Marks { get; set; }
         [ForeignKey(nameof(CompetenceAreaId))]
-        public CompetenceArea? CompetenceArea { get; set; }
         public int? CompetenceAreaId { get; set; }
+        public CompetenceArea? CompetenceArea { get; set; }
         [ForeignKey(nameof(TeacherId))]
-        public Teacher Teacher { get; set; }
         public int TeacherId { get; set; }
+        public Teacher? Teacher { get; set; }
         [ForeignKey(nameof(UserId))]
-        public User? User { get; set; }
         public int? UserId { get; set; }
+        public User? User { get; set; }
     }
 }

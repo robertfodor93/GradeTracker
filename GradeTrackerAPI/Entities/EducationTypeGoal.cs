@@ -6,7 +6,7 @@
         public double? AverageDesiredMark { get; set; }
         public virtual IList<EducationType>? EducationTypes { get; set; }
         [ForeignKey(nameof(UserId))]
-        public User? User { get; set; }
         public int? UserId { get; set; }
+        public User? User { get; set; }
     }
 }

@@ -6,7 +6,7 @@
         public double? Weighting { get; set; }
         public virtual IList<Module>? Modules { get; set; }
         [ForeignKey(nameof(EducationTypeId))]
-        public EducationType? EducationType { get; set; }
         public int? EducationTypeId { get; set; }
+        public EducationType? EducationType { get; set; }
     }
 }

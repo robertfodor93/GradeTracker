@@ -17,12 +17,12 @@ namespace GradeTrackerAPI.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<IEnumerable<ModuleDto>>> GetAll()
         {
             try
             {
-                var modules = await _unitOfWork.Modules.GetAll();
-                var results = _mapper.Map<IList<ModuleDto>>(modules);
+                var modules = await _unitOfWork.Modules.GetAll(include: q => q.Include(x => x.Marks));
+                var results = _mapper.Map<List<ModuleDto>>(modules);
                 return Ok(results);
             }
             catch (Exception ex)
@@ -37,7 +37,7 @@ namespace GradeTrackerAPI.Controllers
         {
             try
             {
-                var module = await _unitOfWork.Modules.Get(e => e.Id == id, new List<string> { "Marks"});
+                var module = await _unitOfWork.Modules.Get(e => e.Id == id, include: q => q.Include(x => x.Marks));
                 var result = _mapper.Map<ModuleDto>(module);
                 return Ok(result);
             }

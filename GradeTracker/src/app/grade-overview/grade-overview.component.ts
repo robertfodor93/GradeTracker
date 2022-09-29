@@ -43,6 +43,7 @@ title: string='Notenübersicht';
     this.modulservice.getAll()
     .subscribe(response => {
       this.posts = response;
+      console.log(response)
     });
   }
 

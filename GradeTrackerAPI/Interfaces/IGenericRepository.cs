@@ -5,12 +5,11 @@
         Task<IList<T>> GetAll(
             Expression<Func<T, bool>> expression = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-            List<string> includes = null
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null
             );
 
         Task<T> Get(
-            Expression<Func<T, bool>> expression, 
-            List<String> includes = null
+            Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null
             );
 
         Task Insert(T entity);
