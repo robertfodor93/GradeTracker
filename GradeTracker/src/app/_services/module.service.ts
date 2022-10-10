@@ -3,6 +3,7 @@ import { Observable, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable} from '@angular/core';
 import { Module } from '../_models/module';
+import { SortDirection } from '@angular/material/sort';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,13 @@ export class ModuleService {
   
   constructor(private http: HttpClient) { }
   
-  getAll() {
-    return this.http.get('https://localhost:7290/api/Module/getAll')
+  getAll() : Observable<Module[]> {
+    return this.http.get<Module[]>('https://localhost:7290/api/Module/getAll').pipe(
+      map((module : Module[]) => module)
+    )
   }
   getById(id: number): Observable<Module> {
-    return this.http.get('https://localhost:7290/api/Module/getById' + id).pipe(
+    return this.http.get<Module>('https://localhost:7290/api/Module/getById' + id).pipe(
       map((module: Module) => module)
     )
   }

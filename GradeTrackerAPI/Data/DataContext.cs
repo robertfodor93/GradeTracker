@@ -1,18 +1,20 @@
 ﻿namespace GradeTrackerAPI.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-
-        public DbSet<User>? Users { get; set; }
         public DbSet<EducationTypeGoal>? EducationTypeGoals { get; set; }
         public DbSet<EducationType>? EducationTypes { get; set; }
         public DbSet<CompetenceArea>? CompetenceAreas { get; set; }
         public DbSet<Module>? Modules { get; set; }
         public DbSet<Teacher>? Teachers { get; set; }
         public DbSet<Mark>? Marks { get; set; }
-        
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new RoleConfiguration());
+        }
         /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

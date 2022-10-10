@@ -5,53 +5,56 @@ namespace GradeTrackerAPI.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthService _authService;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        private readonly IAuthRepository _authRepository;
 
-        public AuthController(IAuthService authService, IUnitOfWork unitOfWork, IMapper mapper)
+
+        public AuthController(IAuthRepository authRepository)
         {
-            _authService = authService;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            this._authRepository = authRepository;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register([FromBody] UserDto request)
+        public async Task<ActionResult<User>> Register([FromBody] UserDTO userDTO)
         {
-            var response = await _authService.Register(request);
-            return Ok(response);
+            var errors = await _authRepository.Register(userDTO);
+
+            if(errors.Any())
+            {
+                foreach (var error in errors)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login([FromBody] UserDto request)
+        public async Task<ActionResult<User>> Login([FromBody] LoginUserDTO loginUserDto)
         {
-            var response = await _authService.Login(request);
-            if (response.Success)
+            var authResponse = await _authRepository.Login(loginUserDto);
+
+            if(authResponse == null)
             {
-                return Ok(response);
+                return Unauthorized();
             }
 
-            return BadRequest(response.Message);
+            return Ok(authResponse);
         }
 
         [HttpPost("refreshToken")]
-        public async Task<ActionResult<string>> RefreshToken()
+        public async Task<ActionResult> RefreshToken([FromBody] AuthResponseDTO request)
         {
-            var response = await _authService.RefreshToken();
-            if (response.Success)
+            var authResponse = await _authRepository.VerifyRefreshToken(request);
+
+            if(authResponse == null)
             {
-                return Ok(response);
+                return Unauthorized(request);
             }
 
-            return BadRequest(response.Message);
-        }
-
-        [Authorize]
-        [HttpGet]
-        public ActionResult<string> Authorization()
-        {
-            return Ok("Authorized");
+            return Ok(authResponse);
         }
     }
 }

@@ -24,7 +24,7 @@ export class NewSubjectModuleComponent implements OnInit {
         competenceArea : [null],
         showOnDashboard : [null],
         teacher : formBuilder.group({
-          teacher: [null]
+          name: [null]
         })
       })
   }

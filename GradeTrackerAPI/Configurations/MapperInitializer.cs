@@ -4,17 +4,25 @@
     {
         public MapperInitializer()
         {
-            CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<User, ChangePasswordDto>().ReverseMap();
-            CreateMap<EducationTypeGoal, EducationTypeGoalDto>().ReverseMap();
-            CreateMap<EducationType, EducationTypeDto>().ReverseMap();
-            CreateMap<CompetenceArea, CompetenceAreaDto>().ReverseMap();
-            CreateMap<Module, ModuleDto >().ReverseMap();
-            CreateMap<Module, CreateModuleDto>().ReverseMap();
-            CreateMap<Module, UpdateModuleDto>().ReverseMap();
-            CreateMap<Module, SetGoalDto>().ReverseMap();
-            CreateMap<TeacherDto, Teacher>().ReverseMap();
-            CreateMap<Mark, MarkDto>().ReverseMap();
+            CreateMap<Module, BaseModuleDTO>().ReverseMap();
+            CreateMap<Module, CreateModuleDTO>().ReverseMap();
+            CreateMap<Module, GetModuleDTO>().ReverseMap();
+            CreateMap<Module, UpdateModuleDTO>().ReverseMap();
+            CreateMap<Module, ModuleDTO>().ReverseMap();
+
+            CreateMap<Mark, BaseMarkDTO>().ReverseMap();
+            CreateMap<Mark, CreateMarkDTO>().ReverseMap();
+            CreateMap<Mark, GetMarkDTO>().ReverseMap();
+            CreateMap<Mark, UpdateMarkDTO>().ReverseMap();
+            CreateMap<Mark, MarkDTO>().ReverseMap();
+
+            CreateMap<Teacher, BaseTeacherDTO>().ReverseMap();
+            CreateMap<Teacher, CreateTeacherDTO>().ReverseMap();
+            CreateMap<Teacher, GetTeacherDTO>().ReverseMap();
+            CreateMap<Teacher, UpdateTeacherDTO>().ReverseMap();
+            CreateMap<Teacher, TeacherDTO>().ReverseMap();
+
+            CreateMap<UserDTO, User>().ReverseMap();
         }
     }
 }

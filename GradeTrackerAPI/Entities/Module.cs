@@ -11,9 +11,7 @@
         public CompetenceArea? CompetenceArea { get; set; }
         [ForeignKey(nameof(TeacherId))]
         public int TeacherId { get; set; }
-        public Teacher? Teacher { get; set; }
-        [ForeignKey(nameof(UserId))]
-        public int? UserId { get; set; }
-        public User? User { get; set; }
+        public virtual Teacher? Teacher { get; set; }
+        public virtual User? User { get; set; }
     }
 }

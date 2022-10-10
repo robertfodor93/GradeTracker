@@ -57,6 +57,7 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
     .subscribe(response => {
       this.posts = response;
     });
+    console.warn(this.dataSourceBM.data)
   }
 
   onChange($event:any){
