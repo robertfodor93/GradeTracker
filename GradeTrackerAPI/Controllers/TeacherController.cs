@@ -7,11 +7,11 @@ namespace GradeTrackerAPI.Controllers
     [ApiController]
     public class TeacherController : ControllerBase
     {
-        private readonly ITeacherRepository _teachersRepository;
+        private readonly ITeachersRepository _teachersRepository;
         private readonly ILogger<TeacherController> _logger;
         private readonly IMapper _mapper;
 
-        public TeacherController(ITeacherRepository teacherRepository, ILogger<TeacherController> logger, IMapper mapper)
+        public TeacherController(ITeachersRepository teacherRepository, ILogger<TeacherController> logger, IMapper mapper)
         {
             this._teachersRepository = teacherRepository;
             this._logger = logger;

@@ -31,6 +31,8 @@ builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IModulesRepository, ModulesRepository>();
 builder.Services.AddScoped<IMarksRepository, MarksRepository>();
+builder.Services.AddScoped<ICompetenceAreasRepository, CompetenceAreasRepository>();
+builder.Services.AddScoped<IEducationTypesRepository, EducationTypesRepository>();
 
 builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; // "Bearer"

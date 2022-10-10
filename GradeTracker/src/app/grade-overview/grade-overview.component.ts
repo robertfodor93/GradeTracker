@@ -11,7 +11,6 @@ import { startWith, switchMap, catchError, map, pipe, of, Observable } from 'rxj
 import { Module } from '../_models/module';
 import { Mark } from '../_models/mark';
 
-
 @Component({
   selector: 'app-grade-overview',
   templateUrl: './grade-overview.component.html',
@@ -32,7 +31,7 @@ export class GradeOverviewComponent implements OnInit {
   dataSource = new MatTableDataSource<Module>()
   dataArray : Module [] = []
   modulesData : Module[] = []
-  columnsToDisplay = ['name', 'competenceArea', 'teacher', 'averageDesiredMark']
+  columnsToDisplay = ['name', 'competenceArea', 'teacher']
   innerDisplayedColumns = ['description','grade', 'weighting', 'date']
   expandedElement: Module | null;
 
@@ -90,5 +89,6 @@ export class GradeOverviewComponent implements OnInit {
     this.changeDetectorRef.detectChanges();
     this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Mark>).sort = this.innerSort.toArray()[index]);
   }
+  
 }
 

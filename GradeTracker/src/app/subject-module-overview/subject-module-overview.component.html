@@ -45,7 +45,7 @@
                     sortActionDescription="Sort by teacher">
                     Teacher
                 </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.teacher}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.teacher.name}} </mat-cell>
             </ng-container>
 
             <!-- durchschnitt Column -->
@@ -63,7 +63,7 @@
                     sortActionDescription="Sort by anzahlNoten">
                     Anzahl Noten
                 </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.marks}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.marks.grade}} </mat-cell>
             </ng-container>
 
             <!-- Favorit Column -->

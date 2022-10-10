@@ -22,6 +22,18 @@
             CreateMap<Teacher, UpdateTeacherDTO>().ReverseMap();
             CreateMap<Teacher, TeacherDTO>().ReverseMap();
 
+            CreateMap<CompetenceArea, BaseCompetenceAreaDTO>().ReverseMap();
+            CreateMap<CompetenceArea, CreateCompetenceAreaDTO>().ReverseMap();
+            CreateMap<CompetenceArea, GetCompetenceAreaDTO>().ReverseMap();
+            CreateMap<CompetenceArea, UpdateCompetenceAreaDTO>().ReverseMap();
+            CreateMap<CompetenceArea, CompetenceAreaDTO>().ReverseMap();
+
+            CreateMap<EducationType, BaseEducationTypeDTO>().ReverseMap();
+            CreateMap<EducationType, CreateEducationTypeDTO>().ReverseMap();
+            CreateMap<EducationType, GetEducationTypeDTO>().ReverseMap();
+            CreateMap<EducationType, UpdateEducationTypeDTO>().ReverseMap();
+            CreateMap<EducationType, EducationTypeDTO>().ReverseMap();
+
             CreateMap<UserDTO, User>().ReverseMap();
         }
     }

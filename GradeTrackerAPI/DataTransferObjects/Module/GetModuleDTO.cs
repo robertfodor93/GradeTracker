@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public GetTeacherDTO Teacher { get; set; }
+        public GetCompetenceAreaDTO CompetenceArea { get; set; }
         public List<GetMarkDTO> Marks { get; set; }
     }
 }
