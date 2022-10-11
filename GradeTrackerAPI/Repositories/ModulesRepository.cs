@@ -12,7 +12,10 @@
         }
         public async Task<IList<GetModuleDTO>> GetDetails()
         {
-            var modules = await _dataContext.Modules.Include(q => q.Marks).Include(q => q.Teacher)
+            var modules = await _dataContext.Modules
+                .Include(q => q.Marks)
+                .Include(q => q.Teacher)
+                .Include(q => q.CompetenceArea)
                 .ProjectTo<GetModuleDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
