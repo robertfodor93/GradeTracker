@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GradeTrackerAPI.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,26 @@ namespace GradeTrackerAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CompetenceAreas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Weighting = table.Column<double>(type: "float", nullable: true),
+                    EducationTypeId = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompetenceAreas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,56 +217,6 @@ namespace GradeTrackerAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EducationTypes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Calculation = table.Column<double>(type: "float", nullable: true),
-                    EducationTypeGoalId = table.Column<int>(type: "int", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: true),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EducationTypes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_EducationTypes_EducationTypeGoals_EducationTypeGoalId",
-                        column: x => x.EducationTypeGoalId,
-                        principalTable: "EducationTypeGoals",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CompetenceAreas",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Weighting = table.Column<double>(type: "float", nullable: true),
-                    EducationTypeId = table.Column<int>(type: "int", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: true),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CompetenceAreas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CompetenceAreas_EducationTypes_EducationTypeId",
-                        column: x => x.EducationTypeId,
-                        principalTable: "EducationTypes",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Modules",
                 columns: table => new
                 {
@@ -286,6 +256,31 @@ namespace GradeTrackerAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EducationTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Calculation = table.Column<double>(type: "float", nullable: true),
+                    EducationTypeGoalId = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EducationTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EducationTypes_EducationTypeGoals_EducationTypeGoalId",
+                        column: x => x.EducationTypeGoalId,
+                        principalTable: "EducationTypeGoals",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Marks",
                 columns: table => new
                 {
@@ -313,15 +308,39 @@ namespace GradeTrackerAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "50f74b07-e9ac-4c2b-b5de-8fe1ec75279d", "22567565-19db-4be4-96bb-89dd4bd6d6b8", "Administrator", "ADMINISTRATOR" });
+            migrationBuilder.CreateTable(
+                name: "CompetenceAreaEducationType",
+                columns: table => new
+                {
+                    CompetenceAreasId = table.Column<int>(type: "int", nullable: false),
+                    EducationTypesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompetenceAreaEducationType", x => new { x.CompetenceAreasId, x.EducationTypesId });
+                    table.ForeignKey(
+                        name: "FK_CompetenceAreaEducationType_CompetenceAreas_CompetenceAreasId",
+                        column: x => x.CompetenceAreasId,
+                        principalTable: "CompetenceAreas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CompetenceAreaEducationType_EducationTypes_EducationTypesId",
+                        column: x => x.EducationTypesId,
+                        principalTable: "EducationTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "989183ca-f710-4262-b2f1-74685bf7fe35", "001b5b76-d5fe-481e-84db-8c003db07d6f", "User", "USER" });
+                values: new object[] { "e0d5cb9a-cbd0-49b9-b117-75c9e50c0a17", "90ce2c57-04fd-4d93-9fb0-add73378f596", "Administrator", "ADMINISTRATOR" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "fe7dbe58-deaf-446f-9ef1-e2e745841595", "ae6d3f52-85b0-41e9-ad8f-060de953e26e", "User", "USER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -363,9 +382,9 @@ namespace GradeTrackerAPI.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CompetenceAreas_EducationTypeId",
-                table: "CompetenceAreas",
-                column: "EducationTypeId");
+                name: "IX_CompetenceAreaEducationType_EducationTypesId",
+                table: "CompetenceAreaEducationType",
+                column: "EducationTypesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EducationTypeGoals_UserId",
@@ -416,25 +435,28 @@ namespace GradeTrackerAPI.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CompetenceAreaEducationType");
+
+            migrationBuilder.DropTable(
                 name: "Marks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "EducationTypes");
+
+            migrationBuilder.DropTable(
                 name: "Modules");
+
+            migrationBuilder.DropTable(
+                name: "EducationTypeGoals");
 
             migrationBuilder.DropTable(
                 name: "CompetenceAreas");
 
             migrationBuilder.DropTable(
                 name: "Teachers");
-
-            migrationBuilder.DropTable(
-                name: "EducationTypes");
-
-            migrationBuilder.DropTable(
-                name: "EducationTypeGoals");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

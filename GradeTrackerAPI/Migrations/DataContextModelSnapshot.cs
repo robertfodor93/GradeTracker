@@ -22,6 +22,21 @@ namespace GradeTrackerAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("CompetenceAreaEducationType", b =>
+                {
+                    b.Property<int>("CompetenceAreasId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EducationTypesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CompetenceAreasId", "EducationTypesId");
+
+                    b.HasIndex("EducationTypesId");
+
+                    b.ToTable("CompetenceAreaEducationType");
+                });
+
             modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceArea", b =>
                 {
                     b.Property<int>("Id")
@@ -55,8 +70,6 @@ namespace GradeTrackerAPI.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EducationTypeId");
 
                     b.ToTable("CompetenceAreas");
                 });
@@ -358,15 +371,15 @@ namespace GradeTrackerAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "50f74b07-e9ac-4c2b-b5de-8fe1ec75279d",
-                            ConcurrencyStamp = "22567565-19db-4be4-96bb-89dd4bd6d6b8",
+                            Id = "e0d5cb9a-cbd0-49b9-b117-75c9e50c0a17",
+                            ConcurrencyStamp = "90ce2c57-04fd-4d93-9fb0-add73378f596",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "989183ca-f710-4262-b2f1-74685bf7fe35",
-                            ConcurrencyStamp = "001b5b76-d5fe-481e-84db-8c003db07d6f",
+                            Id = "fe7dbe58-deaf-446f-9ef1-e2e745841595",
+                            ConcurrencyStamp = "ae6d3f52-85b0-41e9-ad8f-060de953e26e",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -478,13 +491,19 @@ namespace GradeTrackerAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceArea", b =>
+            modelBuilder.Entity("CompetenceAreaEducationType", b =>
                 {
-                    b.HasOne("GradeTrackerAPI.Entities.EducationType", "EducationType")
-                        .WithMany("CompetenceAreas")
-                        .HasForeignKey("EducationTypeId");
+                    b.HasOne("GradeTrackerAPI.Entities.CompetenceArea", null)
+                        .WithMany()
+                        .HasForeignKey("CompetenceAreasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("EducationType");
+                    b.HasOne("GradeTrackerAPI.Entities.EducationType", null)
+                        .WithMany()
+                        .HasForeignKey("EducationTypesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.EducationType", b =>
@@ -593,11 +612,6 @@ namespace GradeTrackerAPI.Migrations
             modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceArea", b =>
                 {
                     b.Navigation("Modules");
-                });
-
-            modelBuilder.Entity("GradeTrackerAPI.Entities.EducationType", b =>
-                {
-                    b.Navigation("CompetenceAreas");
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.EducationTypeGoal", b =>
