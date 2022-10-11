@@ -38,6 +38,7 @@ export class RegistrationComponent implements OnInit {
   title = "Registration"
   posts: any;
   registerForm : FormGroup;
+  loading = false;
 
   constructor(private authService: AuthService, private router : Router, private formBuilder: FormBuilder, private educationTypeService: EducationtypeService) {
    }
@@ -61,7 +62,7 @@ export class RegistrationComponent implements OnInit {
     if(this.registerForm.invalid) {
       return;
     }
-    console.log(this.registerForm.value);
+    this.loading = true;
     this.authService.register(this.registerForm.value).pipe(
       map(user => this.router.navigate(['registration']))
     ).subscribe()

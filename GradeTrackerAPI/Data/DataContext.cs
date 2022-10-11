@@ -9,7 +9,6 @@
         public DbSet<Module>? Modules { get; set; }
         public DbSet<Teacher>? Teachers { get; set; }
         public DbSet<Mark>? Marks { get; set; }
-        public DbSet<CompetenceAreaEducationType>? CompetenceAreaEducationTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -60,6 +59,16 @@
 
             builder.Entity<CompetenceAreaEducationType>()
                 .HasKey(ce => new { ce.CompetenceAreaId, ce.EducationTypeId });
+            builder.Entity<CompetenceAreaEducationType>()
+                .HasOne<CompetenceArea>(ca => ca.CompetenceArea)
+                .WithMany(ce => ce.CompetenceAreaEducationTypes)
+                .HasForeignKey(ca => ca.CompetenceAreaId);
+
+            builder.Entity<CompetenceAreaEducationType>()
+                .HasOne<EducationType>(et => et.EducationType)
+                .WithMany(ce => ce.CompetenceAreaEducationTypes)
+                .HasForeignKey(et => et.EducationTypeId);
+
             builder.Entity<CompetenceAreaEducationType>()
                 .HasData(
                 new CompetenceAreaEducationType

@@ -16,7 +16,6 @@
         public async Task<IList<GetCompetenceAreaDTO>> GetDetails()
         {
             var competenceAreas = await _dataContext.CompetenceAreas
-                .Include(q => q.EducationTypes)
                 .ProjectTo<GetCompetenceAreaDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 

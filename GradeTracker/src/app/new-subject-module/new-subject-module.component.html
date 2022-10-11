@@ -6,9 +6,10 @@
         <input type="text" formControlName="name" required>
         <br>
         <label for="fachtyp">Fachtyp</label>
-        <select id="competenceArea" formControlName="competenceArea" required>
-            <option value="1">BM</option>
-            <option value="2">EFZ</option>
+        <select id="competenceArea" formControlName="competenceAreaId" required>
+            <option *ngFor="let competenceArea of competenceAreas; let i=index" [ngValue]="competenceArea.id">
+                {{competenceArea.name}}
+            </option>
         </select>
         <br>
         <div formGroupName="teacher">

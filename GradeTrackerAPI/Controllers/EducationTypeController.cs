@@ -18,7 +18,7 @@ namespace GradeTrackerAPI.Controllers
             this._mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public async Task<ActionResult<IEnumerable<GetEducationTypeDTO>>> GetAll()
         {
             var educationTypes = await _educationTypesRepository.GetAllAsync();

@@ -6,5 +6,6 @@
         public CompetenceArea CompetenceArea { get; set; }
         public int EducationTypeId { get; set; }
         public EducationType EducationType { get; set; }
+
     }
 }
