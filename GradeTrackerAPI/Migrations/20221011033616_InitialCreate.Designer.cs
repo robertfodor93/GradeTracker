@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GradeTrackerAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221011002131_InitialCreate")]
+    [Migration("20221011033616_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,21 +23,6 @@ namespace GradeTrackerAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("CompetenceAreaEducationType", b =>
-                {
-                    b.Property<int>("CompetenceAreasId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EducationTypesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CompetenceAreasId", "EducationTypesId");
-
-                    b.HasIndex("EducationTypesId");
-
-                    b.ToTable("CompetenceAreaEducationType");
-                });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceArea", b =>
                 {
@@ -52,9 +37,6 @@ namespace GradeTrackerAPI.Migrations
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("EducationTypeId")
-                        .HasColumnType("int");
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
@@ -74,6 +56,98 @@ namespace GradeTrackerAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CompetenceAreas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(852),
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(853),
+                            ModifiedBy = "",
+                            Name = "Fachkompetenz",
+                            Weighting = 0.29999999999999999
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(855),
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(857),
+                            ModifiedBy = "",
+                            Name = "Erweiterte Grundkompetenzen",
+                            Weighting = 0.10000000000000001
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(858),
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(860),
+                            ModifiedBy = "",
+                            Name = "Allgemeinbildung",
+                            Weighting = 0.20000000000000001
+                        });
+                });
+
+            modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceAreaEducationType", b =>
+                {
+                    b.Property<int>("CompetenceAreaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EducationTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CompetenceAreaId", "EducationTypeId");
+
+                    b.HasIndex("EducationTypeId");
+
+                    b.ToTable("CompetenceAreaEducationTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            CompetenceAreaId = 1,
+                            EducationTypeId = 1
+                        },
+                        new
+                        {
+                            CompetenceAreaId = 2,
+                            EducationTypeId = 1
+                        },
+                        new
+                        {
+                            CompetenceAreaId = 3,
+                            EducationTypeId = 1
+                        },
+                        new
+                        {
+                            CompetenceAreaId = 2,
+                            EducationTypeId = 2
+                        },
+                        new
+                        {
+                            CompetenceAreaId = 3,
+                            EducationTypeId = 2
+                        },
+                        new
+                        {
+                            CompetenceAreaId = 1,
+                            EducationTypeId = 3
+                        },
+                        new
+                        {
+                            CompetenceAreaId = 2,
+                            EducationTypeId = 3
+                        },
+                        new
+                        {
+                            CompetenceAreaId = 3,
+                            EducationTypeId = 3
+                        });
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.EducationType", b =>
@@ -86,6 +160,9 @@ namespace GradeTrackerAPI.Migrations
 
                     b.Property<double?>("Calculation")
                         .HasColumnType("float");
+
+                    b.Property<int?>("CompetenceAreaId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
@@ -110,9 +187,46 @@ namespace GradeTrackerAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompetenceAreaId");
+
                     b.HasIndex("EducationTypeGoalId");
 
                     b.ToTable("EducationTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Calculation = 1.0,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(806),
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(832),
+                            ModifiedBy = "",
+                            Name = "EFZ"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Calculation = 1.0,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(835),
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(836),
+                            ModifiedBy = "",
+                            Name = "BMW"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Calculation = 1.0,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(838),
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 11, 5, 36, 15, 937, DateTimeKind.Local).AddTicks(839),
+                            ModifiedBy = "",
+                            Name = "IMS"
+                        });
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.EducationTypeGoal", b =>
@@ -373,15 +487,15 @@ namespace GradeTrackerAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e0d5cb9a-cbd0-49b9-b117-75c9e50c0a17",
-                            ConcurrencyStamp = "90ce2c57-04fd-4d93-9fb0-add73378f596",
+                            Id = "3db2dacb-3b22-47a9-8684-4917c89c7abb",
+                            ConcurrencyStamp = "9790fab9-2bd9-49a3-9d18-f6d4c2e1c180",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "fe7dbe58-deaf-446f-9ef1-e2e745841595",
-                            ConcurrencyStamp = "ae6d3f52-85b0-41e9-ad8f-060de953e26e",
+                            Id = "b3d962e5-7c90-4868-9327-989c080701b2",
+                            ConcurrencyStamp = "878d4671-1c4e-4eed-92a4-e6ae7d93f338",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -493,26 +607,36 @@ namespace GradeTrackerAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CompetenceAreaEducationType", b =>
+            modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceAreaEducationType", b =>
                 {
-                    b.HasOne("GradeTrackerAPI.Entities.CompetenceArea", null)
+                    b.HasOne("GradeTrackerAPI.Entities.CompetenceArea", "CompetenceArea")
                         .WithMany()
-                        .HasForeignKey("CompetenceAreasId")
+                        .HasForeignKey("CompetenceAreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GradeTrackerAPI.Entities.EducationType", null)
+                    b.HasOne("GradeTrackerAPI.Entities.EducationType", "EducationType")
                         .WithMany()
-                        .HasForeignKey("EducationTypesId")
+                        .HasForeignKey("EducationTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CompetenceArea");
+
+                    b.Navigation("EducationType");
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.EducationType", b =>
                 {
+                    b.HasOne("GradeTrackerAPI.Entities.CompetenceArea", "CompetenceArea")
+                        .WithMany("EducationTypes")
+                        .HasForeignKey("CompetenceAreaId");
+
                     b.HasOne("GradeTrackerAPI.Entities.EducationTypeGoal", "EducationTypeGoal")
                         .WithMany("EducationTypes")
                         .HasForeignKey("EducationTypeGoalId");
+
+                    b.Navigation("CompetenceArea");
 
                     b.Navigation("EducationTypeGoal");
                 });
@@ -613,6 +737,8 @@ namespace GradeTrackerAPI.Migrations
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceArea", b =>
                 {
+                    b.Navigation("EducationTypes");
+
                     b.Navigation("Modules");
                 });
 
