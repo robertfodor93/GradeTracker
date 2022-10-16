@@ -8,6 +8,6 @@
         public DateTime? Date { get; set; } = DateTime.Now;
         [ForeignKey(nameof(ModuleId))]
         public int ModuleId { get; set; }
-        public Module? Module { get; set; }
+        public virtual Module? Module { get; set; }
     }
 }

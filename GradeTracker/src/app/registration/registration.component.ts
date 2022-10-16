@@ -44,11 +44,6 @@ export class RegistrationComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.educationTypeService.getEducationTypes()
-      .subscribe(response => {
-        this.posts = response;
-      });
-
       this.registerForm = this.formBuilder.group({
         username: [null, [Validators.required]],
         password: [null, [Validators.required, CustomValidators.passwordContainsNumber!]],

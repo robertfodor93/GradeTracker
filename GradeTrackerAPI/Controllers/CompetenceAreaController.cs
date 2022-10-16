@@ -18,18 +18,20 @@ namespace GradeTrackerAPI.Controllers
             this._mapper = mapper;
         }
 
+        [EnableQuery]
         [HttpGet("getAll")]
-        public async Task<ActionResult<IEnumerable<GetCompetenceAreaDTO>>> GetAll()
+        public async Task<ActionResult<IReadOnlyList<GetCompetenceAreaDTO>>> GetAll()
         {
-            var competenceAreas = await _competenceAreasRepository.GetAllAsync();
-            var records = _mapper.Map<List<GetCompetenceAreaDTO>>(competenceAreas);
+            var competenceAreas = await _competenceAreasRepository.GetDetails();
+            var records = _mapper.Map<IReadOnlyList<GetCompetenceAreaDTO>>(competenceAreas);
             return Ok(records);
         }
 
+        [EnableQuery]
         [HttpGet("getById{id:int}")]
         public async Task<ActionResult<GetCompetenceAreaDTO>> GetById(int id)
         {
-            var competenceArea = await _competenceAreasRepository.GetAsync(id);
+            var competenceArea = await _competenceAreasRepository.GetDetail(id);
 
             if (competenceArea == null)
             {

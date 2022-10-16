@@ -19,10 +19,10 @@ namespace GradeTrackerAPI.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<ActionResult<IEnumerable<GetEducationTypeDTO>>> GetAll()
+        public async Task<ActionResult<IReadOnlyList<GetEducationTypeDTO>>> GetAll()
         {
             var educationTypes = await _educationTypesRepository.GetAllAsync();
-            var records = _mapper.Map<List<GetEducationTypeDTO>>(educationTypes);
+            var records = _mapper.Map<IReadOnlyList<GetEducationTypeDTO>>(educationTypes);
             return Ok(records);
         }
 

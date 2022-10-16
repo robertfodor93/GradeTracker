@@ -1,3 +1,4 @@
+import { AuthService } from './../_services/auth.service';
 import { CompetenceArea } from './../_models/competenceArea';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -23,6 +24,7 @@ export class NewSubjectModuleComponent implements OnInit {
     private http:HttpClient,
     private competenceAreaService : CompetenceareaService,
     private moduleService : ModuleService,
+    private authService : AuthService,
     private formBuilder : FormBuilder) {
       this.createModuleForm = this.formBuilder.group({
         name : [null],
@@ -30,13 +32,8 @@ export class NewSubjectModuleComponent implements OnInit {
         showOnDashboard : [null],
         teacher : formBuilder.group({
           name: [null]
-        })
+        }),
       })
-  }
-
- 
-  get competenceAreaId() {
-    return this.createModuleForm.get('competenceAreaId')
   }
 
   onNoClick(): void {
@@ -44,7 +41,7 @@ export class NewSubjectModuleComponent implements OnInit {
   }
 
  onSubmit(){
-  this.moduleService.create(this.createModuleForm.value).subscribe()
+  this.moduleService.create(this.createModuleForm.value)
  }
 
   ngOnInit() {

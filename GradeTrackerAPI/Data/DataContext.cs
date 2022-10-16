@@ -60,13 +60,12 @@
             builder.Entity<CompetenceAreaEducationType>()
                 .HasKey(ce => new { ce.CompetenceAreaId, ce.EducationTypeId });
             builder.Entity<CompetenceAreaEducationType>()
-                .HasOne<CompetenceArea>(ca => ca.CompetenceArea)
-                .WithMany(ce => ce.CompetenceAreaEducationTypes)
-                .HasForeignKey(ca => ca.CompetenceAreaId);
-
+                .HasOne(ce => ce.CompetenceArea)
+                .WithMany(et => et.EducationTypes)
+                .HasForeignKey(ce => ce.CompetenceAreaId);
             builder.Entity<CompetenceAreaEducationType>()
-                .HasOne<EducationType>(et => et.EducationType)
-                .WithMany(ce => ce.CompetenceAreaEducationTypes)
+                .HasOne(et => et.EducationType)
+                .WithMany(et => et.CompetenceAreas)
                 .HasForeignKey(et => et.EducationTypeId);
 
             builder.Entity<CompetenceAreaEducationType>()

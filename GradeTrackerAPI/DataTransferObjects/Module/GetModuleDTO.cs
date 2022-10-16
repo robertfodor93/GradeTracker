@@ -6,5 +6,6 @@
         public GetTeacherDTO Teacher { get; set; }
         public GetCompetenceAreaDTO CompetenceArea { get; set; }
         public List<GetMarkDTO> Marks { get; set; }
+        public GetUserDTO User { get; set; }
     }
 }

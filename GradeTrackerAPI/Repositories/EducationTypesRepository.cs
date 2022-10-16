@@ -11,9 +11,11 @@
             this._mapper = mapper;
         }
 
-        public async Task<List<GetEducationTypeDTO>> GetDetails()
+        public async Task<IReadOnlyList<GetEducationTypeDTO>> GetDetails()
         {
             var educationTypes = await _dataContext.EducationTypes
+                .Include(et => et.CompetenceAreas)
+                .ThenInclude(ce => ce.CompetenceArea)
                 .ProjectTo<GetEducationTypeDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
@@ -23,6 +25,22 @@
             }
 
             return educationTypes;
+        }
+
+        public async Task<GetEducationTypeDTO> GetDetail(int id)
+        {
+            var competenceArea = await _dataContext.EducationTypes
+                .Include(ca => ca.CompetenceAreas)
+                .ThenInclude(ce => ce.CompetenceArea)
+                .ProjectTo<GetEducationTypeDTO>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(q => q.Id == id);
+
+            if (competenceArea == null)
+            {
+                throw new NotFoundException(nameof(GetDetail), id);
+            }
+
+            return competenceArea;
         }
     }
 }

@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
-    this.loginForm = new FormGroup({
-      username: new FormControl(null),
-      password: new FormControl(null)
+    this.loginForm = this.formBuilder.group({
+      username: [null, [Validators.required]],
+      password: [null, [Validators.required]],
     })
    }
 

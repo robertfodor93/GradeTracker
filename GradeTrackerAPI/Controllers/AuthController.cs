@@ -56,5 +56,16 @@ namespace GradeTrackerAPI.Controllers
 
             return Ok(authResponse);
         }
+
+        [HttpGet("user")]
+        [Authorize]
+        public ActionResult GetCurrentUser()
+        {
+            return Ok(new AuthResponseDTO
+            {
+                UserName = User.Identity?.Name,
+                Role = User.FindFirst(ClaimTypes.Role)?.Value ?? String.Empty,
+            });
+        }
     }
 }

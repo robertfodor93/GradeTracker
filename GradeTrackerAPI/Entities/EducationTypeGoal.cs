@@ -4,7 +4,7 @@
     {
         [Column(TypeName="decimal(3,2)")]
         public double? AverageDesiredMark { get; set; }
-        public List<EducationType>? EducationTypes { get; set; }
-        public User? User { get; set; }
+        public virtual IReadOnlyList<EducationType>? EducationTypes { get; set; }
+        public virtual User? User { get; set; }
     }
 }

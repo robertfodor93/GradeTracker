@@ -1,3 +1,4 @@
+import { AuthService } from './../_services/auth.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -11,12 +12,18 @@ title: string ="Dashboard"
   
  @Output() titleEvent = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private authService : AuthService) { }
 
   sendTitle() {
     this.titleEvent.emit(this.title)
   }
 
 
+
+  ngOnInit() {
+    this.authService.getCurrentUser().subscribe((user) => {
+      console.warn(user)
+    })
+  }
 
 }

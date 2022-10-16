@@ -1,4 +1,5 @@
 import { Goal } from './../_models/goal';
+import { User } from '../_models/user';
 import { Observable, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable} from '@angular/core';

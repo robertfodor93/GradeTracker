@@ -1,3 +1,4 @@
+import { User } from './user';
 import { CompetenceArea } from './competenceArea';
 import { MatTableDataSource } from "@angular/material/table";
 import { Mark, IMark } from "./mark";
@@ -11,6 +12,7 @@ export class Module {
     averageDesiredMark?: number;
     marks?: Mark[] | MatTableDataSource<Mark>;
     showOnDashboard?: boolean;
+    user? : string
 }
 
 export interface IModule {

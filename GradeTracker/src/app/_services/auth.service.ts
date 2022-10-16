@@ -19,6 +19,9 @@ export const JWT_NAME = 'token';
 export class AuthService {
 
   private authenticated = new BehaviorSubject<boolean>(false);
+  private currentUser = new BehaviorSubject<any>(null);
+
+  userId : Pick<User, "id">
 
   get checkAuthentication() {
     return this.authenticated.asObservable();
@@ -26,13 +29,14 @@ export class AuthService {
 
   constructor(private http : HttpClient, private jwtHelper : JwtHelperService, private router : Router) { }
 
-  login(loginForm: LoginForm) {  
+  login(user: User) {  
 
-    return this.http.post<any>('https://localhost:7290/api/Auth/login', {username: loginForm.username, password: loginForm.password}).pipe(
-      map((token) => {
-        console.log('token' + token.token);
-        localStorage.setItem(JWT_NAME, token.token);
-        return token;
+    return this.http.post<any>('https://localhost:7290/api/Auth/login', user).pipe(
+      map((userInfo) => {
+        console.log('token' + userInfo.token);
+        localStorage.setItem(JWT_NAME, userInfo.token);
+        this.currentUser.next(userInfo.user)
+        return userInfo;
       })
     )
   }
@@ -61,5 +65,9 @@ export class AuthService {
         map((jwt : any) => jwt.user.id)
       )
     ));
+  }
+
+  getCurrentUser() : Observable<User> {
+    return this.currentUser.asObservable();
   }
 }

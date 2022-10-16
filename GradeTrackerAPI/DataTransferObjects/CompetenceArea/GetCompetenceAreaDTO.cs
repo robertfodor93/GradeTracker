@@ -3,7 +3,8 @@
     public class GetCompetenceAreaDTO : BaseCompetenceAreaDTO, IBaseDTO
     {
         public int Id { get; set; }
-        public List<GetEducationTypeDTO> EducationTypes { get; set; }
-        public List<GetModuleDTO> Modules { get; set; }
+        [JsonIgnore]
+        public virtual IReadOnlyList<GetEducationTypeDTO> EducationTypes { get; set; }
+        public virtual IReadOnlyList<GetModuleDTO> Modules { get; set; }
     }
 }

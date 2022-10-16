@@ -13,9 +13,11 @@
 
         }
 
-        public async Task<IList<GetCompetenceAreaDTO>> GetDetails()
+        public async Task<IReadOnlyList<GetCompetenceAreaDTO>> GetDetails()
         {
             var competenceAreas = await _dataContext.CompetenceAreas
+                .Include(ca => ca.EducationTypes)
+                .ThenInclude(ce => ce.EducationType)
                 .ProjectTo<GetCompetenceAreaDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
@@ -25,6 +27,22 @@
             }
 
             return competenceAreas;
+        }
+
+        public async Task<GetCompetenceAreaDTO> GetDetail(int id)
+        {
+            var competenceArea = await _dataContext.CompetenceAreas
+                .Include(ca => ca.EducationTypes)
+                .ThenInclude(ce => ce.EducationType)
+                .ProjectTo<GetCompetenceAreaDTO>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(q => q.Id == id);
+
+            if (competenceArea == null)
+            {
+                throw new NotFoundException(nameof(GetDetail), id);
+            }
+
+            return competenceArea;
         }
     }
 }
