@@ -44,5 +44,21 @@
 
             return competenceArea;
         }
+
+        public async Task<IReadOnlyList<GetCompetenceAreaDTO>> GetByEducationType(int educationTypeId)
+        {
+            var competenceArea = await _dataContext.CompetenceAreas
+                .Where(ca => ca.EducationTypeId == educationTypeId)
+                .Include(m => m.Modules)
+                .ProjectTo<GetCompetenceAreaDTO>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            if (competenceArea == null)
+            {
+                throw new NotFoundException(nameof(GetByEducationType), GetByEducationType);
+            }
+
+            return competenceArea;
+        }
     }
 }

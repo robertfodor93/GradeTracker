@@ -318,8 +318,8 @@ namespace GradeTrackerAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6be1218c-298c-49fa-b4a5-a0e5cac462f1", "c2208011-8445-4207-99d7-040701f47203", "Administrator", "ADMINISTRATOR" },
-                    { "9972535a-e19f-4a21-a8d7-837ba51e001f", "ded29195-8cb0-422b-ba36-6f8367b80e45", "User", "USER" }
+                    { "0961fd30-cd0b-423b-ae89-c342ae97f0cd", "41ee31ae-346c-4458-8d3e-397a4d822985", "Administrator", "ADMINISTRATOR" },
+                    { "8c092364-6896-41c2-91bc-9f039234bf8a", "911f70c7-226d-4a87-bb2d-c503d49079fb", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -327,9 +327,9 @@ namespace GradeTrackerAPI.Migrations
                 columns: new[] { "Id", "Calculation", "CreateBy", "CreatedAt", "EducationTypeGoalId", "IsActive", "ModifiedAt", "ModifiedBy", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1.0, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3494), null, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3548), "", "EFZ" },
-                    { 2, 1.0, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3554), null, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3556), "", "BM" },
-                    { 3, 1.0, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3560), null, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3563), "", "MS" }
+                    { 1, 1.0, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5326), null, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5354), "", "EFZ" },
+                    { 2, 1.0, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5357), null, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5358), "", "BM" },
+                    { 3, 1.0, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5360), null, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5361), "", "MS" }
                 });
 
             migrationBuilder.InsertData(
@@ -337,17 +337,17 @@ namespace GradeTrackerAPI.Migrations
                 columns: new[] { "Id", "CreateBy", "CreatedAt", "EducationTypeId", "IsActive", "ModifiedAt", "ModifiedBy", "Name", "Weighting" },
                 values: new object[,]
                 {
-                    { 1, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3589), 1, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3591), "", "Fachkompetenzen", null },
-                    { 2, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3596), 1, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3599), "", "Erweiterte Grundkompetenzen", null },
-                    { 3, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3602), 1, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3605), "", "Allgemeinbildung", null },
-                    { 4, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3608), 1, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3610), "", "ÜK", null },
-                    { 5, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3613), 2, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3615), "", "Erweiterte Grundkompetenzen", null },
-                    { 6, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3618), 2, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3621), "", "Erweiterte Allgemeinbildung", null },
-                    { 7, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3624), 2, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3627), "", "ÜK", null },
-                    { 8, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3629), 3, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3632), "", "Fachkompetenzen", null },
-                    { 9, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3635), 3, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3638), "", "Erweiterte Grundkompetenzen", null },
-                    { 10, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3640), 3, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3643), "", "Erweiterte Allgemeinbildung", null },
-                    { 11, "", new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3646), 3, true, new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3648), "", "ÜK", null }
+                    { 1, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5376), 1, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5377), "", "Fachkompetenzen", null },
+                    { 2, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5379), 1, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5381), "", "Erweiterte Grundkompetenzen", null },
+                    { 3, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5382), 1, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5384), "", "Allgemeinbildung", null },
+                    { 4, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5385), 1, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5386), "", "ÜK", null },
+                    { 5, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5388), 2, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5389), "", "Erweiterte Grundkompetenzen", null },
+                    { 6, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5391), 2, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5392), "", "Erweiterte Allgemeinbildung", null },
+                    { 7, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5393), 2, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5395), "", "ÜK", null },
+                    { 8, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5396), 3, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5397), "", "Fachkompetenzen", null },
+                    { 9, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5399), 3, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5400), "", "Erweiterte Grundkompetenzen", null },
+                    { 10, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5402), 3, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5403), "", "Erweiterte Allgemeinbildung", null },
+                    { 11, "", new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5404), 3, true, new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5406), "", "ÜK", null }
                 });
 
             migrationBuilder.CreateIndex(

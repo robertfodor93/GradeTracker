@@ -2,13 +2,14 @@ import { EducationtypeService } from './../_services/educationtype.service';
 import { AuthService } from './../_services/auth.service';
 import { CompetenceArea } from './../_models/competenceArea';
 import { EducationType } from '../_models/educationType';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Module } from '../_models/module';
 import { ModuleService } from '../_services/module.service';
 import { CompetenceareaService } from '../_services/competencearea.service';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-new-subject-module',
@@ -18,9 +19,11 @@ import { CompetenceareaService } from '../_services/competencearea.service';
 export class NewSubjectModuleComponent implements OnInit {
 
   createModuleForm : FormGroup
-  educationTypes : EducationType[] = []
-  competenceAreas : CompetenceArea[] = []
+  educationTypes : EducationType[]
+  selectedEducationTypeId : number
+  competenceAreas : CompetenceArea[]
   private userId = localStorage.getItem('userId');
+  private educationTypeValueChanges$: Observable<any> | undefined ;
 
   constructor(
     public dialogRef: MatDialogRef<NewSubjectModuleComponent>,
@@ -54,14 +57,13 @@ export class NewSubjectModuleComponent implements OnInit {
   ngOnInit() {
     this.educationtypeService.getAll().subscribe(response =>{
       this.educationTypes = response
-      console.warn(response)
-    })
-    this.competenceAreaService.getAll().subscribe(response =>{
-      this.competenceAreas = response
+      console.warn(this.educationTypes)
     })
   }
 
-  filterCompetenceArea(id : number) {
-    return this.competenceAreas.filter(ca => ca.educationTypeId = id)
+  competenceAreasByEducationType() {
+    this.competenceAreaService.getByEducationType(this.selectedEducationTypeId).subscribe(response => {
+      this.competenceAreas = response
+    })
   }
 }

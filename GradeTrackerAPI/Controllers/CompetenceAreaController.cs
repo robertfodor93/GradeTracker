@@ -43,6 +43,14 @@ namespace GradeTrackerAPI.Controllers
             return Ok(competenceAreaDTO);
         }
 
+        [HttpGet("GetByEducationType{educationTypeId:int}")]
+        public async Task<ActionResult<IReadOnlyList<GetCompetenceAreaDTO>>> GetByEducationType(int educationTypeId)
+        {
+            var competenceAreas = await _competenceAreasRepository.GetByEducationType(educationTypeId);
+            var records = _mapper.Map<IReadOnlyList<GetCompetenceAreaDTO>>(competenceAreas);
+            return Ok(records);
+        }
+
         [HttpPost]
         [Route("create")]
         public async Task<ActionResult<CompetenceArea>> Create([FromBody] CreateCompetenceAreaDTO createCompetenceAreaDTO)

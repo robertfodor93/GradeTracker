@@ -13,10 +13,15 @@ export class CompetenceareaService {
   getAll() : Observable<CompetenceArea[]> {
     return this.httpClient.get<CompetenceArea[]>('https://localhost:7290/api/CompetenceArea/getAll').pipe(
       map((competenceAreas : CompetenceArea[]) => competenceAreas)
-    )}
+  )}
 
   getById(id: number): Observable<CompetenceArea> {
     return this.httpClient.get<CompetenceArea>('https://localhost:7290/api/Module/getById' + id).pipe(
       map((competenceArea: CompetenceArea) => competenceArea)
+  )}
+
+  getByEducationType(educationTypeId: number): Observable<CompetenceArea[]> {
+    return this.httpClient.get<CompetenceArea[]>('https://localhost:7290/api/CompetenceArea/GetByEducationType' + educationTypeId).pipe(
+      map((competenceAreas: CompetenceArea[]) => competenceAreas)
     )}
 }

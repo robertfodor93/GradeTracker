@@ -1,8 +1,8 @@
 import { CompetenceArea } from "./competenceArea"
 
 export class EducationType {
-    id? : number
+    id : number
     name?: string
     calculation?: number
-    competenceAreas?: CompetenceArea[]
+    competenceAreas: CompetenceArea[]
 }
