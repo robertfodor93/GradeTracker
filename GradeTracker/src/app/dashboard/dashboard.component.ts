@@ -1,5 +1,7 @@
 import { AuthService } from './../_services/auth.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { User } from '../_models/user';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,9 +23,6 @@ title: string ="Dashboard"
 
 
   ngOnInit() {
-    this.authService.getCurrentUser().subscribe((user) => {
-      console.warn(user)
-    })
   }
 
 }

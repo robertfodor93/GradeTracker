@@ -11,13 +11,13 @@ export class EducationtypeService {
   constructor(private httpClient: HttpClient) { }
   
   getAll() : Observable<EducationType[]> {
-    return this.httpClient.get<EducationType[]>('https://localhost:7290/api/CompetenceArea/getAll').pipe(
-      map((competenceAreas : EducationType[]) => competenceAreas)
+    return this.httpClient.get<EducationType[]>('https://localhost:7290/api/EducationType/getAll').pipe(
+      map((educationType : EducationType[]) => educationType)
     )}
 
   getById(id: number): Observable<EducationType> {
-    return this.httpClient.get<EducationType>('https://localhost:7290/api/Module/getById' + id).pipe(
-      map((competenceArea: EducationType) => competenceArea)
+    return this.httpClient.get<EducationType>('https://localhost:7290/api/EducationType/getById' + id).pipe(
+      map((educationType: EducationType) => educationType)
     )}
   
 }

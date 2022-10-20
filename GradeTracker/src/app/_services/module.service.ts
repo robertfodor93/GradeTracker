@@ -26,6 +26,7 @@ export class ModuleService {
   }
 
   create(module : Module) {
+    localStorage.getItem('')
     return this.http.post<Module>('https://localhost:7290/api/Module/create', module)
   }
 

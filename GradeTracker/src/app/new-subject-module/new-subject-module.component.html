@@ -6,8 +6,16 @@
         <input type="text" formControlName="name" required>
         <br>
         <label for="fachtyp">Fachtyp</label>
+        <select id="competenceArea" formControlName="educationTypeId" required>
+            <option *ngFor="let educationType of filterCompetenceArea(educationTypes.id)" [ngValue]="educationType">
+                {{educationType.name}}
+            </option>
+        </select>
+        <br>
+        <br>
+        <label for="fachtyp">Fachtyp</label>
         <select id="competenceArea" formControlName="competenceAreaId" required>
-            <option *ngFor="let competenceArea of competenceAreas; let i=index" [ngValue]="competenceArea.id">
+            <option *ngFor="let competenceArea of competenceAreas" [ngValue]="competenceArea">
                 {{competenceArea.name}}
             </option>
         </select>

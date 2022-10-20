@@ -34,12 +34,11 @@
             CreateMap<EducationType, UpdateEducationTypeDTO>().ReverseMap();
             CreateMap<EducationType, EducationTypeDTO>().ReverseMap();
 
-            CreateMap<CompetenceAreaEducationType, GetCompetenceAreaDTO>()
-                .IncludeMembers(ce => ce.CompetenceArea);
+            CreateMap<User, BaseUserDTO>().ReverseMap();
+            CreateMap<User, GetUserDTO>().ReverseMap();
+            CreateMap<User, LoginUserDTO>().ReverseMap();
+            CreateMap<User, UserDTO>().ReverseMap();
 
-            CreateMap<CompetenceAreaEducationType, GetEducationTypeDTO>()
-                .IncludeMembers(et => et.EducationType);
-            CreateMap<UserDTO, User>().ReverseMap();
         }
     }
 }

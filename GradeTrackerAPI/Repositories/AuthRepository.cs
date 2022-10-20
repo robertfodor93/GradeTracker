@@ -26,6 +26,8 @@
 
             var result = await _userManager.CreateAsync(_user, userDTO.Password);
 
+            await _userManager.AddToRoleAsync(_user, "User");
+
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(_user, "User");
@@ -49,14 +51,15 @@
             return new AuthResponseDTO
             {
                 Token = token,
-                UserId = _user.Id,
+                UserName = _user.UserName,
+                Id = _user.Id,
                 RefreshToken = await CreateRefreshToken()
             };
         }
 
         private async Task<string> GenerateToken()
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AppSettings:Token"]));
 
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
@@ -74,10 +77,10 @@
             .Union(userClaims).Union(roleClaims);
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["JwtSettings:Issuer"],
-                audience: _configuration["JwtSettings:Audience"],
+                issuer: _configuration["AppSettings:Issuer"],
+                audience: _configuration["AppSettings:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
+                expires: DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["AppSettings:DurationInMinutes"])),
                 signingCredentials: credentials
                 );
 
@@ -99,7 +102,7 @@
             var username = tokenContent.Claims.ToList().FirstOrDefault(q => q.Type == JwtRegisteredClaimNames.Email)?.Value;
             _user = await _userManager.FindByEmailAsync(username);
 
-            if(_user == null || _user.Id != request.UserId)
+            if(_user == null || _user.Id != request.Id)
             {
                 return null;
             }
@@ -112,7 +115,7 @@
                 return new AuthResponseDTO
                 {
                     Token = token,
-                    UserId = _user.Id,
+                    Id = _user.Id,
                     RefreshToken = await CreateRefreshToken()
                 };
             }

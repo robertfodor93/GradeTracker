@@ -12,6 +12,8 @@
         [ForeignKey(nameof(TeacherId))]
         public int TeacherId { get; set; }
         public virtual Teacher? Teacher { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public string? UserId { get; set; }
         public virtual User? User { get; set; }
     }
 }

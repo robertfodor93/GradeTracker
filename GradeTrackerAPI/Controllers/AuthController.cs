@@ -7,7 +7,6 @@ namespace GradeTrackerAPI.Controllers
     {
         private readonly IAuthRepository _authRepository;
 
-
         public AuthController(IAuthRepository authRepository)
         {
             this._authRepository = authRepository;
@@ -55,17 +54,6 @@ namespace GradeTrackerAPI.Controllers
             }
 
             return Ok(authResponse);
-        }
-
-        [HttpGet("user")]
-        [Authorize]
-        public ActionResult GetCurrentUser()
-        {
-            return Ok(new AuthResponseDTO
-            {
-                UserName = User.Identity?.Name,
-                Role = User.FindFirst(ClaimTypes.Role)?.Value ?? String.Empty,
-            });
         }
     }
 }

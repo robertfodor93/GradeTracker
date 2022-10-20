@@ -6,5 +6,6 @@ export class CompetenceArea {
     name?: string
     weighting?: number
     modules?: Module[]
-    educationTypes?: EducationType[]
+    educationTypeId?: number
+    educationType?: EducationType
 }

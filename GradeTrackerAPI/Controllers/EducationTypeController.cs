@@ -21,7 +21,7 @@ namespace GradeTrackerAPI.Controllers
         [HttpGet("getAll")]
         public async Task<ActionResult<IReadOnlyList<GetEducationTypeDTO>>> GetAll()
         {
-            var educationTypes = await _educationTypesRepository.GetAllAsync();
+            var educationTypes = await _educationTypesRepository.GetDetails();
             var records = _mapper.Map<IReadOnlyList<GetEducationTypeDTO>>(educationTypes);
             return Ok(records);
         }
@@ -29,16 +29,16 @@ namespace GradeTrackerAPI.Controllers
         [HttpGet("getById{id:int}")]
         public async Task<ActionResult<GetEducationTypeDTO>> GetById(int id)
         {
-            var educationType = await _educationTypesRepository.GetAsync(id);
+            var educationType = await _educationTypesRepository.GetDetail(id);
 
             if (educationType == null)
             {
                 throw new NotFoundException(nameof(GetById), id);
             }
 
-            var teacherDTO = _mapper.Map<GetTeacherDTO>(educationType);
+            var educationTypeDTO = _mapper.Map<GetEducationTypeDTO>(educationType);
 
-            return Ok(teacherDTO);
+            return Ok(educationTypeDTO);
         }
 
         [HttpPost]

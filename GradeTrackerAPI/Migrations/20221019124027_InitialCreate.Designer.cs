@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GradeTrackerAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221012212437_InitialCreate")]
+    [Migration("20221019124027_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace GradeTrackerAPI.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("EducationTypeId")
+                        .HasColumnType("int");
+
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
@@ -55,6 +58,8 @@ namespace GradeTrackerAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EducationTypeId");
+
                     b.ToTable("CompetenceAreas");
 
                     b.HasData(
@@ -62,91 +67,122 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 1,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7068),
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3589),
+                            EducationTypeId = 1,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7069),
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3591),
                             ModifiedBy = "",
-                            Name = "Fachkompetenz",
-                            Weighting = 0.29999999999999999
+                            Name = "Fachkompetenzen"
                         },
                         new
                         {
                             Id = 2,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7071),
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3596),
+                            EducationTypeId = 1,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7072),
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3599),
                             ModifiedBy = "",
-                            Name = "Erweiterte Grundkompetenzen",
-                            Weighting = 0.10000000000000001
+                            Name = "Erweiterte Grundkompetenzen"
                         },
                         new
                         {
                             Id = 3,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7074),
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3602),
+                            EducationTypeId = 1,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7075),
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3605),
                             ModifiedBy = "",
-                            Name = "Allgemeinbildung",
-                            Weighting = 0.20000000000000001
-                        });
-                });
-
-            modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceAreaEducationType", b =>
-                {
-                    b.Property<int>("CompetenceAreaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EducationTypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CompetenceAreaId", "EducationTypeId");
-
-                    b.HasIndex("EducationTypeId");
-
-                    b.ToTable("CompetenceAreaEducationType");
-
-                    b.HasData(
-                        new
-                        {
-                            CompetenceAreaId = 1,
-                            EducationTypeId = 1
+                            Name = "Allgemeinbildung"
                         },
                         new
                         {
-                            CompetenceAreaId = 2,
-                            EducationTypeId = 1
+                            Id = 4,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3608),
+                            EducationTypeId = 1,
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3610),
+                            ModifiedBy = "",
+                            Name = "ÜK"
                         },
                         new
                         {
-                            CompetenceAreaId = 3,
-                            EducationTypeId = 1
+                            Id = 5,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3613),
+                            EducationTypeId = 2,
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3615),
+                            ModifiedBy = "",
+                            Name = "Erweiterte Grundkompetenzen"
                         },
                         new
                         {
-                            CompetenceAreaId = 2,
-                            EducationTypeId = 2
+                            Id = 6,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3618),
+                            EducationTypeId = 2,
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3621),
+                            ModifiedBy = "",
+                            Name = "Erweiterte Allgemeinbildung"
                         },
                         new
                         {
-                            CompetenceAreaId = 3,
-                            EducationTypeId = 2
+                            Id = 7,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3624),
+                            EducationTypeId = 2,
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3627),
+                            ModifiedBy = "",
+                            Name = "ÜK"
                         },
                         new
                         {
-                            CompetenceAreaId = 1,
-                            EducationTypeId = 3
+                            Id = 8,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3629),
+                            EducationTypeId = 3,
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3632),
+                            ModifiedBy = "",
+                            Name = "Fachkompetenzen"
                         },
                         new
                         {
-                            CompetenceAreaId = 2,
-                            EducationTypeId = 3
+                            Id = 9,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3635),
+                            EducationTypeId = 3,
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3638),
+                            ModifiedBy = "",
+                            Name = "Erweiterte Grundkompetenzen"
                         },
                         new
                         {
-                            CompetenceAreaId = 3,
-                            EducationTypeId = 3
+                            Id = 10,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3640),
+                            EducationTypeId = 3,
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3643),
+                            ModifiedBy = "",
+                            Name = "Erweiterte Allgemeinbildung"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreateBy = "",
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3646),
+                            EducationTypeId = 3,
+                            IsActive = true,
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3648),
+                            ModifiedBy = "",
+                            Name = "ÜK"
                         });
                 });
 
@@ -194,9 +230,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 1,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7017),
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3494),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7048),
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3548),
                             ModifiedBy = "",
                             Name = "EFZ"
                         },
@@ -205,22 +241,22 @@ namespace GradeTrackerAPI.Migrations
                             Id = 2,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7051),
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3554),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7052),
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3556),
                             ModifiedBy = "",
-                            Name = "BMW"
+                            Name = "BM"
                         },
                         new
                         {
                             Id = 3,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7054),
+                            CreatedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3560),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 12, 23, 24, 37, 638, DateTimeKind.Local).AddTicks(7055),
+                            ModifiedAt = new DateTime(2022, 10, 19, 14, 40, 26, 922, DateTimeKind.Local).AddTicks(3563),
                             ModifiedBy = "",
-                            Name = "IMS"
+                            Name = "MS"
                         });
                 });
 
@@ -482,15 +518,15 @@ namespace GradeTrackerAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "40a1e8a9-571e-43e6-b515-34b9ec605c15",
-                            ConcurrencyStamp = "62203d3a-461c-42de-bae6-7cd76dc87839",
+                            Id = "6be1218c-298c-49fa-b4a5-a0e5cac462f1",
+                            ConcurrencyStamp = "c2208011-8445-4207-99d7-040701f47203",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "b5633465-0df2-4790-b128-30276b9517f2",
-                            ConcurrencyStamp = "109da17a-fe64-4b5f-8fa4-8b9154343096",
+                            Id = "9972535a-e19f-4a21-a8d7-837ba51e001f",
+                            ConcurrencyStamp = "ded29195-8cb0-422b-ba36-6f8367b80e45",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -602,21 +638,11 @@ namespace GradeTrackerAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceAreaEducationType", b =>
+            modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceArea", b =>
                 {
-                    b.HasOne("GradeTrackerAPI.Entities.CompetenceArea", "CompetenceArea")
-                        .WithMany("EducationTypes")
-                        .HasForeignKey("CompetenceAreaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GradeTrackerAPI.Entities.EducationType", "EducationType")
                         .WithMany("CompetenceAreas")
-                        .HasForeignKey("EducationTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CompetenceArea");
+                        .HasForeignKey("EducationTypeId");
 
                     b.Navigation("EducationType");
                 });
@@ -726,8 +752,6 @@ namespace GradeTrackerAPI.Migrations
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceArea", b =>
                 {
-                    b.Navigation("EducationTypes");
-
                     b.Navigation("Modules");
                 });
 

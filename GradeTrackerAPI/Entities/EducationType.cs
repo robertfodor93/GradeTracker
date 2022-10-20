@@ -4,7 +4,7 @@
     {
         public string? Name { get; set; } = string.Empty;
         public double? Calculation { get; set; }
-        public virtual IReadOnlyList<CompetenceAreaEducationType> CompetenceAreas { get; set; }
+        public virtual IList<CompetenceArea> CompetenceAreas { get; set; }
         [ForeignKey(nameof(EducationTypeGoalId))]
         public int? EducationTypeGoalId { get; set; }
         public virtual EducationTypeGoal? EducationTypeGoal { get; set; }

@@ -15,6 +15,14 @@
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new RoleConfiguration());
 
+            builder.Entity<EducationType>()
+                .HasMany(et => et.CompetenceAreas)
+                .WithOne(ca => ca.EducationType);
+
+            builder.Entity<CompetenceArea>()
+                .HasOne(et => et.EducationType)
+                .WithMany(ca => ca.CompetenceAreas);
+
             builder.Entity<EducationType>().HasData(
                 new EducationType
                 {
@@ -24,14 +32,14 @@
                 },
                 new EducationType
                 {
-                    Id = 2,
-                    Name = "BMW",
+                Id = 2,
+                    Name = "BM",
                     Calculation = 1.0
                 },
                 new EducationType
                 {
                     Id = 3,
-                    Name = "IMS",
+                    Name = "MS",
                     Calculation = 1.0
                 }
                 );
@@ -40,74 +48,67 @@
                 new CompetenceArea
                 {
                     Id = 1,
-                    Name = "Fachkompetenz",
-                    Weighting = 0.3
+                    Name = "Fachkompetenzen",
+                    EducationTypeId = 1,
                 },
                 new CompetenceArea
                 {
-                    Id=2,
+                    Id = 2,
                     Name = "Erweiterte Grundkompetenzen",
-                    Weighting = 0.1
+                    EducationTypeId = 1,
                 },
                 new CompetenceArea
                 {
                     Id = 3,
                     Name = "Allgemeinbildung",
-                    Weighting = 0.2
-                }
-                );
-
-            builder.Entity<CompetenceAreaEducationType>()
-                .HasKey(ce => new { ce.CompetenceAreaId, ce.EducationTypeId });
-            builder.Entity<CompetenceAreaEducationType>()
-                .HasOne(ce => ce.CompetenceArea)
-                .WithMany(et => et.EducationTypes)
-                .HasForeignKey(ce => ce.CompetenceAreaId);
-            builder.Entity<CompetenceAreaEducationType>()
-                .HasOne(et => et.EducationType)
-                .WithMany(et => et.CompetenceAreas)
-                .HasForeignKey(et => et.EducationTypeId);
-
-            builder.Entity<CompetenceAreaEducationType>()
-                .HasData(
-                new CompetenceAreaEducationType
-                {
-                    CompetenceAreaId = 1,
                     EducationTypeId = 1,
                 },
-                new CompetenceAreaEducationType
+                new CompetenceArea
                 {
-                    CompetenceAreaId = 2,
+                    Id = 4,
+                    Name = "ÜK",
                     EducationTypeId = 1,
                 },
-                new CompetenceAreaEducationType
+                new CompetenceArea
                 {
-                    CompetenceAreaId = 3,
-                    EducationTypeId = 1,
-                },
-                new CompetenceAreaEducationType
-                {
-                    CompetenceAreaId = 2,
+                    Id = 5,
+                    Name = "Erweiterte Grundkompetenzen",
                     EducationTypeId = 2,
                 },
-                new CompetenceAreaEducationType
+                new CompetenceArea
                 {
-                    CompetenceAreaId = 3,
+                    Id = 6,
+                    Name = "Erweiterte Allgemeinbildung",
                     EducationTypeId = 2,
                 },
-                new CompetenceAreaEducationType
+                new CompetenceArea
                 {
-                    CompetenceAreaId = 1,
+                    Id = 7,
+                    Name = "ÜK",
+                    EducationTypeId = 2,
+                },
+                new CompetenceArea
+                {
+                    Id = 8,
+                    Name = "Fachkompetenzen",
                     EducationTypeId = 3,
                 },
-                new CompetenceAreaEducationType
+                new CompetenceArea
                 {
-                    CompetenceAreaId = 2,
+                    Id = 9,
+                    Name = "Erweiterte Grundkompetenzen",
                     EducationTypeId = 3,
                 },
-                new CompetenceAreaEducationType
+                new CompetenceArea
                 {
-                    CompetenceAreaId = 3,
+                    Id = 10,
+                    Name = "Erweiterte Allgemeinbildung",
+                    EducationTypeId = 3,
+                },
+                new CompetenceArea
+                {
+                    Id = 11,
+                    Name = "ÜK",
                     EducationTypeId = 3,
                 }
                 );

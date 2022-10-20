@@ -14,8 +14,8 @@
         public async Task<IReadOnlyList<GetEducationTypeDTO>> GetDetails()
         {
             var educationTypes = await _dataContext.EducationTypes
-                .Include(et => et.CompetenceAreas)
-                .ThenInclude(ce => ce.CompetenceArea)
+                .Include(ca => ca.CompetenceAreas)
+                .ThenInclude(ca => ca.Modules)
                 .ProjectTo<GetEducationTypeDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
@@ -31,7 +31,7 @@
         {
             var competenceArea = await _dataContext.EducationTypes
                 .Include(ca => ca.CompetenceAreas)
-                .ThenInclude(ce => ce.CompetenceArea)
+                .ThenInclude(ca => ca.Modules)
                 .ProjectTo<GetEducationTypeDTO>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(q => q.Id == id);
 
