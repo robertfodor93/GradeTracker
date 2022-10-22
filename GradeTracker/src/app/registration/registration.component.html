@@ -12,6 +12,15 @@
                         <input matInput formControlName="username">
                     </mat-form-field>
                     <br>
+                    <mat-form-field >
+                        <label>Ausbildungstyp</label>
+                        <mat-select id="educationType" matNativeControl formControlName="educationTypeId">
+                            <mat-option *ngFor="let educationType of educationTypes" [value]="educationType.id">
+                                {{educationType.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
                     <mat-form-field>
                         <label>Passwort</label>
                         <input matInput type="password" formControlName="password">

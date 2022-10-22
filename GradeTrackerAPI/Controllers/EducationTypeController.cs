@@ -90,9 +90,9 @@ namespace GradeTrackerAPI.Controllers
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            var teacher = await _educationTypesRepository.GetAsync(id);
+            var educationType = await _educationTypesRepository.GetAsync(id);
 
-            if (teacher == null)
+            if (educationType == null)
             {
                 throw new NotFoundException(nameof(GetById), id);
             }

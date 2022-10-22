@@ -2,126 +2,156 @@
 {
     public class AuthRepository : IAuthRepository
     {
+        private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
-        private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private User _user;
 
-        private const string _loginProvider = "GradeTrackerAPI";
-        private const string _refreshToken = "RefreshToken";
-
-        public AuthRepository(IMapper mapper, UserManager<User> userManager, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public AuthRepository(DataContext dataContext, IMapper mapper, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
+            this._dataContext = dataContext;
             this._mapper = mapper;
-            this._userManager = userManager;
             this._configuration = configuration;
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<IEnumerable<IdentityError>> Register(UserDTO userDTO)
+        public async Task<User> Register(UserDTO userDTO)
         {
-            _user = _mapper.Map<User>(userDTO);
-            _user.UserName = userDTO.Username;
+            CreatePasswordHash(userDTO.Password, out byte[] passwordSalt, out byte[] passwordHash);
 
-            var result = await _userManager.CreateAsync(_user, userDTO.Password);
-
-            await _userManager.AddToRoleAsync(_user, "User");
-
-            if (result.Succeeded)
+            var user = new User
             {
-                await _userManager.AddToRoleAsync(_user, "User");
-            }
+                Username = userDTO.Username,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+            };
 
-            return result.Errors;
+            _dataContext.Users.Add(user);
+            await _dataContext.SaveChangesAsync();
+
+            return user;
         }
 
         public async Task<AuthResponseDTO> Login(LoginUserDTO loginUserDTO)
         {
-            _user = await _userManager.FindByNameAsync(loginUserDTO.Username);
-            bool isValidUser = await _userManager.CheckPasswordAsync(_user, loginUserDTO.Password);
-
-            if (_user == null || isValidUser == false)
+            var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Username == loginUserDTO.Username);
+            if (user == null)
             {
-                return null;
+                return new AuthResponseDTO { Message = "User not found." };
             }
 
-            var token = await GenerateToken();
+            if (!VerifyPasswordHash(loginUserDTO.Password, user.PasswordHash, user.PasswordSalt))
+            {
+                return new AuthResponseDTO { Message = "Wrong Password." };
+            }
+
+            string token = GenerateToken(user);
+            var refreshToken = CreateRefreshToken();
+            SetRefreshToken(refreshToken, user);
+
+            return new AuthResponseDTO
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Token = token,
+                RefreshToken = refreshToken.Token,
+                TokenExpires = refreshToken.Expires
+            };
+        }
+
+        private void CreatePasswordHash(string password, out byte[] passwordSalt, out byte[] passwordHash)
+        {
+            using(var hmac= new HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
+
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return computedHash.SequenceEqual(passwordHash);
+            }
+        }
+
+        private string GenerateToken(User user)
+        {
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Username),
+            };
+
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+                _configuration.GetSection("AppSettings:Token").Value));
+
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: creds);
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return jwt;
+        }
+
+        public async Task<AuthResponseDTO> RefreshToken()
+        {
+            var refreshToken = _httpContextAccessor?.HttpContext?.Request.Cookies["refreshToken"];
+            var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
+            if (user == null)
+            {
+                return new AuthResponseDTO { Message = "Invalid Refresh Token" };
+            }
+            else if (user.TokenExpires < DateTime.Now)
+            {
+                return new AuthResponseDTO { Message = "Token expired." };
+            }
+
+            string token = GenerateToken(user);
+            var newRefreshToken = CreateRefreshToken();
+            SetRefreshToken(newRefreshToken, user);
 
             return new AuthResponseDTO
             {
                 Token = token,
-                UserName = _user.UserName,
-                Id = _user.Id,
-                RefreshToken = await CreateRefreshToken()
+                RefreshToken = newRefreshToken.Token,
+                TokenExpires = newRefreshToken.Expires
             };
         }
 
-        private async Task<string> GenerateToken()
+        private RefreshToken CreateRefreshToken()
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AppSettings:Token"]));
-
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var roles = await _userManager.GetRolesAsync(_user);
-            var roleClaims = roles.Select(x => new Claim(ClaimTypes.Role, x)).ToList();
-            var userClaims = await _userManager.GetClaimsAsync(_user);
-
-            var claims = new List<Claim>
+            var refreshToken = new RefreshToken
             {
-                new Claim(JwtRegisteredClaimNames.Sub, _user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Name, _user.UserName),
-                new Claim("uid", _user.Id),
-            }
-            .Union(userClaims).Union(roleClaims);
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Expires = DateTime.Now.AddDays(7),
+                Created = DateTime.Now
+            };
 
-            var token = new JwtSecurityToken(
-                issuer: _configuration["AppSettings:Issuer"],
-                audience: _configuration["AppSettings:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["AppSettings:DurationInMinutes"])),
-                signingCredentials: credentials
-                );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return refreshToken;
         }
 
-        public async Task<string> CreateRefreshToken()
+        private async void SetRefreshToken(RefreshToken refreshToken, User user)
         {
-            await _userManager.RemoveAuthenticationTokenAsync(_user, _loginProvider, _refreshToken);
-            var newRefreshToken = await _userManager.GenerateUserTokenAsync(_user, _loginProvider, _refreshToken);
-            var result = await _userManager.SetAuthenticationTokenAsync(_user, _loginProvider, _refreshToken, newRefreshToken);
-            return newRefreshToken;
-        }
-
-        public async Task<AuthResponseDTO> VerifyRefreshToken(AuthResponseDTO request)
-        {
-            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-            var tokenContent = jwtSecurityTokenHandler.ReadJwtToken(request.Token);
-            var username = tokenContent.Claims.ToList().FirstOrDefault(q => q.Type == JwtRegisteredClaimNames.Email)?.Value;
-            _user = await _userManager.FindByEmailAsync(username);
-
-            if(_user == null || _user.Id != request.Id)
+            var cookieOptions = new CookieOptions
             {
-                return null;
-            }
+                HttpOnly = true,
+                Expires = refreshToken.Expires,
+            };
+            _httpContextAccessor?.HttpContext?.Response
+                .Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
 
-            var isValidRefreshToken = await _userManager.VerifyUserTokenAsync(_user, _loginProvider, _refreshToken, request.RefreshToken);
+            user.RefreshToken = refreshToken.Token;
+            user.TokenCreated = refreshToken.Created;
+            user.TokenExpires = refreshToken.Expires;
 
-            if(isValidRefreshToken)
-            {
-                var token = await GenerateToken();
-                return new AuthResponseDTO
-                {
-                    Token = token,
-                    Id = _user.Id,
-                    RefreshToken = await CreateRefreshToken()
-                };
-            }
-
-            await _userManager.UpdateSecurityStampAsync(_user);
-            return null;
+            await _dataContext.SaveChangesAsync();
         }
     }
 }

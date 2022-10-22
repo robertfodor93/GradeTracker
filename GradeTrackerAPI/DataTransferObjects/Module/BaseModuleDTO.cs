@@ -2,8 +2,7 @@
 {
     public class BaseModuleDTO
     {
-        [Required]
-        public string Name { get; set; }
-        public double AverageDesiredMark { get; set; }
+        public string? Name { get; set; }
+        public double? AverageDesiredMark { get; set; }
     }
 }

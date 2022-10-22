@@ -1,8 +1,9 @@
+import { Module } from './../_models/module';
+import { Mark } from './../_models/mark';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Module } from '../_models/module';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Goal } from '../_models/goal';
 import { ModuleService } from '../_services/module.service';
 
@@ -17,27 +18,26 @@ import { ModuleService } from '../_services/module.service';
 export class NewgoalComponent implements OnInit {
   goal = new Goal()
   newGoalForm: FormGroup;
-  posts: any;
+  modules: Module[];
 
 
   constructor(
     public dialogRef: MatDialogRef<NewgoalComponent>,
-    private http: HttpClient,
     private moduleService: ModuleService,
     private formBuilder : FormBuilder) {
   }
 
   onSubmit() {
-    this.moduleService.setGoal(this.newGoalForm.value).subscribe()
+    this.moduleService.update(this.newGoalForm.value).subscribe()
   }
 
 
   ngOnInit() {
     this.moduleService.getAll()
       .subscribe(response => {
-        this.posts = response;
+        this.modules = response;
       });
-    console.log(this.posts)
+    console.log(this.modules)
 
     this.newGoalForm = this.formBuilder.group({
       id : [null],

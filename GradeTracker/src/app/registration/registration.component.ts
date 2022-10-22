@@ -1,9 +1,12 @@
+import { EducationTypeGoal } from './../_models/educationTypeGoal';
+import { EducationTypeGoalService } from '../_services/education-type-goal.service';
+import { User } from './../_models/user';
+import { EducationTypeService } from './../_services/education-type.service';
+import { EducationType } from './../_models/educationType';
 import { Router } from '@angular/router';
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import { map } from 'rxjs/operators';
-import { EducationtypeService } from '../_services/educationtype.service';
 
 class CustomValidators {
   static passwordContainsNumber(control: AbstractControl): ValidationErrors {
@@ -36,20 +39,27 @@ class CustomValidators {
 export class RegistrationComponent implements OnInit {
 
   title = "Registration"
-  posts: any;
   registerForm : FormGroup;
+  educationTypeGoalForm: FormGroup
   loading = false;
+  educationTypes : EducationType[]
+  user : User = new User
+  educationTypeGoal: EducationTypeGoal = new EducationTypeGoal
 
-  constructor(private authService: AuthService, private router : Router, private formBuilder: FormBuilder, private educationTypeService: EducationtypeService) {
+  constructor(private authService: AuthService, private router : Router, private formBuilder: FormBuilder, private educationTypeService: EducationTypeService, private educationTypeGoalService: EducationTypeGoalService) {
    }
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
+        educationTypeId : [null],
         username: [null, [Validators.required]],
         password: [null, [Validators.required, CustomValidators.passwordContainsNumber!]],
         confirmPassword: [null, [Validators.required]]
       },{
         validators : CustomValidators.passwordMatch
+      })
+      this.educationTypeService.getAll().subscribe(response =>{
+        this.educationTypes = response
       })
   }
 
@@ -58,8 +68,15 @@ export class RegistrationComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.authService.register(this.registerForm.value).pipe(
-      map(user => this.router.navigate(['registration']))
-    ).subscribe()
+    this.authService.register(this.registerForm.value).subscribe(response =>{
+        this.user = response
+        this.educationTypeGoal.userId = this.user.id
+        this.educationTypeGoal.educationTypeId = this.registerForm.controls['educationTypeId'].value as number
+        
+    })
+    console.warn(this.educationTypeGoal)
+    this.educationTypeGoalService.create(this.educationTypeGoal).subscribe(response => {
+      console.warn(response)
+    })
   }
 }

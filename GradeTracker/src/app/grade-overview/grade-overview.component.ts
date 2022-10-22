@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewChild, ViewChildren, QueryList, ChangeDetectorRef} from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 import { NewGradeComponent } from '../new-grade/new-grade.component';
 import { ModuleService } from '../_services/module.service';
-import { MarkService } from '../_services/mark.service';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatSort, Sort } from '@angular/material/sort';
-import { startWith, switchMap, catchError, map, pipe, of, Observable } from 'rxjs';
+import { MatSort } from '@angular/material/sort';
 import { Module } from '../_models/module';
 import { Mark } from '../_models/mark';
 
@@ -32,7 +29,7 @@ export class GradeOverviewComponent implements OnInit {
   dataArray : Module [] = []
   modulesData : Module[] = []
   columnsToDisplay = ['name', 'competenceArea', 'teacher']
-  innerDisplayedColumns = ['description','grade', 'weighting', 'date']
+  innerDisplayedColumns = ['description','grade', 'weighting']
   expandedElement: Module | null;
 
   @ViewChild('outerSort', { static: true }) sort: MatSort;
@@ -41,10 +38,8 @@ export class GradeOverviewComponent implements OnInit {
 
   constructor(
     private modulService: ModuleService,
-    private gradeservice: MarkService,
     public matDialog: MatDialog, 
     private changeDetectorRef: ChangeDetectorRef) {
-      
     }
 
   ngOnInit() {

@@ -15,7 +15,7 @@
 			sortActionDescription="Sort by subject">
 			Kompetenzbereich
 		</th>
-		<td *matCellDef="let element"> {{element.competenceArea}} </td>
+		<td *matCellDef="let element"> {{element.competenceArea.name}} </td>
 	</ng-container>
 	<ng-container matColumnDef="teacher">
 		<th class="headerrow" *matHeaderCellDef mat-sort-header
@@ -49,13 +49,6 @@
 								Modul
 							</th>
 							<td *matCellDef="let element"> {{element.weighting}} </td>
-						</ng-container>
-						<ng-container matColumnDef="date">
-							<th class="headerrow" *matHeaderCellDef mat-sort-header
-								sortActionDescription="Sort by subject">
-								Modul
-							</th>
-							<td *matCellDef="let element"> {{element.date}} </td>
 						</ng-container>
 						<tr mat-row *matRowDef="let row; columns: innerDisplayedColumns;"></tr>
 					</table>

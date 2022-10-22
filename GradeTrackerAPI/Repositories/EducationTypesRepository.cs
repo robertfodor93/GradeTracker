@@ -29,18 +29,18 @@
 
         public async Task<GetEducationTypeDTO> GetDetail(int id)
         {
-            var competenceArea = await _dataContext.EducationTypes
+            var educationType = await _dataContext.EducationTypes
                 .Include(ca => ca.CompetenceAreas)
                 .ThenInclude(ca => ca.Modules)
                 .ProjectTo<GetEducationTypeDTO>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(q => q.Id == id);
 
-            if (competenceArea == null)
+            if (educationType == null)
             {
                 throw new NotFoundException(nameof(GetDetail), id);
             }
 
-            return competenceArea;
+            return educationType;
         }
     }
 }

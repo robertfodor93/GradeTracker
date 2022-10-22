@@ -6,9 +6,9 @@ import { CompetenceArea } from '../_models/competenceArea';
 @Injectable({
   providedIn: 'root'
 })
-export class CompetenceareaService {
+export class CompetenceAreaService {
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   getAll() : Observable<CompetenceArea[]> {
     return this.httpClient.get<CompetenceArea[]>('https://localhost:7290/api/CompetenceArea/getAll').pipe(
@@ -16,7 +16,7 @@ export class CompetenceareaService {
   )}
 
   getById(id: number): Observable<CompetenceArea> {
-    return this.httpClient.get<CompetenceArea>('https://localhost:7290/api/Module/getById' + id).pipe(
+    return this.httpClient.get<CompetenceArea>('https://localhost:7290/api/CompetenceArea/getById' + id).pipe(
       map((competenceArea: CompetenceArea) => competenceArea)
   )}
 

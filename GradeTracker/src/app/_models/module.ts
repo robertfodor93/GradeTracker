@@ -12,7 +12,7 @@ export class Module {
     averageDesiredMark?: number;
     marks?: Mark[] | MatTableDataSource<Mark>;
     showOnDashboard?: boolean;
-    userId? : string
+    userId? : number;
 }
 
 export interface IModule {

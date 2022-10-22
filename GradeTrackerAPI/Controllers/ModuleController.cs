@@ -50,7 +50,7 @@ namespace GradeTrackerAPI.Controllers
 
         }
 
-        [HttpPut("update")]
+        [HttpPatch("update")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateModuleDTO updateModuleDTO)
         {
             if(id != updateModuleDTO.Id)

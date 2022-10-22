@@ -1,11 +1,8 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import { ModuleService} from '../_services/module.service';
-import { Module } from '../_models/module';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MarkService } from '../_services/mark.service';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -20,13 +17,14 @@ export class NewGradeComponent implements OnInit {
   
   constructor(
     public dialogRef: MatDialogRef<NewGradeComponent>,
-    private moduleService: ModuleService, private markService: MarkService, private http:HttpClient, private formBuilder : FormBuilder
+    private moduleService: ModuleService, private markService: MarkService, private formBuilder : FormBuilder
   ) {
     
   }
 
   onSubmit() {
     this.markService.createMark(this.newMarkForm.value).subscribe()
+    console.warn(this.newMarkForm.value)
   }
 
   ngOnInit() {
@@ -37,7 +35,7 @@ export class NewGradeComponent implements OnInit {
     console.log(this.modules)
 
     this.newMarkForm = this.formBuilder.group({
-      mark: [null],
+      grade: [null],
       description : [null],
       weighting : [null],
       date : [null],

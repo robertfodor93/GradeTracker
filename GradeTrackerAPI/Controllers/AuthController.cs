@@ -15,45 +15,34 @@ namespace GradeTrackerAPI.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register([FromBody] UserDTO userDTO)
         {
-            var errors = await _authRepository.Register(userDTO);
-
-            if(errors.Any())
-            {
-                foreach (var error in errors)
-                {
-                    ModelState.AddModelError(error.Code, error.Description);
-                }
-
-                return BadRequest(ModelState);
-            }
-
-            return Ok();
+            var response = await _authRepository.Register(userDTO);
+            return Ok(response);
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login([FromBody] LoginUserDTO loginUserDto)
+        public async Task<ActionResult<User>> Login([FromBody] LoginUserDTO loginUserDTO)
         {
-            var authResponse = await _authRepository.Login(loginUserDto);
-
-            if(authResponse == null)
+            var response = await _authRepository.Login(loginUserDTO);
+            if(response == null)
             {
                 return Unauthorized();
+            } else
+            {
+                return Ok(response);
             }
-
-            return Ok(authResponse);
         }
 
         [HttpPost("refreshToken")]
-        public async Task<ActionResult> RefreshToken([FromBody] AuthResponseDTO request)
+        public async Task<ActionResult<string>> RefreshToken()
         {
-            var authResponse = await _authRepository.VerifyRefreshToken(request);
-
-            if(authResponse == null)
+            var response = await _authRepository.RefreshToken();
+            if(response == null)
             {
-                return Unauthorized(request);
+                return Unauthorized();
+            } else
+            {
+                return Ok(response);
             }
-
-            return Ok(authResponse);
         }
     }
 }

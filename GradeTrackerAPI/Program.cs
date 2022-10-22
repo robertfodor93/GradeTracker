@@ -6,12 +6,6 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddIdentityCore<User>()
-    .AddRoles<IdentityRole>()
-    .AddTokenProvider<DataProtectorTokenProvider<User>>("GradeTrackerAPI")
-    .AddEntityFrameworkStores<DataContext>()
-    .AddDefaultTokenProviders();
-
 builder.Services.AddCors(options => options.AddPolicy(name: "NgOrigins",
     policy =>
     {
@@ -33,6 +27,7 @@ builder.Services.AddScoped<IModulesRepository, ModulesRepository>();
 builder.Services.AddScoped<IMarksRepository, MarksRepository>();
 builder.Services.AddScoped<ICompetenceAreasRepository, CompetenceAreasRepository>();
 builder.Services.AddScoped<IEducationTypesRepository, EducationTypesRepository>();
+builder.Services.AddScoped<IEducationTypeGoalsRepository, EducationTypeGoalsRepository>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

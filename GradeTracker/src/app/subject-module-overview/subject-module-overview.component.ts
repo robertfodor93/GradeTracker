@@ -4,7 +4,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Module } from '../_models/module';
 import { ModuleService } from '../_services/module.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { NewSubjectModuleComponent } from '../new-subject-module/new-subject-module.component';
 import { HttpClient } from '@angular/common/http';
 

@@ -34,6 +34,12 @@
             CreateMap<EducationType, UpdateEducationTypeDTO>().ReverseMap();
             CreateMap<EducationType, EducationTypeDTO>().ReverseMap();
 
+            CreateMap<EducationTypeGoal, BaseEducationTypeGoalDTO>().ReverseMap();
+            CreateMap<EducationTypeGoal, CreateEducationTypeGoalDTO>().ReverseMap();
+            CreateMap<EducationTypeGoal, GetEducationTypeGoalDTO>().ReverseMap();
+            CreateMap<EducationTypeGoal, UpdateEducationTypeGoalDTO>().ReverseMap();
+            CreateMap<EducationTypeGoal, EducationTypeGoalDTO>().ReverseMap();
+
             CreateMap<User, BaseUserDTO>().ReverseMap();
             CreateMap<User, GetUserDTO>().ReverseMap();
             CreateMap<User, LoginUserDTO>().ReverseMap();

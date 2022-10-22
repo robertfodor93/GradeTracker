@@ -1,8 +1,9 @@
 ﻿namespace GradeTrackerAPI.Data
 {
-    public class DataContext : IdentityDbContext<User>
+    public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+        public DbSet<User> Users { get; set; }
         public DbSet<EducationTypeGoal>? EducationTypeGoals { get; set; }
         public DbSet<EducationType>? EducationTypes { get; set; }
         public DbSet<CompetenceArea>? CompetenceAreas { get; set; }

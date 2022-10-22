@@ -65,10 +65,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 1,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5376),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3588),
                             EducationTypeId = 1,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5377),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3591),
                             ModifiedBy = "",
                             Name = "Fachkompetenzen"
                         },
@@ -76,10 +76,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 2,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5379),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3594),
                             EducationTypeId = 1,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5381),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3596),
                             ModifiedBy = "",
                             Name = "Erweiterte Grundkompetenzen"
                         },
@@ -87,10 +87,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 3,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5382),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3599),
                             EducationTypeId = 1,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5384),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3601),
                             ModifiedBy = "",
                             Name = "Allgemeinbildung"
                         },
@@ -98,10 +98,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 4,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5385),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3604),
                             EducationTypeId = 1,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5386),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3606),
                             ModifiedBy = "",
                             Name = "ÜK"
                         },
@@ -109,10 +109,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 5,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5388),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3609),
                             EducationTypeId = 2,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5389),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3611),
                             ModifiedBy = "",
                             Name = "Erweiterte Grundkompetenzen"
                         },
@@ -120,10 +120,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 6,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5391),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3614),
                             EducationTypeId = 2,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5392),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3616),
                             ModifiedBy = "",
                             Name = "Erweiterte Allgemeinbildung"
                         },
@@ -131,10 +131,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 7,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5393),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3618),
                             EducationTypeId = 2,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5395),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3620),
                             ModifiedBy = "",
                             Name = "ÜK"
                         },
@@ -142,10 +142,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 8,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5396),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3623),
                             EducationTypeId = 3,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5397),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3625),
                             ModifiedBy = "",
                             Name = "Fachkompetenzen"
                         },
@@ -153,10 +153,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 9,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5399),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3628),
                             EducationTypeId = 3,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5400),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3630),
                             ModifiedBy = "",
                             Name = "Erweiterte Grundkompetenzen"
                         },
@@ -164,10 +164,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 10,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5402),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3632),
                             EducationTypeId = 3,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5403),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3635),
                             ModifiedBy = "",
                             Name = "Erweiterte Allgemeinbildung"
                         },
@@ -175,10 +175,10 @@ namespace GradeTrackerAPI.Migrations
                         {
                             Id = 11,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5404),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3637),
                             EducationTypeId = 3,
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5406),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3639),
                             ModifiedBy = "",
                             Name = "ÜK"
                         });
@@ -201,9 +201,6 @@ namespace GradeTrackerAPI.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EducationTypeGoalId")
-                        .HasColumnType("int");
-
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
@@ -218,8 +215,6 @@ namespace GradeTrackerAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EducationTypeGoalId");
-
                     b.ToTable("EducationTypes");
 
                     b.HasData(
@@ -228,9 +223,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 1,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5326),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3506),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5354),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3552),
                             ModifiedBy = "",
                             Name = "EFZ"
                         },
@@ -239,9 +234,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 2,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5357),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3558),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5358),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3560),
                             ModifiedBy = "",
                             Name = "BM"
                         },
@@ -250,9 +245,9 @@ namespace GradeTrackerAPI.Migrations
                             Id = 3,
                             Calculation = 1.0,
                             CreateBy = "",
-                            CreatedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5360),
+                            CreatedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3563),
                             IsActive = true,
-                            ModifiedAt = new DateTime(2022, 10, 20, 20, 56, 37, 491, DateTimeKind.Local).AddTicks(5361),
+                            ModifiedAt = new DateTime(2022, 10, 21, 15, 24, 52, 893, DateTimeKind.Local).AddTicks(3565),
                             ModifiedBy = "",
                             Name = "MS"
                         });
@@ -275,6 +270,9 @@ namespace GradeTrackerAPI.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("EducationTypeId")
+                        .HasColumnType("int");
+
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
@@ -284,10 +282,12 @@ namespace GradeTrackerAPI.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EducationTypeId");
 
                     b.HasIndex("UserId");
 
@@ -377,8 +377,8 @@ namespace GradeTrackerAPI.Migrations
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -424,67 +424,52 @@ namespace GradeTrackerAPI.Migrations
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
 
-                    b.Property<bool>("EmailConfirmed")
+                    b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                    b.Property<DateTime>("TokenCreated")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("SecurityStamp")
+                    b.Property<DateTime>("TokenExpires")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -493,147 +478,33 @@ namespace GradeTrackerAPI.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("IdentityRole");
 
                     b.HasData(
                         new
                         {
-                            Id = "0961fd30-cd0b-423b-ae89-c342ae97f0cd",
-                            ConcurrencyStamp = "41ee31ae-346c-4458-8d3e-397a4d822985",
+                            Id = "4fec0ca6-24a3-4815-8b47-b75e56d645ff",
+                            ConcurrencyStamp = "a87878be-10fe-42f5-9d3f-ee401cf02cbc",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "8c092364-6896-41c2-91bc-9f039234bf8a",
-                            ConcurrencyStamp = "911f70c7-226d-4a87-bb2d-c503d49079fb",
+                            Id = "a5fd9f22-4f33-4981-964b-574f7c2f159c",
+                            ConcurrencyStamp = "5f5dd8f4-c3f1-460c-8ccf-26ebabefae6c",
                             Name = "User",
                             NormalizedName = "USER"
                         });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceArea", b =>
@@ -645,20 +516,17 @@ namespace GradeTrackerAPI.Migrations
                     b.Navigation("EducationType");
                 });
 
-            modelBuilder.Entity("GradeTrackerAPI.Entities.EducationType", b =>
-                {
-                    b.HasOne("GradeTrackerAPI.Entities.EducationTypeGoal", "EducationTypeGoal")
-                        .WithMany("EducationTypes")
-                        .HasForeignKey("EducationTypeGoalId");
-
-                    b.Navigation("EducationTypeGoal");
-                });
-
             modelBuilder.Entity("GradeTrackerAPI.Entities.EducationTypeGoal", b =>
                 {
+                    b.HasOne("GradeTrackerAPI.Entities.EducationType", "EducationType")
+                        .WithMany("EducationTypeGoals")
+                        .HasForeignKey("EducationTypeId");
+
                     b.HasOne("GradeTrackerAPI.Entities.User", "User")
                         .WithMany("EducationTypeGoals")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("EducationType");
 
                     b.Navigation("User");
                 });
@@ -697,57 +565,6 @@ namespace GradeTrackerAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("GradeTrackerAPI.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("GradeTrackerAPI.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GradeTrackerAPI.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("GradeTrackerAPI.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("GradeTrackerAPI.Entities.CompetenceArea", b =>
                 {
                     b.Navigation("Modules");
@@ -756,11 +573,8 @@ namespace GradeTrackerAPI.Migrations
             modelBuilder.Entity("GradeTrackerAPI.Entities.EducationType", b =>
                 {
                     b.Navigation("CompetenceAreas");
-                });
 
-            modelBuilder.Entity("GradeTrackerAPI.Entities.EducationTypeGoal", b =>
-                {
-                    b.Navigation("EducationTypes");
+                    b.Navigation("EducationTypeGoals");
                 });
 
             modelBuilder.Entity("GradeTrackerAPI.Entities.Module", b =>

@@ -1,11 +1,10 @@
-import { IGoal } from './../_models/goal';
-import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModuleService } from '../_services/module.service';
 import { Module } from '../_models/module';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { NewgoalComponent } from '../newgoal/newgoal.component';
 
 @Component({

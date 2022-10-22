@@ -31,7 +31,7 @@ export class ModuleService {
   }
 
   update(module: Module): Observable<Module> {
-    return this.http.put('https://localhost:7290/api/Module/update?id=' + module.id, module )
+    return this.http.patch('https://localhost:7290/api/Module/update?id=' + module.id, module )
   }
 
   setGoal(goal : Goal): Observable<Goal> {
