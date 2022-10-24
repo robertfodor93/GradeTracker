@@ -1,3 +1,5 @@
+import { IModule } from './../_models/module';
+import { Mark, IMark } from './../_models/mark';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -16,9 +18,11 @@ import { NewgoalComponent } from '../newgoal/newgoal.component';
 export class GoalOverviewComponent implements AfterViewInit,OnInit {
 
   title:string='Zielübersicht';
-  GOAL_DATA : Module[] = [];
+  dataArray : Module[]
+  modulesData : Module[]
+  averageMark : number
   displayedColumns: string[] = ['module', 'averageDesiredMark', 'reached'];
-  dataSourceGoal = new MatTableDataSource<Module>(this.GOAL_DATA)
+  dataSourceGoal = new MatTableDataSource<Module>()
   module: string;
   averageDesiredMark:number;
   needed:number;
@@ -37,12 +41,8 @@ export class GoalOverviewComponent implements AfterViewInit,OnInit {
   constructor(private _liveAnnouncer: LiveAnnouncer, private moduleService: ModuleService,public dialog: MatDialog,) { }
 
   ngOnInit() {
-    this.getAllGoals();
-  }
-
-  public getAllGoals() {
-    var response = this.moduleService.getAll();
-    response.subscribe(goals => this.dataSourceGoal.data = goals as Module[])
+    let test = this.moduleService.getAll().subscribe()
+    console.warn(test)
   }
 
   onChange($event:any){

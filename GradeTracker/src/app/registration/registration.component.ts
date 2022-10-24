@@ -72,11 +72,9 @@ export class RegistrationComponent implements OnInit {
         this.user = response
         this.educationTypeGoal.userId = this.user.id
         this.educationTypeGoal.educationTypeId = this.registerForm.controls['educationTypeId'].value as number
-        
-    })
-    console.warn(this.educationTypeGoal)
-    this.educationTypeGoalService.create(this.educationTypeGoal).subscribe(response => {
+      this.educationTypeGoalService.create(this.educationTypeGoal).subscribe(response => {
       console.warn(response)
+    })
     })
   }
 }

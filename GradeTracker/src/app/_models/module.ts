@@ -22,6 +22,6 @@ export interface IModule {
   competenceAreaId? : number
   teacher?: string;
   averageDesiredMark?: number;
-  marks?: IMark[] | MatTableDataSource<IMark>;
+  marks?: IMark[];
   showOnDashboard?: boolean;
 }

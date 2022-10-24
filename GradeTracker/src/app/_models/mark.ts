@@ -4,13 +4,13 @@ export class Mark {
     id?: number;
     description: string;
     grade?: number;
-    weighting?: string;
+    weighting?: number;
     moduleId?: number;
 }
 
 export interface IMark {
     id?: number;
     grade?: number;
-    weighting?: string;
+    weighting?: number;
     moduleId?: number;
 }

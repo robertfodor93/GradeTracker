@@ -1,3 +1,4 @@
+import { IModule } from './../_models/module';
 import { Goal } from './../_models/goal';
 import { User } from '../_models/user';
 import { Observable, map } from 'rxjs';
@@ -14,9 +15,9 @@ export class ModuleService {
   
   constructor(private http: HttpClient) { }
   
-  getAll() : Observable<Module[]> {
-    return this.http.get<Module[]>('https://localhost:7290/api/Module/getAll').pipe(
-      map((modules : Module[]) => modules)
+  getAll() : Observable<any[]> {
+    return this.http.get<any[]>('https://localhost:7290/api/Module/getAll').pipe(
+      map((modules : any[]) => modules)
     )
   }
   getById(id: number): Observable<Module> {

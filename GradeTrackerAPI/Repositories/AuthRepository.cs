@@ -137,7 +137,7 @@
             return refreshToken;
         }
 
-        private async void SetRefreshToken(RefreshToken refreshToken, User user)
+        private async Task SetRefreshToken(RefreshToken refreshToken, User user)
         {
             var cookieOptions = new CookieOptions
             {
