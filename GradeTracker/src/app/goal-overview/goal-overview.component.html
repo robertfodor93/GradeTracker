@@ -11,7 +11,7 @@
 
 
   
-<table mat-table [dataSource]="dataSourceGoal" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
   <!-- subject Column -->
   <ng-container matColumnDef="module">
       <th mat-header-cell *matHeaderCellDef> Modul </th>  
@@ -24,7 +24,7 @@
   </ng-container>
   <ng-container matColumnDef="reached">
     <th mat-header-cell *matHeaderCellDef>Erreicht</th>
-    <td mat-cell *matCellDef="let element">{{element.marks.grade}}</td>
+    <td mat-cell *matCellDef="let element">{{element.averageMark}}</td>
   </ng-container>
   <!-- benötigte Note Column -->
   <ng-container matColumnDef="needed">

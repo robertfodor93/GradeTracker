@@ -19,13 +19,12 @@ export class GoalOverviewComponent implements AfterViewInit,OnInit {
 
   title:string='Zielübersicht';
   dataArray : Module[]
-  modulesData : Module[]
+  marksData : Mark[]
   averageMark : number
   displayedColumns: string[] = ['module', 'averageDesiredMark', 'reached'];
-  dataSourceGoal = new MatTableDataSource<Module>()
+  dataSource = new MatTableDataSource<Module>()
   module: string;
   averageDesiredMark:number;
-  needed:number;
 
   openDialog(): void {
     const dialogRef = this.dialog.open(NewgoalComponent, {
@@ -41,19 +40,29 @@ export class GoalOverviewComponent implements AfterViewInit,OnInit {
   constructor(private _liveAnnouncer: LiveAnnouncer, private moduleService: ModuleService,public dialog: MatDialog,) { }
 
   ngOnInit() {
-    let test = this.moduleService.getAll().subscribe()
-    console.warn(test)
+    this.moduleService.getAll().subscribe(response => {
+      this.dataArray = response
+      this.dataArray.forEach(p => {
+        this.marksData = p.marks as Mark[]
+        let weighedMark = this.marksData.map(p => p.grade!* p.weighting!).reduce((a, b) => a+b)
+        let sumOfWeights = this.marksData.map(p => p.weighting).reduce((a,b) => a!+b!)
+        let calculationResult = weighedMark! / sumOfWeights!
+        p.averageMark = parseFloat(calculationResult.toFixed(2))
+      })
+      this.dataSource = new MatTableDataSource<Module>(this.dataArray);
+      console.warn(this.dataSource.data)
+    })
   }
 
   onChange($event:any){
     const filterValue = $event.value;
-    this.dataSourceGoal.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
    
   }
 
   applyFilter(event:Event){
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSourceGoal.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
   }
 
@@ -74,7 +83,7 @@ public closeForm() {
   @ViewChild(MatSort) sort = new MatSort();
 
   ngAfterViewInit() {
-    this.dataSourceGoal.sort = this.sort;
+    this.dataSource.sort = this.sort;
   }
 
   announceSortChange(sortState: Sort) {

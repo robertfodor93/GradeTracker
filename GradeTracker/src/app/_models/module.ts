@@ -10,6 +10,7 @@ export class Module {
     competenceAreaId? : number
     teacher?: string;
     averageDesiredMark?: number;
+    averageMark? : number;
     marks?: Mark[] | MatTableDataSource<Mark>;
     showOnDashboard?: boolean;
     userId? : number;
