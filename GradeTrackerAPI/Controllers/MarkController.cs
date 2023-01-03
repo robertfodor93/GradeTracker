@@ -7,38 +7,47 @@ namespace GradeTrackerAPI.Controllers
     [ApiController]
     public class MarkController : ControllerBase
     {
-        private readonly IMarksRepository _marksRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<MarkController> _logger;
         private readonly IMapper _mapper;
 
-        public MarkController(IMarksRepository marksRepository, ILogger<MarkController> logger, IMapper mapper)
+        public MarkController(IUnitOfWork unitOfWork, ILogger<MarkController> logger, IMapper mapper)
         {
-            _marksRepository = marksRepository;
+            _unitOfWork = unitOfWork;
             _logger = logger;
             _mapper = mapper;
         }
 
         [HttpGet("getAll")]
-        public async Task<ActionResult<GetMarkDTO>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var marks = await _marksRepository.GetAllAsync();
-            var records = _mapper.Map<List<GetMarkDTO>>(marks);
-            return Ok(records);
+            try
+            {
+                var marks = await _unitOfWork.Marks.GetAll();
+                var results = _mapper.Map<IList<MarkDto>>(marks);
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error {nameof(GetAll)}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpGet("getById{id:int}")]
-        public async Task<ActionResult<GetMarkDTO>> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var mark = await _marksRepository.GetAsync(id);
-
-            if(mark == null)
+            try
             {
-                throw new NotFoundException(nameof(GetById), id);
+                var mark = await _unitOfWork.Marks.Get(e => e.Id == id);
+                var result = _mapper.Map<MarkDto>(mark);
+                return Ok(result);
             }
-
-            var markDTO = _mapper.Map<GetMarkDTO>(mark);
-
-            return Ok(markDTO);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error {nameof(GetById)}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpGet("getByModuleId{id:int}")]
@@ -58,47 +67,44 @@ namespace GradeTrackerAPI.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<Mark>> Create([FromBody] CreateMarkDTO createMarkDTO)
+        public async Task<IActionResult> Create([FromBody] MarkDto request)
         {
-            var mark = _mapper.Map<Mark>(createMarkDTO);
+            var mark = _mapper.Map<Mark>(request);
+            await _unitOfWork.Marks.Insert(mark);
+            await _unitOfWork.Save();
 
-            await _marksRepository.AddAsync(mark);
-
-            return CreatedAtAction("GetById", new { id = mark.Id }, mark);
+            return Ok(mark);
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateMarkDTO markDTO)
+        public async Task<IActionResult> Update(int id, [FromBody] MarkDto request)
         {
-            try
+            var mark = await _unitOfWork.Marks.Get(e => e.Id == id);
+            if (mark == null)
             {
-                await _marksRepository.UpdateAsync(id, markDTO);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!await MarkExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest("Error");
             }
 
-            return NoContent();
+            _mapper.Map(request, mark);
+            _unitOfWork.Marks.Update(mark);
+            await _unitOfWork.Save();
+
+            return Ok(mark);
         }
 
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _marksRepository.DeleteAsync(id);
-            return NoContent();
-        }
+            var mark = await _unitOfWork.Marks.Get(e => e.Id == id);
+            if (mark == null)
+            {
+                return BadRequest("Error");
+            }
 
-        private async Task<bool> MarkExists(int id)
-        {
-            return await _marksRepository.Exists(id);
+            await _unitOfWork.Marks.Delete(id);
+            await _unitOfWork.Save();
+
+            return Ok("Mark deleted");
         }
     }
 }

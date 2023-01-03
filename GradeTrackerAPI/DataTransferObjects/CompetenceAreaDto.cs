@@ -4,6 +4,6 @@
     {
         [Required]
         public string Name { get; set; } = string.Empty;
-        public ICollection<ModuleDTO>? Modules { get; set; }
+        public ICollection<Module>? Modules { get; set; }
     }
 }

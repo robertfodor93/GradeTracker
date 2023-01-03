@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild, ViewChildren, QueryList, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NewGradeComponent } from '../new-grade/new-grade.component';
-import { ModuleService } from '../_services/module.service';
-import { MatTableDataSource, MatTable } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { Module } from '../_models/module';
-import { Mark } from '../_models/mark';
+import { ModuleService, Subject } from '../services/module.service';
+import { Exam, GradeService } from '../services/grade.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-grade-overview',
@@ -21,41 +21,28 @@ import { Mark } from '../_models/mark';
   ],
 })
 
+
+
 export class GradeOverviewComponent implements OnInit {
 
-  title: string='Notenübersicht';
+title: string='Notenübersicht';
+  posts: any;
 
-  dataSource = new MatTableDataSource<Module>()
-  dataArray : Module [] = []
-  modulesData : Module[] = []
-  columnsToDisplay = ['name', 'competenceArea', 'teacher']
-  innerDisplayedColumns = ['description','grade', 'weighting']
-  expandedElement: Module | null;
+  constructor(private _liveAnnouncer: LiveAnnouncer, private Modulservice: ModuleService,private Gradeservice: GradeService,public dialog: MatDialog,) { }
 
-  @ViewChild('outerSort', { static: true }) sort: MatSort;
-  @ViewChildren('innerSort') innerSort: QueryList<MatSort>;
-  @ViewChildren('innerTables') innerTables: QueryList<MatTable<Mark>>;
-
-  constructor(
-    private modulService: ModuleService,
-    public matDialog: MatDialog, 
-    private changeDetectorRef: ChangeDetectorRef) {
-    }
+ //Daten von der Datenbank holen
+  displayedColumnsSubject = ['name', 'competenceArea', 'teacher', 'averageDesiredMark', 'marks', 'showOnDashboard','id']
+  displayedColumnsExam =['date','weighting','grade','moduleId'];
+  expandedElements: Subject | null | undefined;
 
   ngOnInit() {
-    this.modulService.getAll().subscribe(response =>{
-      this.dataArray = response
-      this.dataArray.forEach(module => {
-        if(module.marks && Array.isArray(module.marks) && module.marks.length) {
-          this.modulesData = [...this.modulesData, {...module, marks: new MatTableDataSource(module.marks)}]
-        } else {
-          this.modulesData = [...this.modulesData, module];
-        }
-      });
-      this.dataSource = new MatTableDataSource<Module>(this.modulesData);
-      this.dataSource.sort = this.sort
-      console.warn(this.dataSource.data)
-    })
+    this.getModule();
+    this.getGrade();
+    console.log(this.title);
+    this.Modulservice.getModule()
+    .subscribe(response => {
+      this.posts = response;
+    });
   }
 
   subject: string | undefined;
@@ -64,8 +51,10 @@ export class GradeOverviewComponent implements OnInit {
   gewichtung:number | undefined;
   note:number | undefined;
 
+
+
+ 
   panelOpenState = false;
-  
   protected SUBJECT_DATA_EFZ: Subject[] = [];
   protected SUBJECT_DATA_BM: Subject[] = [];
   protected EXAM_DATA_EFZ: Exam[] = [];
@@ -118,7 +107,7 @@ export class GradeOverviewComponent implements OnInit {
   
   //Neue Noten erfassen
   openDialog(): void {
-    const dialogRef = this.matDialog.open(NewGradeComponent, {
+    const dialogRef = this.dialog.open(NewGradeComponent, {
       width: '40%' ,height:'87%', 
       data: {subject: this.subject,datum:this.datum, bez: this.bez, gewictung: this.gewichtung,note:this.note },
     });
@@ -130,11 +119,46 @@ export class GradeOverviewComponent implements OnInit {
   }
 
 
-  toggleRow(element: Module) {
-    element.marks && (element.marks as MatTableDataSource<Mark>).data?.length?(this.expandedElement = this.expandedElement === element ? null : element) : null;
-    this.changeDetectorRef.detectChanges();
-    this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Mark>).sort = this.innerSort.toArray()[index]);
+  //sortieren
+  @ViewChild(MatSort) sort = new MatSort();
+
+  ngAfterViewInit() {
+    this.dataSourceBM.sort = this.sort;
+    this.dataSourceEFZ.sort = this.sort;
+    this.dataSourceBMexam.sort = this.sort;
+    this.dataSourceEFZexam.sort = this.sort;
   }
-  
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
+
+
 
 }
+
+
+// export interface Exam{
+//   subject: string;
+//   datum: Date;
+//   bez:string;
+//   gewichtung:number;
+//   note:number;
+// }
+
+
+// const EXAM_DATA_EFZ: Exam[]=[
+//   {subject:'INF 226B', bez:'Theorie', gewichtung: 1, note: 5, datum: new Date(2022, 4, 8) },
+//   {subject:'M117', bez:'Praktische Arbeit', gewichtung: 1, note: 4, datum: new Date(2022, 6, 18) },
+//   {subject:'M200', bez:'Theorie', gewichtung: 1, note: 4.5, datum: new Date(2022, 5, 8) }
+// ]
+// const EXAM_DATA_BM: Exam[]=[
+//   {subject:'Mathematik', bez:'Vektorgeometrie', gewichtung: 1, note: 5.5, datum: new Date(2022, 4, 8) },
+//   {subject:'Englisch', bez:'FCE', gewichtung: 1, note: 5, datum: new Date(2022, 4, 28) },
+//   {subject:'Deutsch', bez:'Theorie', gewichtung: 1, note: 4.5, datum: new Date(2022, 4, 18) }
+// ]
+

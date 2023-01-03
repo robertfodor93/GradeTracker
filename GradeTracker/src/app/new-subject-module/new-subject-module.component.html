@@ -6,23 +6,14 @@
         <input type="text" formControlName="name" required>
         <br>
         <label for="fachtyp">Fachtyp</label>
-        <select id="educationType" formControlName="educationTypeId" [(ngModel)]="selectedEducationTypeId" (change)="competenceAreasByEducationType()" required>
-            <option *ngFor="let educationType of educationTypes" [ngValue]="educationType.id">
-                {{educationType.name}}
-            </option>
-        </select>
-        <br>
-        <br>
-        <label for="fachtyp">Fachtyp</label>
-        <select id="competenceArea" formControlName="competenceAreaId" required>
-            <option *ngFor="let competenceArea of competenceAreas" [ngValue]="competenceArea.id">
-                {{competenceArea.name}}
-            </option>
+        <select id="competenceArea" formControlName="competenceArea" required>
+            <option value="1">BM</option>
+            <option value="2">EFZ</option>
         </select>
         <br>
         <div formGroupName="teacher">
         <label for="lehrperson">Lehrperson</label>
-        <input type="text" formControlName="name" form required>
+        <input type="text" formControlName="teacher" form required>
         </div>
         <br>
 

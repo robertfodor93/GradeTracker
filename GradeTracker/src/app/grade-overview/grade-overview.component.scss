@@ -48,13 +48,10 @@ table{
 }
 
 
-.inner-table {
+.innertable {
+  font-family: arial, sans-serif;
   width: 100%;
-}
-
-.inner-table mat-form-field {
-  margin-top: 15px;
-  width: 100%;
+  padding-bottom: 15px;
 }
 
 .row{

@@ -1,35 +1,9 @@
-import { EducationTypeGoal } from './../_models/educationTypeGoal';
-import { EducationTypeGoalService } from '../_services/education-type-goal.service';
-import { User } from './../_models/user';
-import { EducationTypeService } from './../_services/education-type.service';
-import { EducationType } from './../_models/educationType';
 import { Router } from '@angular/router';
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-
-class CustomValidators {
-  static passwordContainsNumber(control: AbstractControl): ValidationErrors {
-    const regex = /\d/;
-
-    if(regex.test(control?.value) && control?.value !== null) {
-      return null as any;
-    } else {
-      return {passwordInvalid: true};
-    }
-  }
-
-  static passwordMatch(control: AbstractControl): ValidationErrors {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value
-
-    if((password === confirmPassword) && (password !== null && confirmPassword !== null)) {
-      return null as any
-    } else {
-      return {passwordsNotMatching: true}
-    }
-  }
-}
+import { map } from 'rxjs/operators';
+import { EducationtypeService } from '../services/educationtype.service';
 
 @Component({
   selector: 'app-registration',
@@ -39,42 +13,30 @@ class CustomValidators {
 export class RegistrationComponent implements OnInit {
 
   title = "Registration"
+  posts: any;
   registerForm : FormGroup;
-  educationTypeGoalForm: FormGroup
-  loading = false;
-  educationTypes : EducationType[]
-  user : User = new User
-  educationTypeGoal: EducationTypeGoal = new EducationTypeGoal
 
-  constructor(private authService: AuthService, private router : Router, private formBuilder: FormBuilder, private educationTypeService: EducationTypeService, private educationTypeGoalService: EducationTypeGoalService) {
+  constructor(private authService: AuthService, private router : Router, private formBuilder: FormBuilder, private educationTypeService: EducationtypeService) {
+    this.registerForm = this.formBuilder.group({
+      username: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+    })
    }
 
   ngOnInit() {
-      this.registerForm = this.formBuilder.group({
-        educationTypeId : [null],
-        username: [null, [Validators.required]],
-        password: [null, [Validators.required, CustomValidators.passwordContainsNumber!]],
-        confirmPassword: [null, [Validators.required]]
-      },{
-        validators : CustomValidators.passwordMatch
-      })
-      this.educationTypeService.getAll().subscribe(response =>{
-        this.educationTypes = response
-      })
+    this.educationTypeService.getEducationTypes()
+      .subscribe(response => {
+        this.posts = response;
+      });
   }
 
   onSubmit(){
     if(this.registerForm.invalid) {
       return;
     }
-    this.loading = true;
-    this.authService.register(this.registerForm.value).subscribe(response =>{
-        this.user = response
-        this.educationTypeGoal.userId = this.user.id
-        this.educationTypeGoal.educationTypeId = this.registerForm.controls['educationTypeId'].value as number
-      this.educationTypeGoalService.create(this.educationTypeGoal).subscribe(response => {
-      console.warn(response)
-    })
-    })
+    console.log(this.registerForm.value);
+    this.authService.register(this.registerForm.value).pipe(
+      map(user => this.router.navigate(['registration']))
+    ).subscribe()
   }
 }

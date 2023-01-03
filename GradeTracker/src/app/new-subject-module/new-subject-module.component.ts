@@ -1,12 +1,9 @@
-import { EducationTypeService } from './../_services/education-type.service';
-import { CompetenceAreaService } from './../_services/competence-area.service';
-import { CompetenceArea } from './../_models/competenceArea';
-import { EducationType } from '../_models/educationType';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Module } from '../_models/module';
-import { ModuleService } from '../_services/module.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Subject } from '../services/module.service';
+import { ModuleService } from '../services/module.service';
 
 @Component({
   selector: 'app-new-subject-module',
@@ -16,28 +13,19 @@ import { ModuleService } from '../_services/module.service';
 export class NewSubjectModuleComponent implements OnInit {
 
   createModuleForm : FormGroup
-  module : Module
-  educationTypes : EducationType[]
-  selectedEducationTypeId : number
-  competenceAreas : CompetenceArea[]
-  private userId = localStorage.getItem('userId');
 
   constructor(
     public dialogRef: MatDialogRef<NewSubjectModuleComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Module,
-    private competenceAreaService : CompetenceAreaService,
-    private educationTypeService : EducationTypeService,
-    private moduleService : ModuleService,
+    @Inject(MAT_DIALOG_DATA) public data: Subject,
+    private http:HttpClient,
     private formBuilder : FormBuilder) {
       this.createModuleForm = this.formBuilder.group({
         name : [null],
-        educationTypeId : [null],
-        competenceAreaId : [null],
+        competenceArea : [null],
         showOnDashboard : [null],
-        userId : [this.userId],
         teacher : formBuilder.group({
-          name: [null]
-        }),
+          teacher: [null]
+        })
       })
   }
 
@@ -46,22 +34,12 @@ export class NewSubjectModuleComponent implements OnInit {
   }
 
  onSubmit(){
-  this.moduleService.create(this.createModuleForm.value).subscribe((result) => {
-    console.warn(result)
+  this.http.post('https://localhost:7290/api/Module/create', this.createModuleForm.value).subscribe((result)=>{
+    console.warn("result", result);
   })
  }
 
-  ngOnInit() {
-    this.educationTypeService.getAll().subscribe(response =>{
-      this.educationTypes = response
-      console.warn(this.educationTypes)
-    })
-    console.warn(this.userId)
+  ngOnInit(): void {
   }
 
-  competenceAreasByEducationType() {
-    this.competenceAreaService.getByEducationType(this.selectedEducationTypeId).subscribe(response => {
-      this.competenceAreas = response
-    })
-  }
 }

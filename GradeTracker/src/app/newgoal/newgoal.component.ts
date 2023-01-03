@@ -1,11 +1,10 @@
-import { Module } from './../_models/module';
-import { Mark } from './../_models/mark';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { Goal } from '../_models/goal';
-import { ModuleService } from '../_services/module.service';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Subject } from '../services/module.service';
+import { ModuleService } from '../services/module.service';
+import { Goal, GoalService } from '../services/goal.service';
 
 @Component({
   selector: 'app-newgoal',
@@ -16,33 +15,43 @@ import { ModuleService } from '../_services/module.service';
 
 
 export class NewgoalComponent implements OnInit {
-  goal = new Goal()
-  newGoalForm: FormGroup;
-  modules: Module[];
+  newGoal: FormGroup;
+  posts: any;
 
 
   constructor(
     public dialogRef: MatDialogRef<NewgoalComponent>,
-    private moduleService: ModuleService,
-    private formBuilder : FormBuilder) {
+    @Inject(MAT_DIALOG_DATA) public data: Goal,
+    private http: HttpClient,
+    private service: ModuleService, private serviceGoal: GoalService) {
   }
 
-  onSubmit() {
-    this.moduleService.update(this.newGoalForm.value).subscribe()
+  onClick() {
+    this.postGrade(this.data);
+    console.log(this.data);
+    this.dialogRef.close();
+  }
+
+postGrade(data : Goal){
+    const headers = { 'content-type': 'application/json'} 
+    const averageDesiredMark = data.averageDesiredMark;
+    const fach = JSON.stringify(data.fach);
+    console.log(averageDesiredMark);
+    console.log(fach);
+    console.log('https://localhost:7290/api/Module/update?id=' + fach)
+    this.http.put('https://localhost:7290/api/Module/update?id=' + fach, averageDesiredMark, {'headers':headers}).subscribe((result)=>{
+      console.warn("result", result);
+      
+    });
   }
 
 
   ngOnInit() {
-    this.moduleService.getAll()
+    this.service.getModule()
       .subscribe(response => {
-        this.modules = response;
+        this.posts = response;
       });
-    console.log(this.modules)
-
-    this.newGoalForm = this.formBuilder.group({
-      id : [null],
-      averageDesiredMark : [null],
-    })
+    console.log(this.posts)
   }
 
 
