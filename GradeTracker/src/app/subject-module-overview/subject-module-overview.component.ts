@@ -1,11 +1,17 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { CompetenceArea } from './../_models/competenceArea';
+import { EducationType } from './../_models/educationType';
+import { Mark } from './../_models/mark';
 import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ModuleService, Subject } from '../services/module.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Module } from '../_models/module';
+import { ModuleService } from '../_services/module.service';
+import {MatDialog} from '@angular/material/dialog';
 import { NewSubjectModuleComponent } from '../new-subject-module/new-subject-module.component';
 import { HttpClient } from '@angular/common/http';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-subject-module-overview',
@@ -18,7 +24,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
 
-  displayedColumns = ['name', 'competenceArea', 'teacher', 'averageDesiredMark', 'marks', 'showOnDashboard'];
+  displayedColumns = ['name', 'educationType' ,'competenceArea', 'teacher', 'averageMark', 'marks', 'showOnDashboard'];
 
   subject: string | undefined;
   datum: Date | undefined;
@@ -39,23 +45,40 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
       this.bez = result;
     });
   }
-  protected SUBJECT_DATA_EFZ: Subject[] = []
-  protected SUBJECT_DATA_BM: Subject[] = []
-
-  dataSourceEFZ = new MatTableDataSource<Subject>(this.SUBJECT_DATA_EFZ);
-  dataSourceBM = new MatTableDataSource<Subject>(this.SUBJECT_DATA_BM);
 
   title:string = "Fach-/Modulübersicht";
+  dataArray : Module[]
+  marksData : Mark[]
+  dataSource = new MatTableDataSource<Module>()
 
-
-  constructor(private _liveAnnouncer: LiveAnnouncer, private service: ModuleService,public dialog: MatDialog, private http: HttpClient) { }
+  constructor(private _liveAnnouncer: LiveAnnouncer, 
+    private moduleService : ModuleService, 
+    public dialog: MatDialog, 
+    private http: HttpClient, ) {
+      
+    }
 
   ngOnInit() {
+<<<<<<< HEAD
+    this.moduleService.getAll().subscribe(response => {
+      this.dataArray = response
+      this.dataArray.forEach(p => {
+        this.marksData = p.marks as Mark[]
+        let weighedMark = this.marksData.map(p => p.grade! * p.weighting!).reduce((a,b) => a+b, 0)
+        let sumOfWeights = this.marksData.map(p => p.weighting).reduce((a,b) => a!+b!, 0)
+        let calculationResult = weighedMark! / sumOfWeights!
+        p.averageMark = parseFloat(calculationResult.toFixed(2))
+        p.numberOfMarks = this.marksData.length
+      })
+      this.dataSource = new MatTableDataSource<Module>(this.dataArray)
+    })
+=======
     this.getModule();
-    this.service.getModule()
+    this.service.getAll()
     .subscribe(response => {
       this.posts = response;
     });
+    console.warn(this.dataSourceBM.data)
   }
   onChange($event:any){
     const filterValue = $event.value;
@@ -67,16 +90,15 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceBM.filter = filterValue.trim().toLowerCase();
     this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
+>>>>>>> 6f0016fdeb23684a89d4f8210458da2ab289b79c
   }
   
-
-  public getModule() {
-    let resp = this.service.getModule();
-    
-    resp.subscribe(report => this.dataSourceEFZ.data = report as Subject[])
-    resp.subscribe(report => this.dataSourceBM.data = report as Subject[])
+  applyFilter(filterValue:string){
+    filterValue = filterValue.trim()
+    filterValue = filterValue.toLowerCase()
+    this.dataSource.filter = filterValue
   }
-
+  
   public openForm() {
     let form = document.getElementById('myForm')
     if(form) (form as HTMLFormElement).style.display="block"; 
@@ -93,8 +115,7 @@ public closeForm() {
   @ViewChild(MatSort) sort = new MatSort();
 
   ngAfterViewInit() {
-    this.dataSourceBM.sort = this.sort;
-    this.dataSourceEFZ.sort = this.sort;
+    this.dataSource.sort = this.sort;
   }
 
   announceSortChange(sortState: Sort) {

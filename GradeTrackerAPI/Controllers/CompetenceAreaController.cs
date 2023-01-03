@@ -7,88 +7,114 @@ namespace GradeTrackerAPI.Controllers
     [ApiController]
     public class CompetenceAreaController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICompetenceAreasRepository _competenceAreasRepository;
         private readonly ILogger<CompetenceAreaController> _logger;
         private readonly IMapper _mapper;
 
-        public CompetenceAreaController(IUnitOfWork unitOfWork, ILogger<CompetenceAreaController> logger, IMapper mapper)
+        public CompetenceAreaController(ICompetenceAreasRepository competenceAreasRepository, ILogger<CompetenceAreaController> logger, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
-            _logger = logger;
-            _mapper = mapper;
+            this._competenceAreasRepository = competenceAreasRepository;
+            this._logger = logger;
+            this._mapper = mapper;
         }
 
+        [EnableQuery]
         [HttpGet("getAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<IReadOnlyList<GetCompetenceAreaDTO>>> GetAll()
         {
-            try
-            {
-                var competenceAreas = await _unitOfWork.CompetenceAreas.GetAll();
-                var results = _mapper.Map<IList<CompetenceAreaDto>>(competenceAreas);
-                return Ok(results);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error {nameof(GetAll)}");
-                return StatusCode(500, "Internal server error");
-            }
+            var competenceAreas = await _competenceAreasRepository.GetDetails();
+            var records = _mapper.Map<IReadOnlyList<GetCompetenceAreaDTO>>(competenceAreas);
+            return Ok(records);
         }
 
+        [EnableQuery]
         [HttpGet("getById{id:int}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<ActionResult<GetCompetenceAreaDTO>> GetById(int id)
         {
-            try
+            var competenceArea = await _competenceAreasRepository.GetDetail(id);
+
+            if (competenceArea == null)
             {
-                var competenceArea = await _unitOfWork.CompetenceAreas.Get(e => e.Id == id);
-                var result = _mapper.Map<CompetenceAreaDto>(competenceArea);
-                return Ok(result);
+                throw new NotFoundException(nameof(GetById), id);
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error {nameof(GetById)}");
-                return StatusCode(500, "Internal server error");
-            }
+
+            var competenceAreaDTO = _mapper.Map<GetCompetenceAreaDTO>(competenceArea);
+
+            return Ok(competenceAreaDTO);
         }
 
-        [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] CompetenceAreaDto request)
+        [HttpGet("GetByEducationType{educationTypeId:int}")]
+        public async Task<ActionResult<IReadOnlyList<GetCompetenceAreaDTO>>> GetByEducationType(int educationTypeId)
         {
-            var competenceArea = _mapper.Map<CompetenceArea>(request);
-            await _unitOfWork.CompetenceAreas.Insert(competenceArea);
-            await _unitOfWork.Save();
+            var competenceAreas = await _competenceAreasRepository.GetByEducationType(educationTypeId);
+            var records = _mapper.Map<IReadOnlyList<GetCompetenceAreaDTO>>(competenceAreas);
+            return Ok(records);
+        }
 
-            return Ok(competenceArea);
+        [HttpPost]
+        [Route("create")]
+        public async Task<ActionResult<CompetenceArea>> Create([FromBody] CreateCompetenceAreaDTO createCompetenceAreaDTO)
+        {
+            var competenceArea = _mapper.Map<CompetenceArea>(createCompetenceAreaDTO);
+            await _competenceAreasRepository.AddAsync(competenceArea);
+            return CreatedAtAction("GetById", new { id = competenceArea.Id }, competenceArea);
+
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> Update(int id, [FromBody] CompetenceAreaDto request)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateCompetenceAreaDTO updateCompetenceAreaDTO)
         {
-            var competenceArea = await _unitOfWork.CompetenceAreas.Get(e => e.Id == id);
-            if (competenceArea == null)
+            if (id != updateCompetenceAreaDTO.Id)
             {
-                return BadRequest("Error");
+                return BadRequest("Invalid ID");
             }
 
-            _mapper.Map(request, competenceArea);
-            _unitOfWork.CompetenceAreas.Update(competenceArea);
-            await _unitOfWork.Save();
+            var competenceArea = await _competenceAreasRepository.GetAsync(id);
 
-            return Ok(competenceArea);
+            if (competenceArea == null)
+            {
+                throw new NotFoundException(nameof(GetById), id);
+            }
+
+            _mapper.Map(updateCompetenceAreaDTO, competenceArea);
+
+            try
+            {
+                await _competenceAreasRepository.UpdateAsync(competenceArea);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await ModuleExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            var competenceArea = await _unitOfWork.CompetenceAreas.Get(e => e.Id == id);
+            var competenceArea = await _competenceAreasRepository.GetAsync(id);
+
             if (competenceArea == null)
             {
-                return BadRequest("Error");
+                throw new NotFoundException(nameof(GetById), id);
             }
 
-            await _unitOfWork.CompetenceAreas.Delete(id);
-            await _unitOfWork.Save();
+            await _competenceAreasRepository.DeleteAsync(id);
 
-            return Ok("Competence Area deleted");
+            return NoContent();
+        }
+
+        private async Task<bool> ModuleExists(int id)
+        {
+            return await _competenceAreasRepository.Exists(id);
         }
     }
 }

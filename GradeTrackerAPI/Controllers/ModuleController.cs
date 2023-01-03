@@ -5,62 +5,90 @@ namespace GradeTrackerAPI.Controllers
     [ApiController]
     public class ModuleController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IModulesRepository _modulesRepository;
         private readonly ILogger<ModuleController> _logger;
         private readonly IMapper _mapper;
 
-        public ModuleController(IUnitOfWork unitOfWork, ILogger<ModuleController> logger, IMapper mapper)
+        public ModuleController(IModulesRepository modulesRepository, ILogger<ModuleController> logger, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
-            _logger = logger;
-            _mapper = mapper;
+            this._modulesRepository = modulesRepository;
+            this._logger = logger;
+            this._mapper = mapper;
         }
 
         [HttpGet("getAll")]
-        public async Task<IActionResult> GetAll()
+        [EnableQuery]
+        public async Task<ActionResult<IEnumerable<GetModuleDTO>>> GetAll()
         {
-            try
-            {
-                var modules = await _unitOfWork.Modules.GetAll();
-                var results = _mapper.Map<IList<ModuleDto>>(modules);
-                return Ok(results);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error {nameof(GetAll)}");
-                return StatusCode(500, "Internal server error");
-            }
+            var modules = await _modulesRepository.GetDetails();
+            var records = _mapper.Map<List<GetModuleDTO>>(modules);
+            return Ok(records);
         }
 
         [HttpGet("getById{id:int}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<ActionResult<GetModuleDTO>> GetById(int id)
         {
-            try
+            var module = await _modulesRepository.GetDetail(id);
+
+            if(module == null)
             {
-                var module = await _unitOfWork.Modules.Get(e => e.Id == id);
-                var result = _mapper.Map<ModuleDto>(module);
-                return Ok(result);
+                throw new NotFoundException(nameof(GetById), id);
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error {nameof(GetById)}");
-                return StatusCode(500, "Internal server error");
-            }
+
+            var moduleDTO = _mapper.Map<ModuleDTO>(module);
+
+            return Ok(moduleDTO);
         }
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create([FromBody] CreateModuleDto request)
+        public async Task<ActionResult<Module>> Create([FromBody] CreateModuleDTO createModuleDTO)
         {
-            var module = _mapper.Map<Module>(request);
-            await _unitOfWork.Modules.Insert(module);
-            await _unitOfWork.Save();
+            var module = _mapper.Map<Module>(createModuleDTO);
+            await _modulesRepository.AddAsync(module);
+            return CreatedAtAction("GetById", new { id = module.Id }, module);
 
-            return Ok(module);
         }
 
-        [HttpPut("update")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateModuleDto request)
+        [HttpPatch("update")]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateModuleDTO updateModuleDTO)
+        {
+            if(id != updateModuleDTO.Id)
+            {
+                return BadRequest("Invalid ID");
+            }
+
+            var module = await _modulesRepository.GetAsync(id);
+
+            if(module == null)
+            {
+                throw new NotFoundException(nameof(GetById), id);
+            }
+
+            _mapper.Map(updateModuleDTO, module);
+
+            try
+            {
+                await _modulesRepository.UpdateAsync(module);
+            }
+            catch(DbUpdateConcurrencyException)
+            {
+                if(!await ModuleExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        /* Needs revision
+        [HttpPut("setGoal")]
+        public async Task<IActionResult> SetGoal(int id, [FromBody] SetGoalDto request)
         {
             var module = await _unitOfWork.Modules.Get(e => e.Id == id);
             if (module == null)
@@ -74,20 +102,26 @@ namespace GradeTrackerAPI.Controllers
 
             return Ok(module);
         }
+        */
 
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            var module = await _unitOfWork.Modules.Get(e => e.Id == id);
-            if (module == null)
+            var module = await _modulesRepository.GetAsync(id);
+
+            if(module == null)
             {
-                return BadRequest("Error");
+                throw new NotFoundException(nameof(GetById), id);
             }
 
-            await _unitOfWork.Modules.Delete(id);
-            await _unitOfWork.Save();
+            await _modulesRepository.DeleteAsync(id);
 
-            return Ok("Module deleted");
+            return NoContent();
+        }
+
+        private async Task<bool> ModuleExists(int id)
+        {
+            return await _modulesRepository.Exists(id);
         }
     }
 }

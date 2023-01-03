@@ -1,33 +1,44 @@
-<div class="background">
+
 <h2>Notenerfassung</h2>
-<mat-divider></mat-divider>
-<div mat-dialog-actions>
-        <label for="date">Datum</label>
-        <input type="date" id="date" name="date" value="2022-08-25" min="2018-01-01" max="2024-12-31" [(ngModel)]="data.date">
-        <br>
-       <label for="bez">Bezeichnung</label>
-       <input  id="bez" name="bez" class="input-field" type="text" >
-       <br>
-       <label for="fachtyp">Fachtyp</label>
-        <select id="fachtyp" name="fachtyp" class="input-field">
-            <option>BM</option>
-            <option>EFZ</option>
-        </select>
-        <br>
-        <label for="note">Note</label>
-        <input type="number" id="note" name="note" min="1" max="6" [(ngModel)]="data.grade">
-        <br>
-        <label for="gewichtung">Gewichtung</label>
-        <input type="number" id="gewichtung" name="gewictung" min="0" max="2" step="0.5" [(ngModel)]="data.weighting">
-        <br>
-        <label for="fach" >Modul/Fach</label>
-        <select id="fach" name="fach" class="input-field" [(ngModel)]="data.moduleId">
-            <option  *ngFor="let a of modul"> {{a.id}}</option>
-        </select>
-        <br>
-  
-  
-        <button class="buttonCancel" [mat-dialog-close]="" cdkFocusInitial>Abbrechen</button>
-        <button class="buttonSubmit" (click)="onClick()" >Speichern</button> 
+    <mat-divider></mat-divider>
+    <div mat-dialog-actions>
+        <form [formGroup]="newMarkForm" (ngSubmit)="onSubmit()">
+            <label for="name">Fach</label>
+    
+            <mat-select matNativeControl #module class="input-field" formControlName="moduleId" name="moduleId">
+                <mat-option *ngFor="let module of modules" [value]="module.id" name="module">
+                    {{module.name}}
+                </mat-option>
+            </mat-select>
+    
+            <br>
+            <div>
+                <label for="goal">Datum</label>
+                <input type="date" max="6" min="1" formControlName="date" name="date" required>
+            </div>
+            <br>
+
+            <br>
+            <div>
+                <label for="Bezeichnung">Bezeichnung</label>
+                <input type="text" formControlName="description" name="description" required>
+            </div>
+            <br>
+            <br>
+            <div>
+                <label for="mark">Note</label>
+                <input type="number" max="6" min="1" formControlName="grade" name="mark" required>
+            </div>
+            <br>
+            <div>
+                <label for="weighting">Gewichtung</label>
+                <input type="number" max="2" min="0.5" step="0.5" formControlName="weighting" name="weighing" required>
+            </div>
+            <br>
+            <br>
+            <button class="buttonCancel" [mat-dialog-close]="" cdkFocusInitial>Abbrechen</button>
+            <button class="submit">Speichern</button>
+        </form>
+    
+    
     </div>
-</div>

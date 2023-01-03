@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren } from '@angular/core';
+import { Mark } from './../_models/mark';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { GoalService, Goal } from '../services/goal.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ModuleService } from '../_services/module.service';
+import { Module } from '../_models/module';
+import {MatDialog} from '@angular/material/dialog';
 import { NewgoalComponent } from '../newgoal/newgoal.component';
 
 @Component({
@@ -15,53 +17,54 @@ import { NewgoalComponent } from '../newgoal/newgoal.component';
 export class GoalOverviewComponent implements AfterViewInit,OnInit {
 
   title:string='Zielübersicht';
-
-  displayedColumns = ['fach', 'averageDesiredMark', 'needed'];
-
-  fach: string;
+  dataArray : Module[]
+  marksData : Mark[]
+  averageMark : number
+  displayedColumns: string[] = ['module', 'averageDesiredMark', 'reached'];
+  dataSource = new MatTableDataSource<Module>()
+  module: string;
   averageDesiredMark:number;
-  needed:number;
 
   openDialog(): void {
     const dialogRef = this.dialog.open(NewgoalComponent, {
       width: '40%' ,height:'70%',
-      data: {subject: this.fach, goal: this.averageDesiredMark},
+      data: {module: this.module, goal: this.averageDesiredMark},
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');;
     });
   }
-  protected GOAL_DATA: Goal[] = []
-  
 
-  dataSourceGoal = new MatTableDataSource<Goal>(this.GOAL_DATA);
- 
-
-
-  constructor(private _liveAnnouncer: LiveAnnouncer, private service: GoalService,public dialog: MatDialog,) { }
+  constructor(private _liveAnnouncer: LiveAnnouncer, private moduleService: ModuleService,public dialog: MatDialog,) { }
 
   ngOnInit() {
-    this.service.getGoals();
-    console.log(this.service.getGoals())
+    this.moduleService.getAll().subscribe(response => {
+      this.dataArray = response
+      this.dataArray.forEach(p => {
+        this.marksData = p.marks as Mark[]
+        let weighedMark = this.marksData.map(p => p.grade!* p.weighting!).reduce((a, b) => a+b, 0)
+        let sumOfWeights = this.marksData.map(p => p.weighting).reduce((a,b) => a!+b!, 0)
+        let calculationResult = weighedMark! / sumOfWeights!
+        p.averageMark = parseFloat(calculationResult.toFixed(2))
+      })
+      this.dataSource = new MatTableDataSource<Module>(this.dataArray);
+      console.warn(this.dataSource.data)
+    })
   }
 
   onChange($event:any){
     const filterValue = $event.value;
-    this.dataSourceGoal.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
    
   }
 
   applyFilter(event:Event){
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSourceGoal.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
   }
 
-  public getModule() {
-    let resp = this.service.getGoals();
-    resp.subscribe(report => this.dataSourceGoal.data = report as Goal[])
-  }
 
   public openForm() {
     let form = document.getElementById('myForm')
@@ -79,7 +82,7 @@ public closeForm() {
   @ViewChild(MatSort) sort = new MatSort();
 
   ngAfterViewInit() {
-    this.dataSourceGoal.sort = this.sort;
+    this.dataSource.sort = this.sort;
   }
 
   announceSortChange(sortState: Sort) {
