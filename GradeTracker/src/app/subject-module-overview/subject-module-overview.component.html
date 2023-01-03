@@ -3,7 +3,20 @@
 </mat-toolbar>
 
 <mat-form-field>
+<<<<<<< HEAD
       <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
+=======
+    <mat-label>Filter Modul</mat-label>
+    <mat-select matNativeControl #post class="input-field" (selectionChange)="onChange($event)">
+        <mat-option *ngFor="let post of posts" [value]="post.name" name="fach">
+            {{post.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field appearance="standard">
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" #input>
+>>>>>>> 6f0016fdeb23684a89d4f8210458da2ab289b79c
 </mat-form-field>
 
         <mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"

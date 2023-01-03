@@ -59,6 +59,7 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
     }
 
   ngOnInit() {
+<<<<<<< HEAD
     this.moduleService.getAll().subscribe(response => {
       this.dataArray = response
       this.dataArray.forEach(p => {
@@ -71,6 +72,25 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
       })
       this.dataSource = new MatTableDataSource<Module>(this.dataArray)
     })
+=======
+    this.getModule();
+    this.service.getAll()
+    .subscribe(response => {
+      this.posts = response;
+    });
+    console.warn(this.dataSourceBM.data)
+  }
+  onChange($event:any){
+    const filterValue = $event.value;
+    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
+    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilter(event:Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
+    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
+>>>>>>> 6f0016fdeb23684a89d4f8210458da2ab289b79c
   }
   
   applyFilter(filterValue:string){
