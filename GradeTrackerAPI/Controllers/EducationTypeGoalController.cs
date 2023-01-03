@@ -7,106 +7,88 @@ namespace GradeTrackerAPI.Controllers
     [ApiController]
     public class EducationTypeGoalController : ControllerBase
     {
-        private readonly IEducationTypeGoalsRepository _educationTypeGoalRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<EducationTypeGoalController> _logger;
         private readonly IMapper _mapper;
 
-        public EducationTypeGoalController(IEducationTypeGoalsRepository educationTypeGoalRepository, ILogger<EducationTypeGoalController> logger, IMapper mapper)
+        public EducationTypeGoalController(IUnitOfWork unitOfWork, ILogger<EducationTypeGoalController> logger, IMapper mapper)
         {
-            _educationTypeGoalRepository = educationTypeGoalRepository;
+            _unitOfWork = unitOfWork;
             _logger = logger;
             _mapper = mapper;
         }
 
         [HttpGet("getAll")]
-        public async Task<ActionResult<IReadOnlyList<GetEducationTypeGoalDTO>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var educationTypes = await _educationTypeGoalRepository.GetDetails();
-            var records = _mapper.Map<IReadOnlyList<GetEducationTypeGoalDTO>>(educationTypes);
-            return Ok(records);
+            try
+            {
+                var educationTypeGoals = await _unitOfWork.EducationTypeGoals.GetAll();
+                var results = _mapper.Map<IList<EducationTypeGoalDto>>(educationTypeGoals);
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error {nameof(GetAll)}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpGet("getById{id:int}")]
-        public async Task<ActionResult<GetEducationTypeGoalDTO>> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var educationType = await _educationTypeGoalRepository.GetDetail(id);
-
-            if (educationType == null)
+            try
             {
-                throw new NotFoundException(nameof(GetById), id);
+                var educationTypeGoal = await _unitOfWork.EducationTypeGoals.Get(e => e.Id == id);
+                var result = _mapper.Map<EducationTypeGoal>(educationTypeGoal);
+                return Ok(result);
             }
-
-            var educationTypeDTO = _mapper.Map<GetEducationTypeGoalDTO>(educationType);
-
-            return Ok(educationTypeDTO);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error {nameof(GetById)}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
-        [HttpPost]
-        [Route("create")]
-        public async Task<ActionResult<CreateEducationTypeGoalDTO>> Create([FromBody] CreateEducationTypeGoalDTO createEducationTypeGoalDTO)
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] EducationTypeGoalDto request)
         {
-            var educationTypeGoal = _mapper.Map<EducationTypeGoal>(createEducationTypeGoalDTO);
-            await _educationTypeGoalRepository.AddAsync(educationTypeGoal);
-            var result = CreatedAtAction("GetById", new { id = educationTypeGoal.Id }, educationTypeGoal);
-            return result;
+            var educationTypeGoal = _mapper.Map<EducationTypeGoal>(request);
+            await _unitOfWork.EducationTypeGoals.Insert(educationTypeGoal);
+            await _unitOfWork.Save();
 
-
+            return Ok(educationTypeGoal);
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateEducationTypeGoalDTO updateEducationTypeGoalDTO)
+        public async Task<IActionResult> Update(int id, [FromBody] EducationTypeGoalDto request)
         {
-            if (id != updateEducationTypeGoalDTO.Id)
-            {
-                return BadRequest("Invalid ID");
-            }
-
-            var educationTypeGoal = await _educationTypeGoalRepository.GetAsync(id);
-
+            var educationTypeGoal = await _unitOfWork.EducationTypeGoals.Get(e => e.Id == id);
             if (educationTypeGoal == null)
             {
-                throw new NotFoundException(nameof(GetById), id);
+                return BadRequest("Error");
             }
 
-            _mapper.Map(updateEducationTypeGoalDTO, educationTypeGoal);
+            _mapper.Map(request, educationTypeGoal);
+            _unitOfWork.EducationTypeGoals.Update(educationTypeGoal);
+            await _unitOfWork.Save();
 
-            try
-            {
-                await _educationTypeGoalRepository.UpdateAsync(educationTypeGoal);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!await ModuleExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(educationTypeGoal);
         }
 
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            var educationTypeGoal = await _educationTypeGoalRepository.GetAsync(id);
-
+            var educationTypeGoal = await _unitOfWork.EducationTypeGoals.Get(e => e.Id == id);
             if (educationTypeGoal == null)
             {
-                throw new NotFoundException(nameof(GetById), id);
+                return BadRequest("Error");
             }
 
-            await _educationTypeGoalRepository.DeleteAsync(id);
+            await _unitOfWork.EducationTypeGoals.Delete(id);
+            await _unitOfWork.Save();
 
-            return NoContent();
-        }
-
-        private async Task<bool> ModuleExists(int id)
-        {
-            return await _educationTypeGoalRepository.Exists(id);
+            return Ok("Education Type Goal deleted");
         }
     }
 }

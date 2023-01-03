@@ -3,117 +3,15 @@
     public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-        public DbSet<User> Users { get; set; }
+
+        public DbSet<User>? Users { get; set; }
         public DbSet<EducationTypeGoal>? EducationTypeGoals { get; set; }
         public DbSet<EducationType>? EducationTypes { get; set; }
         public DbSet<CompetenceArea>? CompetenceAreas { get; set; }
         public DbSet<Module>? Modules { get; set; }
         public DbSet<Teacher>? Teachers { get; set; }
         public DbSet<Mark>? Marks { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-
-            builder.Entity<EducationType>()
-                .HasMany(et => et.CompetenceAreas)
-                .WithOne(ca => ca.EducationType);
-
-            builder.Entity<CompetenceArea>()
-                .HasOne(et => et.EducationType)
-                .WithMany(ca => ca.CompetenceAreas);
-
-            builder.Entity<EducationType>().HasData(
-                new EducationType
-                {
-                    Id = 1,
-                    Name = "EFZ",
-                    Calculation = 1.0
-                },
-                new EducationType
-                {
-                Id = 2,
-                    Name = "BM",
-                    Calculation = 1.0
-                },
-                new EducationType
-                {
-                    Id = 3,
-                    Name = "MS",
-                    Calculation = 1.0
-                }
-                );
-
-            builder.Entity<CompetenceArea>().HasData(
-                new CompetenceArea
-                {
-                    Id = 1,
-                    Name = "Fachkompetenzen",
-                    EducationTypeId = 1,
-                },
-                new CompetenceArea
-                {
-                    Id = 2,
-                    Name = "Erweiterte Grundkompetenzen",
-                    EducationTypeId = 1,
-                },
-                new CompetenceArea
-                {
-                    Id = 3,
-                    Name = "Allgemeinbildung",
-                    EducationTypeId = 1,
-                },
-                new CompetenceArea
-                {
-                    Id = 4,
-                    Name = "ÜK",
-                    EducationTypeId = 1,
-                },
-                new CompetenceArea
-                {
-                    Id = 5,
-                    Name = "Erweiterte Grundkompetenzen",
-                    EducationTypeId = 2,
-                },
-                new CompetenceArea
-                {
-                    Id = 6,
-                    Name = "Erweiterte Allgemeinbildung",
-                    EducationTypeId = 2,
-                },
-                new CompetenceArea
-                {
-                    Id = 7,
-                    Name = "ÜK",
-                    EducationTypeId = 2,
-                },
-                new CompetenceArea
-                {
-                    Id = 8,
-                    Name = "Fachkompetenzen",
-                    EducationTypeId = 3,
-                },
-                new CompetenceArea
-                {
-                    Id = 9,
-                    Name = "Erweiterte Grundkompetenzen",
-                    EducationTypeId = 3,
-                },
-                new CompetenceArea
-                {
-                    Id = 10,
-                    Name = "Erweiterte Allgemeinbildung",
-                    EducationTypeId = 3,
-                },
-                new CompetenceArea
-                {
-                    Id = 11,
-                    Name = "ÜK",
-                    EducationTypeId = 3,
-                }
-                );
-        }
-        /*
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -225,6 +123,6 @@
                     TeacherId = 3,
                 }
                 );
-        }*/
+        }
     }
 }

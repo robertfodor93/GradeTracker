@@ -1,8 +1,9 @@
 import { Component, OnInit,Inject } from '@angular/core';
-import { ModuleService} from '../_services/module.service';
-import {MatDialogRef} from '@angular/material/dialog';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { MarkService } from '../_services/mark.service';
+import { ModuleService, Subject } from '../services/module.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Exam ,GradeService } from '../services/grade.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -12,34 +13,34 @@ import { MarkService } from '../_services/mark.service';
 })
 export class NewGradeComponent implements OnInit {
 
-  newMarkForm : FormGroup
-  modules : any
+modul:any;
   
   constructor(
     public dialogRef: MatDialogRef<NewGradeComponent>,
-    private moduleService: ModuleService, private markService: MarkService, private formBuilder : FormBuilder
-  ) {
-    
+    @Inject(MAT_DIALOG_DATA ) public data: Exam, private Modulservice: ModuleService, private GradeService: GradeService, private http:HttpClient
+  ) {}
+
+  onClick() {
+    this.postGrade(this.data)
   }
 
-  onSubmit() {
-    this.markService.createMark(this.newMarkForm.value).subscribe()
-    console.warn(this.newMarkForm.value)
+  postGrade(data : Exam){
+    const headers = { 'content-type': 'application/json'} 
+    const grade = JSON.stringify(data);
+    console.log(grade)
+    this.http.post('https://localhost:7290/api/Mark/create', grade, {'headers':headers}).subscribe((result)=>{
+      console.warn("result", result);
+    });
   }
 
-  ngOnInit() {
-    this.moduleService.getAll()
-      .subscribe(response => {
-        this.modules = response;
-      });
-    console.log(this.modules)
-
-    this.newMarkForm = this.formBuilder.group({
-      grade: [null],
-      description : [null],
-      weighting : [null],
-      date : [null],
-      moduleId : [null]
-    })
+  public getModule() {
+    let resp = this.Modulservice.getModule();
+    resp.subscribe(report => this.modul = report as Subject[]);
+    console.log('modul',this.modul);
   }
+
+  ngOnInit(): void {
+    this.getModule();
+  }
+
 }

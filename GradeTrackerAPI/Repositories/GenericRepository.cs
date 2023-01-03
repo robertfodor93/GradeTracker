@@ -3,106 +3,79 @@
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly DataContext _dataContext;
-        private readonly IMapper _mapper;
+        private readonly DbSet<T> _db;
 
-        public GenericRepository(DataContext context, IMapper mapper)
+        public GenericRepository(DataContext context)
         {
-            this._dataContext = context;
-            this._mapper = mapper;
+            _dataContext = context;
+            _db = _dataContext.Set<T>();
         }
         
-        public async Task<List<T>> GetAllAsync()
+        public async Task Delete(int id)
         {
-            return await _dataContext.Set<T>().ToListAsync();
+            var entity = await _db.FindAsync(id);
+            _db.Remove(entity);
         }
 
-        public async Task<List<TResult>> GetAllAsync<TResult>()
+        public void DeleteRange(IEnumerable<T> entities)
         {
-            return await _dataContext.Set<T>()
-                .ProjectTo<TResult>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+            _db.RemoveRange(entities);
         }
 
-        public async Task<T> GetAsync(int? id)
+        public async Task<T> Get(Expression<Func<T, bool>> expression, List<string> includes = null)
         {
-            if (id == null)
+            IQueryable<T> query = _db;
+
+            if(includes != null)
             {
-                return null;
+                foreach (var includeProperty in includes)
+                {
+                    query = query.Include(includeProperty);
+                }
             }
 
-            return await _dataContext.Set<T>().FindAsync(id);
+            return await query.AsNoTracking().FirstOrDefaultAsync(expression);
         }
 
-        public async Task<TResult> GetAsync<TResult>(int? id)
+        public async Task<IList<T>> GetAll(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IOrderedQueryable<T>> oderBy = null, List<string> includes = null)
         {
-            var result = await _dataContext.Set<T>().FindAsync(id);
-            if (result == null)
+            IQueryable<T> query = _db;
+
+            if(expression != null)
             {
-                throw new NotFoundException(typeof(T).Name, id.HasValue ? id : "No Key Provided");
+                query = query.Where(expression);
             }
 
-            return _mapper.Map<TResult>(result);
-        }
-
-        public async Task<T> AddAsync(T entity)
-        {
-            await _dataContext.AddAsync(entity);
-            await _dataContext.SaveChangesAsync();
-            return entity;
-        }
-
-        public async Task<TResult> AddAsync<TSource, TResult>(TSource source)
-        {
-            var entity = _mapper.Map<T>(source);
-
-            await _dataContext.AddAsync(entity);
-            await _dataContext.SaveChangesAsync();
-
-            return _mapper.Map<TResult>(entity);
-        }
-
-        public async Task UpdateAsync(T entity)
-        {
-            _dataContext.Update(entity);
-            await _dataContext.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync<TSource>(int id, TSource source) where TSource : IBaseDTO
-        {
-            if(id != source.Id)
+            if (includes != null)
             {
-                throw new BadRequestException("Invalid Id used in request");
+                foreach (var includeProperty in includes)
+                {
+                    query = query.Include(includeProperty);
+                }
             }
 
-            var entity = await GetAsync(id);
-
-            if( entity == null)
+            if(oderBy != null)
             {
-                throw new NotFoundException(typeof(T).Name, id);
+                query = oderBy(query);
             }
 
-            _mapper.Map(source, entity);
-            _dataContext.Update(entity);
-            await _dataContext.SaveChangesAsync();
+            return await query.AsNoTracking().ToListAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task Insert(T entity)
         {
-            var entity = await GetAsync(id);
-
-            if (entity == null)
-            {
-                throw new NotFoundException(typeof(T).Name, id);
-            }
-
-            _dataContext.Set<T>().Remove(entity);
-            await _dataContext.SaveChangesAsync();
+            await _db.AddAsync(entity);
         }
 
-        public async Task<bool> Exists(int id)
+        public async Task InsertRange(IEnumerable<T> entities)
         {
-            var entity = await GetAsync(id);
-            return entity != null;
+            await _db.AddRangeAsync(entities);
+        }
+
+        public void Update(T entity)
+        {
+            _db.Attach(entity);
+            _dataContext.Entry(entity).State = EntityState.Modified;
         }
     }
 }

@@ -12,13 +12,13 @@ import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   
-  {path: `subjectoverview`, component: SubjectModuleOverviewComponent, data:{title:'Modulübersicht'}, canActivate: [AuthGuard]},
+  {path: `subjectoverview`, component: SubjectModuleOverviewComponent, data:{title:'Modulübersicht'}},
   {path:`registration`, component:RegistrationComponent, data:{title:'Registrieren'}},
   {path:`login`, component:LoginComponent, data:{title:'Login'}},
-  {path:`dashboard`, component:DashboardComponent, data:{title:'Dashboard'}, canActivate: [AuthGuard]},
-  {path:`goaloverview`, component:GoalOverviewComponent, data:{title:'Zielübersicht'}, canActivate: [AuthGuard]},
-  {path:`gradeoverview`, component:GradeOverviewComponent, data:{title:'Notenüberischt'}, canActivate: [AuthGuard]},
-  {path:`profile`, component:ProfileComponent, data:{title:'Profil'}, canActivate: [AuthGuard]},
+  {path:`dashboard`, component:DashboardComponent, data:{title:'Dashboard'}},
+  {path:`goaloverview`, component:GoalOverviewComponent, data:{title:'Zielübersicht'}},
+  {path:`gradeoverview`, component:GradeOverviewComponent, data:{title:'Notenüberischt'}},
+  {path:`profile`, component:ProfileComponent, data:{title:'Profil'}},
   {path: '',   redirectTo: '/registration', pathMatch: 'full'},
 
 
