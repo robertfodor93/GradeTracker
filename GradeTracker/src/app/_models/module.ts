@@ -1,3 +1,4 @@
+import { EducationType } from './educationType';
 import { User } from './user';
 import { CompetenceArea } from './competenceArea';
 import { MatTableDataSource } from "@angular/material/table";
@@ -11,6 +12,8 @@ export class Module {
     teacher?: string;
     averageDesiredMark?: number;
     averageMark? : number;
+    numberOfMarks?: number;
+    educationType?: EducationType;
     marks?: Mark[] | MatTableDataSource<Mark>;
     showOnDashboard?: boolean;
     userId? : number;

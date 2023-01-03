@@ -1,5 +1,4 @@
-import { IModule } from './../_models/module';
-import { Mark, IMark } from './../_models/mark';
+import { Mark } from './../_models/mark';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -44,8 +43,8 @@ export class GoalOverviewComponent implements AfterViewInit,OnInit {
       this.dataArray = response
       this.dataArray.forEach(p => {
         this.marksData = p.marks as Mark[]
-        let weighedMark = this.marksData.map(p => p.grade!* p.weighting!).reduce((a, b) => a+b)
-        let sumOfWeights = this.marksData.map(p => p.weighting).reduce((a,b) => a!+b!)
+        let weighedMark = this.marksData.map(p => p.grade!* p.weighting!).reduce((a, b) => a+b, 0)
+        let sumOfWeights = this.marksData.map(p => p.weighting).reduce((a,b) => a!+b!, 0)
         let calculationResult = weighedMark! / sumOfWeights!
         p.averageMark = parseFloat(calculationResult.toFixed(2))
       })

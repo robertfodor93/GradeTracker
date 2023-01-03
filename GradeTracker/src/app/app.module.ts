@@ -34,7 +34,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { Title } from '@angular/platform-browser';
 
@@ -78,14 +78,9 @@ import { NewgoalComponent } from './newgoal/newgoal.component';
     MatOptionModule,
     MatSelectModule,
     MatSortModule,
-
     MatDialogModule,
-
     FormsModule,
-
-
-
-   
+    MatSlideToggleModule
   ],
   providers: [ 
     JwtHelperService,

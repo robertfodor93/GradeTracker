@@ -6,6 +6,6 @@ export class EducationTypeGoal {
     averageDesiredMark?: number
     userId? : number
     user?: User
-    educationTypeId: number
-    educationType: EducationType
+    educationTypeId?: number
+    educationType?: EducationType
 }

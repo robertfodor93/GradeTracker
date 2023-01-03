@@ -3,22 +3,10 @@
 </mat-toolbar>
 
 <mat-form-field>
-    <mat-label>Filter Modul</mat-label>
-    <mat-select matNativeControl #post class="input-field" (selectionChange)="onChange($event)">
-        <mat-option *ngFor="let post of posts" [value]="post.name" name="fach">
-            {{post.name}}
-        </mat-option>
-    </mat-select>
-</mat-form-field> <br>
-
-<mat-form-field appearance="standard">
-    <mat-label>Search</mat-label>
-    <input matInput (keyup)="applyFilter($event)" #input>
+      <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
 </mat-form-field>
 
-<mat-tab-group>
-    <mat-tab label="EFZ">
-        <mat-table [dataSource]="dataSourceEFZ" matSort (matSortChange)="announceSortChange($event)"
+        <mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
             class="mat-elevation-z8">
 
             <!-- subject Column -->
@@ -28,6 +16,14 @@
                     Subject
                 </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="educationType">
+                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header
+                    sortActionDescription="Sort by educationType">
+                    Ausbildungstyp
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.competenceArea.educationType.name}} </mat-cell>
             </ng-container>
 
             <!-- kompetenzbereich Column -->
@@ -49,12 +45,12 @@
             </ng-container>
 
             <!-- durchschnitt Column -->
-            <ng-container matColumnDef="averageDesiredMark">
+            <ng-container matColumnDef="averageMark">
                 <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header
                     sortActionDescription="Sort by durchschnitt">
                     Durchschnitt
                 </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.averageDesiredMark}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.averageMark}} </mat-cell>
             </ng-container>
 
             <!-- anzahlNoten Column -->
@@ -63,7 +59,7 @@
                     sortActionDescription="Sort by anzahlNoten">
                     Anzahl Noten
                 </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.marks.grade}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.numberOfMarks}} </mat-cell>
             </ng-container>
 
             <!-- Favorit Column -->
@@ -78,71 +74,5 @@
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
-    </mat-tab>
-
-    <mat-tab label="BM">
-
-        <mat-table [dataSource]="dataSourceBM" matSort (matSortChange)="announceSortChange($event)"
-            class="mat-elevation-z8">
-
-            <!-- subject Column -->
-            <ng-container matColumnDef="name">
-                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header
-                    sortActionDescription="Sort by subject">
-                    Subject
-                </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-            </ng-container>
-
-            <!-- kompetenzbereich Column -->
-            <ng-container matColumnDef="competenceArea">
-                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header
-                    sortActionDescription="Sort by kompetenzbereich">
-                    Kompetenzbereich
-                </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.competenceArea}} </mat-cell>
-            </ng-container>
-
-            <!-- teacher Column -->
-            <ng-container matColumnDef="teacher">
-                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header
-                    sortActionDescription="Sort by teacher">
-                    Teacher
-                </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.teacher}} </mat-cell>
-            </ng-container>
-
-            <!-- durchschnitt Column -->
-            <ng-container matColumnDef="averageDesiredMark">
-                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header
-                    sortActionDescription="Sort by durchschnitt">
-                    Durchschnitt
-                </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.averageDesiredMark}} </mat-cell>
-            </ng-container>
-
-            <!-- anzahlNoten Column -->
-            <ng-container matColumnDef="marks">
-                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header
-                    sortActionDescription="Sort by anzahlNoten">
-                    Anzahl Noten
-                </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.marks}} </mat-cell>
-            </ng-container>
-
-            <!-- Favorit Column -->
-            <ng-container matColumnDef="showOnDashboard">
-                <mat-header-cell class="headerrow" *matHeaderCellDef mat-sort-header
-                    sortActionDescription="Sort by favorit">
-                    Favorit
-                </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.showOnDashboard}} </mat-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-    </mat-tab>
-</mat-tab-group>
 
 <button class="buttonNew" mat-raised-button (click)="openDialog()">Neues Fach/Modul erfassen</button>
