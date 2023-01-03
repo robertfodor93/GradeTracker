@@ -59,7 +59,6 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
     });
     console.warn(this.dataSourceBM.data)
   }
-
   onChange($event:any){
     const filterValue = $event.value;
     this.dataSourceBM.filter = filterValue.trim().toLowerCase();

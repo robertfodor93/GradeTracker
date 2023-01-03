@@ -66,6 +66,56 @@ export class GradeOverviewComponent implements OnInit {
 
   panelOpenState = false;
   
+  protected SUBJECT_DATA_EFZ: Subject[] = [];
+  protected SUBJECT_DATA_BM: Subject[] = [];
+  protected EXAM_DATA_EFZ: Exam[] = [];
+  protected EXAM_DATA_BM: Exam[] = [];
+
+  dataSourceEFZ = new MatTableDataSource<Subject>(this.SUBJECT_DATA_EFZ);
+  dataSourceBM = new MatTableDataSource<Subject>(this.SUBJECT_DATA_BM);
+  // datasourceEFZExam = EXAM_DATA_EFZ;
+  // datasourceBMExam = EXAM_DATA_BM;
+  dataSourceEFZexam = new MatTableDataSource<Exam>(this.EXAM_DATA_EFZ);
+  dataSourceBMexam = new MatTableDataSource<Exam>(this.EXAM_DATA_BM);
+
+  onChange($event:any){
+    const filterValue = $event.value;
+    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
+    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
+  }
+  applyFilter(event: Event) {
+  
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
+    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataSourceEFZ.filter = filterValue.trim().toLowerCase());
+  }
+  // filterExam($event:Event){
+  //   const subject = document.getElementById("subject")?.innerHTML;
+  //   console.log(subject);
+  //   this.dataSourceEFZ.filter = subject.trim().toLowerCase();
+  // }
+
+    filterExam(){
+   const filter = 2;
+   this.dataSourceEFZexam.filter = filter.toString();
+    console.log(this.dataSourceEFZexam.filter = filter.toString().trim());
+  //funktioniert noch nicht 
+  }
+
+  public getModule() {
+    let resp = this.Modulservice.getModule();
+    resp.subscribe(report => this.dataSourceEFZ.data = report as Subject[])
+    resp.subscribe(report => this.dataSourceBM.data = report as Subject[])
+  }
+  
+  public getGrade() {
+    let resp = this.Gradeservice.getGrade();
+    resp.subscribe(report => this.dataSourceEFZexam.data = report as Exam[])
+    resp.subscribe(report => this.dataSourceBMexam.data = report as Exam[])
+    console.log(this.dataSourceEFZexam)
+  }
+  
   //Neue Noten erfassen
   openDialog(): void {
     const dialogRef = this.matDialog.open(NewGradeComponent, {
@@ -79,11 +129,12 @@ export class GradeOverviewComponent implements OnInit {
     });
   }
 
+
   toggleRow(element: Module) {
     element.marks && (element.marks as MatTableDataSource<Mark>).data?.length?(this.expandedElement = this.expandedElement === element ? null : element) : null;
     this.changeDetectorRef.detectChanges();
     this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Mark>).sort = this.innerSort.toArray()[index]);
   }
   
-}
 
+}
