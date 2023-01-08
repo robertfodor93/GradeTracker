@@ -40,26 +40,18 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
       this.bez = result;
     });
   }
-  protected SUBJECT_DATA_EFZ: Module[] = []
-  protected SUBJECT_DATA_BM: Module[] = []
+  protected MODULE_DATA: Module[] = []
 
-  dataSourceEFZ = new MatTableDataSource<Module>(this.SUBJECT_DATA_EFZ);
-  dataSourceBM = new MatTableDataSource<Module>(this.SUBJECT_DATA_BM);
+  dataSourceModule = new MatTableDataSource<Module>(this.MODULE_DATA)
 
   title:string = "Fach-/Modulübersicht";
 
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private service: ModuleService,public dialog: MatDialog, private http: HttpClient) { }
+  constructor(private _liveAnnouncer: LiveAnnouncer, private moduleService: ModuleService,public dialog: MatDialog, private http: HttpClient) { }
 
   ngOnInit() {
-    this.getModule();
-    this.service.getAll()
-    .subscribe(response => {
-      this.posts = response;
-    });
-    console.warn(this.dataSourceBM.data)
+    this.moduleService.getAll().subscribe((res: any))
   }
-
   onChange($event:any){
     const filterValue = $event.value;
     this.dataSourceBM.filter = filterValue.trim().toLowerCase();
