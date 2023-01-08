@@ -170,6 +170,7 @@ namespace GradeTrackerAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Grade = table.Column<double>(type: "float", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Weighting = table.Column<double>(type: "float", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModuleId = table.Column<int>(type: "int", nullable: true),
@@ -194,10 +195,10 @@ namespace GradeTrackerAPI.Migrations
                 columns: new[] { "Id", "Calculation", "CreateBy", "CreatedAt", "EducationTypeGoalId", "IsActive", "ModifiedAt", "ModifiedBy", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1.0, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(1921), null, true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(1966), "", "Eidgenössisches Berufsattest (EBA)" },
-                    { 2, 1.0, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(1970), null, true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(1972), "", "Eidgenössisches Fachzertifikat (EFZ)" },
-                    { 3, 1.0, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(1974), null, true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(1976), "", "Berufsmatura (BMS)" },
-                    { 4, 1.0, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(1979), null, true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(1981), "", "IMS" }
+                    { 1, 1.0, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3659), null, true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3702), "", "Eidgenössisches Berufsattest (EBA)" },
+                    { 2, 1.0, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3707), null, true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3708), "", "Eidgenössisches Fachzertifikat (EFZ)" },
+                    { 3, 1.0, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3736), null, true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3737), "", "Berufsmatura (BMS)" },
+                    { 4, 1.0, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3738), null, true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3739), "", "IMS" }
                 });
 
             migrationBuilder.InsertData(
@@ -205,9 +206,9 @@ namespace GradeTrackerAPI.Migrations
                 columns: new[] { "Id", "CreateBy", "CreatedAt", "IsActive", "ModifiedAt", "ModifiedBy", "Name" },
                 values: new object[,]
                 {
-                    { 1, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(3603), true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(3619), "", "Roland Bucher" },
-                    { 2, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(3623), true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(3625), "", "Fritz Kempf" },
-                    { 3, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(3627), true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(3629), "", "Marcel Schorno" }
+                    { 1, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(4904), true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(4915), "", "Roland Bucher" },
+                    { 2, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(4918), true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(4919), "", "Fritz Kempf" },
+                    { 3, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(4921), true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(4922), "", "Marcel Schorno" }
                 });
 
             migrationBuilder.InsertData(
@@ -215,9 +216,9 @@ namespace GradeTrackerAPI.Migrations
                 columns: new[] { "Id", "CreateBy", "CreatedAt", "EducationTypeId", "IsActive", "ModifiedAt", "ModifiedBy", "Name", "Weighting" },
                 values: new object[,]
                 {
-                    { 1, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(2101), 2, true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(2105), "", "Fachkompetenzen", null },
-                    { 2, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(2214), 3, true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(2217), "", "Erweiterte Kompetenzen", null },
-                    { 3, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(2220), 1, true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(2222), "", "Allgemeinbildung", null }
+                    { 1, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3861), 2, true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3863), "", "Fachkompetenzen", null },
+                    { 2, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3865), 3, true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3866), "", "Erweiterte Kompetenzen", null },
+                    { 3, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3868), 1, true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(3869), "", "Allgemeinbildung", null }
                 });
 
             migrationBuilder.InsertData(
@@ -225,9 +226,9 @@ namespace GradeTrackerAPI.Migrations
                 columns: new[] { "Id", "AverageDesiredMark", "CompetenceAreaId", "CreateBy", "CreatedAt", "IsActive", "ModifiedAt", "ModifiedBy", "Name", "ShowOnDashboard", "TeacherId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, null, null, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(6577), true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(6591), "", "INF 226B", true, 1, null },
-                    { 2, null, null, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(6595), true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(6597), "", "Mathematik", false, 2, null },
-                    { 3, null, null, "", new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(6600), true, new DateTime(2022, 8, 18, 15, 52, 11, 359, DateTimeKind.Local).AddTicks(6602), "", "Sprache und Kommunikation", false, 3, null }
+                    { 1, null, null, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(7509), true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(7521), "", "INF 226B", true, 1, null },
+                    { 2, null, null, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(7526), true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(7527), "", "Mathematik", false, 2, null },
+                    { 3, null, null, "", new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(7529), true, new DateTime(2023, 1, 8, 23, 51, 1, 616, DateTimeKind.Local).AddTicks(7530), "", "Sprache und Kommunikation", false, 3, null }
                 });
 
             migrationBuilder.CreateIndex(
