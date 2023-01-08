@@ -7,88 +7,104 @@ namespace GradeTrackerAPI.Controllers
     [ApiController]
     public class TeacherController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ITeachersRepository _teachersRepository;
         private readonly ILogger<TeacherController> _logger;
         private readonly IMapper _mapper;
 
-        public TeacherController(IUnitOfWork unitOfWork, ILogger<TeacherController> logger, IMapper mapper)
+        public TeacherController(ITeachersRepository teacherRepository, ILogger<TeacherController> logger, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
-            _logger = logger;
-            _mapper = mapper;
+            this._teachersRepository = teacherRepository;
+            this._logger = logger;
+            this._mapper = mapper;
         }
 
-        [HttpGet("getAll")]
-        public async Task<IActionResult> GetAll()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GetTeacherDTO>>> GetAll()
         {
-            try
-            {
-                var teachers = await _unitOfWork.Teachers.GetAll();
-                var results = _mapper.Map<IList<TeacherDto>>(teachers);
-                return Ok(results);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error {nameof(GetAll)}");
-                return StatusCode(500, "Internal server error");
-            }
+            var teachers = await _teachersRepository.GetAllAsync();
+            var records = _mapper.Map<List<GetTeacherDTO>>(teachers);
+            return Ok(records);
         }
 
         [HttpGet("getById{id:int}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<ActionResult<GetTeacherDTO>> GetById(int id)
         {
-            try
+            var teacher = await _teachersRepository.GetAsync(id);
+
+            if (teacher == null)
             {
-                var teacher = await _unitOfWork.Teachers.Get(e => e.Id == id);
-                var result = _mapper.Map<TeacherDto>(teacher);
-                return Ok(result);
+                throw new NotFoundException(nameof(GetById), id);
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error {nameof(GetById)}");
-                return StatusCode(500, "Internal server error");
-            }
+
+            var teacherDTO = _mapper.Map<GetTeacherDTO>(teacher);
+
+            return Ok(teacherDTO);
         }
 
-        [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] TeacherDto request)
+        [HttpPost]
+        [Route("create")]
+        public async Task<ActionResult<Teacher>> Create([FromBody] CreateTeacherDTO createTeacherDTO)
         {
-            var teacher = _mapper.Map<Teacher>(request);
-            await _unitOfWork.Teachers.Insert(teacher);
-            await _unitOfWork.Save();
+            var teacher = _mapper.Map<Teacher>(createTeacherDTO);
+            await _teachersRepository.AddAsync(teacher);
+            return CreatedAtAction("GetById", new { id = teacher.Id }, teacher);
 
-            return Ok(teacher);
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> Update(int id, [FromBody] TeacherDto request)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateTeacherDTO updateTeacherDTO)
         {
-            var teacher = await _unitOfWork.Teachers.Get(e => e.Id == id);
-            if (teacher == null)
+            if (id != updateTeacherDTO.Id)
             {
-                return BadRequest("Error");
+                return BadRequest("Invalid ID");
             }
 
-            _mapper.Map(request, teacher);
-            _unitOfWork.Teachers.Update(teacher);
-            await _unitOfWork.Save();
+            var teacher = await _teachersRepository.GetAsync(id);
 
-            return Ok(teacher);
+            if (teacher == null)
+            {
+                throw new NotFoundException(nameof(GetById), id);
+            }
+
+            _mapper.Map(updateTeacherDTO, teacher);
+
+            try
+            {
+                await _teachersRepository.UpdateAsync(teacher);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await ModuleExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            var teacher = await _unitOfWork.Teachers.Get(e => e.Id == id);
+            var teacher = await _teachersRepository.GetAsync(id);
+
             if (teacher == null)
             {
-                return BadRequest("Error");
+                throw new NotFoundException(nameof(GetById), id);
             }
 
-            await _unitOfWork.Teachers.Delete(id);
-            await _unitOfWork.Save();
+            await _teachersRepository.DeleteAsync(id);
 
-            return Ok("Teacher deleted");
+            return NoContent();
+        }
+
+        private async Task<bool> ModuleExists(int id)
+        {
+            return await _teachersRepository.Exists(id);
         }
     }
 }

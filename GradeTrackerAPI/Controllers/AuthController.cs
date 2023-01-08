@@ -5,49 +5,44 @@ namespace GradeTrackerAPI.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthService _authService;
+        private readonly IAuthRepository _authRepository;
 
-        public AuthController(IAuthService authService, IUnitOfWork unitOfWork, IMapper mapper)
+        public AuthController(IAuthRepository authRepository)
         {
-            _authService = authService;
+            this._authRepository = authRepository;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register([FromBody] UserDto request)
+        public async Task<ActionResult<User>> Register([FromBody] UserDTO userDTO)
         {
-            var response = await _authService.Register(request);
+            var response = await _authRepository.Register(userDTO);
             return Ok(response);
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login([FromBody] UserDto request)
+        public async Task<ActionResult<User>> Login([FromBody] LoginUserDTO loginUserDTO)
         {
-            var response = await _authService.Login(request);
-            if (response.Success)
+            var response = await _authRepository.Login(loginUserDTO);
+            if(response == null)
+            {
+                return Unauthorized();
+            } else
             {
                 return Ok(response);
             }
-
-            return BadRequest(response.Message);
         }
 
         [HttpPost("refreshToken")]
         public async Task<ActionResult<string>> RefreshToken()
         {
-            var response = await _authService.RefreshToken();
-            if (response.Success)
+            var response = await _authRepository.RefreshToken();
+            if(response == null)
+            {
+                return Unauthorized();
+            } else
             {
                 return Ok(response);
             }
-
-            return BadRequest(response.Message);
-        }
-
-        [Authorize]
-        [HttpGet]
-        public ActionResult<string> Authorization()
-        {
-            return Ok("Authorized");
         }
     }
 }

@@ -1,15 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, tap, switchMap } from 'rxjs/operators';
 import {User} from '../_models/user'
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-
-export interface LoginForm {
-  username: string;
-  password: string;
-}
 
 export const JWT_NAME = 'token';
 
@@ -18,6 +13,7 @@ export const JWT_NAME = 'token';
 })
 export class AuthService {
 
+  private _user = new BehaviorSubject<User | null>(null);
   private authenticated = new BehaviorSubject<boolean>(false);
 
   get checkAuthentication() {
@@ -26,19 +22,19 @@ export class AuthService {
 
   constructor(private http : HttpClient, private jwtHelper : JwtHelperService, private router : Router) { }
 
-  login(loginForm: LoginForm) {  
-
-    return this.http.post<any>('https://localhost:7290/api/Auth/login', {username: loginForm.username, password: loginForm.password}).pipe(
+  login(user : User) {  
+    return this.http.post<any>('https://localhost:7290/api/Auth/login', user).pipe(
       map((token) => {
         console.log('token' + token.token);
         localStorage.setItem(JWT_NAME, token.token);
+        localStorage.setItem('userId', token.id)
         return token;
       })
     )
   }
 
   logout() {
-    localStorage.removeItem(JWT_NAME);
+    localStorage.removeItem('token');
     this.router.navigate(['/login'])
   }
 
@@ -55,11 +51,4 @@ export class AuthService {
     return false;
   }
 
-  getUserId(): Observable<number>{
-    return of(JSON.stringify(localStorage.getItem(JWT_NAME))).pipe(
-      switchMap((jwt) => of(this.jwtHelper.decodeToken(jwt)).pipe(
-        map((jwt : any) => jwt.user.id)
-      )
-    ));
-  }
 }

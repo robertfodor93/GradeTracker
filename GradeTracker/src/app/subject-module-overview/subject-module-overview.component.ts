@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren } from '@angu
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ModuleService, Subject } from '../services/module.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Module } from '../_models/module';
+import { ModuleService } from '../_services/module.service';
+import {MatDialog} from '@angular/material/dialog';
 import { NewSubjectModuleComponent } from '../new-subject-module/new-subject-module.component';
 import { HttpClient } from '@angular/common/http';
 
@@ -39,11 +40,11 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
       this.bez = result;
     });
   }
-  protected SUBJECT_DATA_EFZ: Subject[] = []
-  protected SUBJECT_DATA_BM: Subject[] = []
+  protected SUBJECT_DATA_EFZ: Module[] = []
+  protected SUBJECT_DATA_BM: Module[] = []
 
-  dataSourceEFZ = new MatTableDataSource<Subject>(this.SUBJECT_DATA_EFZ);
-  dataSourceBM = new MatTableDataSource<Subject>(this.SUBJECT_DATA_BM);
+  dataSourceEFZ = new MatTableDataSource<Module>(this.SUBJECT_DATA_EFZ);
+  dataSourceBM = new MatTableDataSource<Module>(this.SUBJECT_DATA_BM);
 
   title:string = "Fach-/Modulübersicht";
 
@@ -52,11 +53,13 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.getModule();
-    this.service.getModule()
+    this.service.getAll()
     .subscribe(response => {
       this.posts = response;
     });
+    console.warn(this.dataSourceBM.data)
   }
+
   onChange($event:any){
     const filterValue = $event.value;
     this.dataSourceBM.filter = filterValue.trim().toLowerCase();
@@ -71,10 +74,10 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
   
 
   public getModule() {
-    let resp = this.service.getModule();
+    let resp = this.service.getAll();
     
-    resp.subscribe(report => this.dataSourceEFZ.data = report as Subject[])
-    resp.subscribe(report => this.dataSourceBM.data = report as Subject[])
+    resp.subscribe(report => this.dataSourceEFZ.data = report as Module[])
+    resp.subscribe(report => this.dataSourceBM.data = report as Module[])
   }
 
   public openForm() {

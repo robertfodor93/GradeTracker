@@ -2,23 +2,44 @@
     <mat-card>
         <mat-card-header>
             <mat-card-title>
-                <h1>Login</h1>
+                <h1>Registrieren</h1>
             </mat-card-title>
-            <mat-card-subtitle>Loggen sie sich in ihren Grade-Tracker Account ein!</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                <mat-form-field>
-                    <input matInput placeholder="Username" formControlName="username">
-                </mat-form-field>
-                <mat-form-field>
-                    <input matInput placeholder="Password" formControlName="password">
-                </mat-form-field>
-                <button type="submit" class="submit-button">Register</button>
+                    <mat-form-field>
+                        <label>Benutzername</label>
+                        <input matInput formControlName="username">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field >
+                        <label>Ausbildungstyp</label>
+                        <mat-select id="educationType" matNativeControl formControlName="educationTypeId">
+                            <mat-option *ngFor="let educationType of educationTypes" [value]="educationType.id">
+                                {{educationType.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field>
+                        <label>Passwort</label>
+                        <input matInput type="password" formControlName="password">
+                        <mat-hint *ngIf="registerForm.get('password')">Bitte geben sie ein Passwort ein.</mat-hint>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field>
+                        <label>Passwort wiederholen</label>
+                        <input matInput type="password" formControlName="confirmPassword">
+                        <mat-hint *ngIf="registerForm.hasError('passwordsNotMatching')">Passwort stimmt nicht überein</mat-hint>
+                    </mat-form-field>
+                    <button type="submit" class="submit-button">Registrieren</button>
             </form>
+            <h3 *ngIf="registerForm.invalid">Form contains following errors</h3>
+            <small *ngIf="registerForm.get('password')!.hasError('passwordInvalid')">Passwort hat keine Zahl</small> <br>
+            <small *ngIf="registerForm.hasError('passwordsNotMatching')">Passwörter stimmen nicht überein</small>
         </mat-card-content>
         <div class="linkToRegister">
-            <a routerLink="/registration">Noch kein Konto?</a>
+            <a routerLink="/login">Zum Login</a>
         </div>
     </mat-card>
 </div>

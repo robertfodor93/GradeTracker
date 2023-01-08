@@ -17,7 +17,8 @@ export class AppComponent implements OnInit{
 
   constructor(
     private router: Router,
-    private titleService: Title
+    private titleService: Title,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -41,6 +42,14 @@ export class AppComponent implements OnInit{
           this.titleService.setTitle(`GradeTracker - ${title}`);
         }
       });
+  }
+
+  navigateTo(value: string) {
+    this.router.navigate(['../', value])
+  }
+
+  logout() {
+    this.authService.logout()
   }
 }
 
