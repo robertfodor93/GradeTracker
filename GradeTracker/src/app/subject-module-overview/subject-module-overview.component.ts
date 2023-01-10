@@ -6,7 +6,7 @@ import { Module } from '../_models/module';
 import { ModuleService } from '../_services/module.service';
 import {MatDialog} from '@angular/material/dialog';
 import { NewSubjectModuleComponent } from '../new-subject-module/new-subject-module.component';
-import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-subject-module-overview',
@@ -47,31 +47,28 @@ export class SubjectModuleOverviewComponent implements AfterViewInit, OnInit {
   title:string = "Fach-/Modulübersicht";
 
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private moduleService: ModuleService,public dialog: MatDialog, private http: HttpClient) { }
+  constructor(
+    private _liveAnnouncer: LiveAnnouncer, 
+    private moduleService: ModuleService,
+    public dialog: MatDialog,
+    private formBuilder : FormBuilder) { 
+    }
 
   ngOnInit() {
-    this.moduleService.getAll().subscribe((res: any))
+    this.moduleService.getAll().subscribe((response) => {
+      this.dataSourceModule.data = response
+    })
   }
   onChange($event:any){
     const filterValue = $event.value;
-    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
-    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
+    this.dataSourceModule.filter = filterValue.trim().toLowerCase();
   }
 
   applyFilter(event:Event){
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSourceBM.filter = filterValue.trim().toLowerCase();
-    this.dataSourceEFZ.filter = filterValue.trim().toLowerCase();
+    this.dataSourceModule.filter = filterValue.trim().toLowerCase();
   }
   
-
-  public getModule() {
-    let resp = this.service.getAll();
-    
-    resp.subscribe(report => this.dataSourceEFZ.data = report as Module[])
-    resp.subscribe(report => this.dataSourceBM.data = report as Module[])
-  }
-
   public openForm() {
     let form = document.getElementById('myForm')
     if(form) (form as HTMLFormElement).style.display="block"; 
@@ -88,8 +85,7 @@ public closeForm() {
   @ViewChild(MatSort) sort = new MatSort();
 
   ngAfterViewInit() {
-    this.dataSourceBM.sort = this.sort;
-    this.dataSourceEFZ.sort = this.sort;
+    this.dataSourceModule.sort = this.sort;
   }
 
   announceSortChange(sortState: Sort) {
