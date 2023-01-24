@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DataTransferObjects\CompetenceArea\" />
+    <Folder Include="DataTransferObjects\EducationType\" />
+    <Folder Include="DataTransferObjects\EducationTypeGoal\" />
+    <Folder Include="DataTransferObjects\Grade\" />
+    <Folder Include="DataTransferObjects\Teacher\" />
+    <Folder Include="DataTransferObjects\Subject\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.3" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="7.0.2" />
+  </ItemGroup>
+
+</Project>
