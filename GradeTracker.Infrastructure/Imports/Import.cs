@@ -1,3 +1,16 @@
 ﻿global using AutoMapper;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using Microsoft.AspNetCore.Identity;
 global using GradeTracker.Core.Entities;
+global using GradeTracker.Core.DataTransferObjects.User;
+global using GradeTracker.Core.DataTransferObjects.CompetenceArea;
+global using GradeTracker.Core.DataTransferObjects.EducationType;
+global using GradeTracker.Core.DataTransferObjects.Grade;
+global using GradeTracker.Core.DataTransferObjects.Subject;
+global using GradeTracker.Core.DataTransferObjects.Teacher;
+global using Microsoft.IdentityModel.Tokens;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.EntityFrameworkCore.Design;
+global using GradeTracker.Core.Interfaces;
+global using GradeTracker.Core.Models;

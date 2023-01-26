@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GradeTracker.Core.DataTransferObjects.User
 {
-    public class BaseUserDTO : LoginUserDTO
+    public class GetUserDTO : BaseUserDTO
     {
-        public string Username { get; set; }
+        public int Id { get; set; }
     }
 }
