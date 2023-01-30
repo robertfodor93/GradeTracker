@@ -59,7 +59,7 @@ namespace GradeTracker.Infrastructure.Repositories
 
             string token = GenerateToken(user);
             var refreshToken = CreateRefreshToken();
-            SetRefreshToken(refreshToken, user);
+            await SetRefreshToken(refreshToken, user);
 
             return new AuthResponseDTO
             {
@@ -98,7 +98,7 @@ namespace GradeTracker.Infrastructure.Repositories
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-                _configuration.GetSection("AppSettings:Token").Value));
+                _configuration.GetSection("AppSettings:Key").Value));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
@@ -127,7 +127,7 @@ namespace GradeTracker.Infrastructure.Repositories
 
             string token = GenerateToken(user);
             var newRefreshToken = CreateRefreshToken();
-            SetRefreshToken(newRefreshToken, user);
+            await SetRefreshToken(newRefreshToken, user);
 
             return new AuthResponseDTO
             {
@@ -166,5 +166,4 @@ namespace GradeTracker.Infrastructure.Repositories
             await _dataContext.SaveChangesAsync();
         }
     }
-
 }

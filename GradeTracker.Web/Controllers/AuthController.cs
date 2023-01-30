@@ -15,7 +15,7 @@ namespace GradeTracker.Web.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register([FromBody] BaseUserDTO userDTO)
+        public async Task<ActionResult<User>> Register([FromBody] UserDTO userDTO)
         {
             var response = await _authRepository.Register(userDTO);
             return Ok(response);

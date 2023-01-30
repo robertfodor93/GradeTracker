@@ -1,8 +1,11 @@
 ﻿global using GradeTracker.Infrastructure.Data;
 global using GradeTracker.Core.Entities;
 global using Microsoft.EntityFrameworkCore;
-global using Microsoft.AspNetCore.Identity;
 global using GradeTracker.Core.Interfaces;
 global using GradeTracker.Core.DataTransferObjects.User;
 global using GradeTracker.Infrastructure.Repositories;
 global using GradeTracker.Infrastructure.Config;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.IdentityModel.Tokens;
+global using Microsoft.OpenApi.Models;
+global using Swashbuckle.AspNetCore.Filters;
